@@ -36,6 +36,9 @@ PanelWindow {
             Layout.fillWidth: true
         }
 
+        Volume {
+        }
+
         Battery {
             visible: Config.showBattery
         }
