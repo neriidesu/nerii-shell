@@ -29,10 +29,13 @@ RowLayout {
         model: 10
 
         Text {
+            property var ws: Hyprland.workspaces.values.find((w) => {
+                return w.id === index + 1;
+            })
             property bool isActive: Hyprland.focusedWorkspace.id === (index + 1)
 
             text: getWorkspaceText(index)
-            color: isActive ? Colors.md3.primary : Colors.md3.on_background
+            color: isActive ? Colors.md3.primary : (ws ? Colors.md3.on_background : Colors.md3.on_secondary)
 
             font {
                 family: Fonts.code
