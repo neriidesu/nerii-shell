@@ -28,7 +28,6 @@ BarGroup {
         color: root.charging ? Colors.yellow : root.level <= 15 ? Colors.status_err : root.level <= 30 ? Colors.status_pending : Colors.status_ok
 
         font {
-            family: Fonts.code
             pixelSize: 20
         }
 
@@ -36,7 +35,6 @@ BarGroup {
 
     Text {
         text: root.level + "%"
-        color: Colors.md3.on_background
 
         font {
             family: Fonts.jp
