@@ -12,7 +12,6 @@ Item {
     BarGroup {
         id: root
 
-        property int fontsize: 10
         readonly property var sink: Pipewire.defaultAudioSink
         readonly property bool ready: sink && sink.ready
         readonly property bool muted: ready && sink.audio.muted
@@ -43,7 +42,7 @@ Item {
             color: root.ready ? Colors.md3.on_background : Colors.status_err
 
             font {
-                pixelSize: root.fontsize
+                pixelSize: 20
             }
 
         }
