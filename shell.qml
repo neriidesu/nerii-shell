@@ -1,27 +1,15 @@
-import QtQuick
 import Quickshell
+import qs.Commons
+import qs.Modules.Bar
 
 ShellRoot {
-    PanelWindow {
-        implicitHeight: 30
-        color: Colors.background_dim
+    Variants {
+        model: Quickshell.screens
 
-        anchors {
-            top: true
-            left: true
-            right: true
-        }
+        Bar {
+            required property var modelData
 
-        Text {
-            anchors.centerIn: parent
-            text: Qt.formatDateTime(clock.date, "hh:mm")
-            color: Colors.foreground
-        }
-
-        SystemClock {
-            id: clock
-
-            precision: SystemClock.Minutes
+            screen: modelData
         }
 
     }
