@@ -6,7 +6,7 @@ import qs.Commons
 
 RowLayout {
     function getWorkspaceText(index) {
-        var text = index + 1;
+        var text = "undefined";
         switch (index + 1) {
         case 3:
             text = "";
@@ -16,6 +16,9 @@ RowLayout {
             break;
         case 10:
             text = "󰍜";
+            break;
+        default:
+            text = index + 1;
             break;
         }
         return text;
@@ -32,15 +35,22 @@ RowLayout {
             property var ws: Hyprland.workspaces.values.find((w) => {
                 return w.id === index + 1;
             })
-            property bool isActive: Hyprland.focusedWorkspace.id === (index + 1)
+            property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
 
             text: getWorkspaceText(index)
-            color: isActive ? Colors.md3.primary : (ws ? Colors.md3.on_background : Colors.md3.on_secondary)
+            color: isActive ? Colors.md3.primary : (ws ? Colors.md3.on_background : Colors.md3.surface_container_highest)
 
             font {
                 family: Fonts.code
-                weight: isActive ? 900 : 400
-                pixelSize: isActive ? 14 : 12
+                weight: 600
+                pixelSize: 14
+            }
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: 150
+                }
+
             }
 
         }

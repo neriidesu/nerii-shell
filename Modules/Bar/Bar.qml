@@ -5,7 +5,7 @@ import qs.Commons
 import qs.Modules.Bar.Widgets
 
 PanelWindow {
-    implicitHeight: 30
+    implicitHeight: 32
     color: Colors.md3.background
 
     anchors {
@@ -19,7 +19,10 @@ PanelWindow {
         anchors.leftMargin: 14
         anchors.rightMargin: 14
 
-        Workspaces {
+        BarGroup {
+            Workspaces {
+            }
+
         }
 
         Item {
@@ -31,6 +34,10 @@ PanelWindow {
 
         Item {
             Layout.fillWidth: true
+        }
+
+        Battery {
+            visible: Config.showBattery
         }
 
         Clock {
