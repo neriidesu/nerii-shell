@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
+import Quickshell.Io
 import qs.Commons
 
 RowLayout {
@@ -36,9 +37,16 @@ RowLayout {
                 return w.id === index + 1;
             })
             property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
+            property bool keep: {
+            if (Config.keepWorkspaces.includes(index + 1)) {
+                true;
+            } else {
+                false;
+            }}
 
             text: getWorkspaceText(index)
             color: isActive ? Colors.md3.primary : (ws ? Colors.md3.on_background : Colors.md3.surface_container_highest)
+            visible: ws ? true : keep
 
             font {
                 family: Fonts.code

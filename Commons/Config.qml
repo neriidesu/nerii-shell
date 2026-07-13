@@ -6,4 +6,5 @@ Singleton {
     property bool showWifi: false
     property bool showEth: true
     property bool debug: true
+    property var keepWorkspaces: [1, 2, 3, 4, 10]
 }
