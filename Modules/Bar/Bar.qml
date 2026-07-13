@@ -1,7 +1,8 @@
-// TODO: Spotify integration
+// TODO: Fix overlap on long window name
 // TODO: Weather widget
 // TODO: Animations
 // TODO: Start menu
+// TODO: Media panel
 
 import QtQuick
 import QtQuick.Layouts

@@ -8,4 +8,5 @@ Singleton {
     property bool debug: true
     property var keepWorkspaces: [1, 2, 3, 4, 10]
     property var blacklistTrayIds: ["spotify-client"]
+    property var preferredPlayer: "spotify"
 }

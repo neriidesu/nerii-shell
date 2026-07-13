@@ -16,6 +16,12 @@ RowLayout {
         }
 
         Separator {
+        }
+
+        Media {
+        }
+
+        Separator {
             type: 1
         }
 

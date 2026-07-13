@@ -27,4 +27,32 @@ Singleton {
         target: "volume"
     }
 
+    IpcHandler {
+        function playPause() {
+            MediaService.playPause();
+        }
+
+        function play() {
+            MediaService.play();
+        }
+
+        function stop() {
+            MediaService.stop();
+        }
+
+        function pause() {
+            MediaService.stop();
+        }
+
+        function next() {
+            MediaService.next();
+        }
+
+        function previous() {
+            MediaService.previous();
+        }
+
+        target: "media"
+    }
+
 }
