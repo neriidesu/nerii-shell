@@ -5,8 +5,12 @@ import qs.Commons
 import qs.Modules.Bar.Widgets
 
 PanelWindow {
-    implicitHeight: 32
-    color: Colors.md3.background
+    id: root
+
+    readonly property real edgeMargin: 10
+
+    implicitHeight: 40 + edgeMargin
+    color: "transparent"
 
     anchors {
         top: true
@@ -16,8 +20,9 @@ PanelWindow {
 
     RowLayout {
         anchors.fill: parent
-        anchors.leftMargin: 14
-        anchors.rightMargin: 14
+        anchors.leftMargin: root.edgeMargin
+        anchors.topMargin: root.edgeMargin
+        anchors.rightMargin: root.edgeMargin
         spacing: 4
 
         RowLayout {
@@ -38,17 +43,20 @@ PanelWindow {
         RowLayout {
             id: right_modules
 
-            Volume {
-            }
+            BarGroup {
+                Volume {
+                }
 
-            Network {
-            }
+                Network {
+                }
 
-            Battery {
-                visible: Config.showBattery
-            }
+                Battery {
+                    visible: Config.showBattery
+                }
 
-            Clock {
+                Clock {
+                }
+
             }
 
         }

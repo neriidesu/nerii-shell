@@ -9,7 +9,7 @@ Item {
     implicitWidth: root.width
     Layout.fillHeight: true
 
-    BarGroup {
+    RowLayout {
         id: root
 
         readonly property var sink: Pipewire.defaultAudioSink
@@ -35,11 +35,20 @@ Item {
             return String.fromCodePoint(984446);
         }
 
-        anchors.fill: parent
+        implicitWidth: icon.implicitWidth + label.implicitWidth
+
+        anchors {
+            verticalCenter: parent.verticalCenter
+            left: parent.left
+            right: parent.right
+        }
 
         Text {
+            id: icon
+
             text: root.icon
             color: root.ready ? Colors.md3.on_background : Colors.status_err
+            Layout.alignment: Qt.AlignVCenter
 
             font {
                 pixelSize: 20
@@ -48,26 +57,24 @@ Item {
         }
 
         Text {
+            id: label
+
             text: {
                 if (!root.ready)
                     return "-";
 
                 return root.vol + "%";
             }
+            Layout.alignment: Qt.AlignVCenter
             color: root.muted ? Colors.status_err : Colors.md3.on_background
         }
 
-        Item {
-            visible: false
+    }
 
-            PwObjectTracker {
-                id: sinkTracker
+    PwObjectTracker {
+        id: sinkTracker
 
-                objects: [root.sink]
-            }
-
-        }
-
+        objects: [root.sink]
     }
 
     MouseArea {

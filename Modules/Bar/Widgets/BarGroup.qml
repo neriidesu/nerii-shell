@@ -15,12 +15,17 @@ Item {
     Rectangle {
         id: background
 
-        color: Colors.md3.surface_container
-        radius: 5
+        color: Colors.a(Colors.md3.background, 0.75)
+        radius: 0
+
+        border {
+            color: Colors.md3.primary
+            width: 2
+        }
 
         anchors {
             fill: parent
-            margins: 4
+            margins: 0
         }
 
     }

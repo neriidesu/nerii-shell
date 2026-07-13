@@ -4,7 +4,7 @@ import Quickshell
 import Quickshell.Networking
 import qs.Commons
 
-BarGroup {
+RowLayout {
     id: root
 
     RowLayout {
