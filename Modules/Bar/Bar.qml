@@ -18,73 +18,38 @@ PanelWindow {
         right: true
     }
 
-    RowLayout {
-        anchors.fill: parent
-        anchors.leftMargin: root.edgeMargin
-        anchors.topMargin: root.edgeMargin
-        anchors.rightMargin: root.edgeMargin
-        spacing: 4
-
-        RowLayout {
-            id: left_modules
-
-            BarGroup {
-                Separator {
-                    type: -1
-                }
-
-                Workspaces {
-                }
-
-                Separator {
-                    type: 1
-                }
-
-            }
-
+    LeftModules {
+        anchors {
+            left: parent.left
+            bottom: parent.bottom
+            top: parent.top
+            leftMargin: root.edgeMargin
+            topMargin: root.edgeMargin
+            rightMargin: root.edgeMargin
         }
 
-        Item {
-            Layout.fillWidth: true
+    }
+
+    CenterModules {
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            bottom: parent.bottom
+            top: parent.top
+            leftMargin: root.edgeMargin
+            topMargin: root.edgeMargin
+            rightMargin: root.edgeMargin
         }
 
-        RowLayout {
-            id: right_modules
+    }
 
-            BarGroup {
-                Separator {
-                    type: -1
-                }
-
-                Volume {
-                }
-
-                Separator {
-                }
-
-                Network {
-                }
-
-                Separator {
-                }
-
-                Battery {
-                    visible: Config.showBattery
-                }
-
-                Separator {
-                    visible: Config.showBattery
-                }
-
-                Clock {
-                }
-
-                Separator {
-                    type: 1
-                }
-
-            }
-
+    RightModules {
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            top: parent.top
+            leftMargin: root.edgeMargin
+            topMargin: root.edgeMargin
+            rightMargin: root.edgeMargin
         }
 
     }
