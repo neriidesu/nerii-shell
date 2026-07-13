@@ -12,6 +12,7 @@ Item {
 
     implicitWidth: rowLayout.implicitWidth + padding * 2
     Layout.fillHeight: true
+    clip: true
 
     Rectangle {
         id: background
@@ -41,6 +42,14 @@ Item {
             left: parent.left
             right: parent.right
             margins: root.padding
+        }
+
+    }
+
+    Behavior on implicitWidth {
+        NumberAnimation {
+            duration: 150
+            easing.type: Easing.InOutCubic
         }
 
     }

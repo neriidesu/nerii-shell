@@ -1,5 +1,5 @@
 // TODO: Weather widget
-// TODO: Animations
+// TODO: Implement noctalia panel service on tray
 // TODO: Start menu
 // TODO: Media panel
 

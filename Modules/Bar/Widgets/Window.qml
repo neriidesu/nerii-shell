@@ -6,9 +6,9 @@ import qs.Commons
 Text {
     readonly property int maxLength: 60
     readonly property string title: {
-        var text = Hyprland.activeToplevel?.title
-        if (text.length > maxLength) {
-            return text.substring(0, maxLength) + "..."
+        var text = Hyprland.activeToplevel? Hyprland.activeToplevel.title : "nerii-shell"
+        if (text?.length > maxLength) {
+            return text.substring(0, maxLength).trim() + "..."
         }
 
         return text

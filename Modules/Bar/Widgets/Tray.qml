@@ -5,6 +5,8 @@ import Quickshell.Services.SystemTray
 import qs.Commons
 
 RowLayout {
+    id: root
+
     readonly property var trayItems: SystemTray.items.values
     readonly property int iconSize: 16
 
@@ -16,12 +18,9 @@ RowLayout {
         model: SystemTray.items && SystemTray.items.values ? SystemTray.items.values : []
 
         Image {
-            source: trayItems[index].icon
+            source: modelData.icon
             visible: {
-                if (Config.blacklistTrayIds.includes(trayItems[index].id))
-                    false;
-                else
-                    true;
+                !Config.blacklistTrayIds.includes(modelData.id);
             }
 
             sourceSize {

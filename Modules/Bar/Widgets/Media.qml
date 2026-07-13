@@ -14,13 +14,27 @@ Item {
         var track = MediaService.trackTitle;
         var o = (artist ? `${artist} - ${track}` : track);
         if (o.length > maxLength)
-            return o.substring(0, maxLength) + "...";
+            return o.substring(0, maxLength).trim() + "...";
 
         return o;
     }
 
     implicitHeight: row_layout.implicitHeight
-    implicitWidth: row_layout.implicitWidth
+    implicitWidth: row_layout.implicitWidth + row_layout.spacing
+
+    Rectangle {
+        anchors.fill: root
+        color: mouse.hovered ? Colors.a(Colors.md3.primary, 0.5) : "transparent"
+        radius: 2
+
+        Behavior on color {
+            ColorAnimation {
+                duration: 150
+            }
+
+        }
+
+    }
 
     RowLayout {
         id: row_layout
@@ -50,6 +64,7 @@ Item {
             Layout.alignment: Qt.AlignVCenter
             text: MediaService.isPlaying ? "" : ""
             font.pixelSize: 16
+            Layout.minimumWidth: font.pixelSize / 4 * 3
         }
 
     }
@@ -82,6 +97,12 @@ Item {
             else if (button === Qt.ForwardButton)
                 MediaService.next();
         }
+    }
+
+    HoverHandler {
+        id: mouse
+
+        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
     }
 
 }

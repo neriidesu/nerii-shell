@@ -35,7 +35,7 @@ Item {
             return String.fromCodePoint(984446);
         }
 
-        implicitWidth: icon.implicitWidth + label.implicitWidth
+        implicitWidth: 50
 
         anchors {
             verticalCenter: parent.verticalCenter

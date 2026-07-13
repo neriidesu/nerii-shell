@@ -38,7 +38,7 @@ RowLayout {
             })
             property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
             property bool onScreen: {
-                if (bar_root.screen.name == ws?.monitor.name)
+                if (bar_root.screen.name == ws?.monitor?.name)
                     true;
                 else
                     false;

@@ -50,7 +50,7 @@ RowLayout {
                 if (!wifi.active)
                     return "Disconnected";
 
-                return wifi.active.name;
+                return wifi.active?.name;
             }
         }
 
@@ -84,8 +84,8 @@ RowLayout {
 
         Text {
             id: eth_label
-
-            text: eth.wifiDevice.name
+            
+            text: eth.wifiDevice ? eth.wifiDevice.name: "-"
         }
 
     }
