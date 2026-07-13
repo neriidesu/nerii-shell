@@ -7,6 +7,7 @@ Item {
     id: root
 
     property real padding: 12
+    property real spacing: 5
     default property alias items: rowLayout.children
 
     implicitWidth: rowLayout.implicitWidth + padding * 2
@@ -33,7 +34,7 @@ Item {
     RowLayout {
         id: rowLayout
 
-        spacing: 12
+        spacing: root.spacing
 
         anchors {
             verticalCenter: parent.verticalCenter

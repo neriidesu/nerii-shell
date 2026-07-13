@@ -29,7 +29,15 @@ PanelWindow {
             id: left_modules
 
             BarGroup {
+                Separator {
+                    type: -1
+                }
+
                 Workspaces {
+                }
+
+                Separator {
+                    type: 1
                 }
 
             }
@@ -44,17 +52,35 @@ PanelWindow {
             id: right_modules
 
             BarGroup {
+                Separator {
+                    type: -1
+                }
+
                 Volume {
                 }
 
+                Separator {
+                }
+
                 Network {
+                }
+
+                Separator {
                 }
 
                 Battery {
                     visible: Config.showBattery
                 }
 
+                Separator {
+                    visible: Config.showBattery
+                }
+
                 Clock {
+                }
+
+                Separator {
+                    type: 1
                 }
 
             }

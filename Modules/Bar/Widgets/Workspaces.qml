@@ -25,7 +25,7 @@ RowLayout {
         return text;
     }
 
-    spacing: 7
+    spacing: 5
 
     Repeater {
         id: repeater
