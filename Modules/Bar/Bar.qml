@@ -10,7 +10,7 @@ import qs.Commons
 import qs.Modules.Bar.Widgets
 
 PanelWindow {
-    id: root
+    id: bar_root
 
     readonly property real edgeMargin: 10
 
@@ -28,9 +28,9 @@ PanelWindow {
             left: parent.left
             bottom: parent.bottom
             top: parent.top
-            leftMargin: root.edgeMargin
-            topMargin: root.edgeMargin
-            rightMargin: root.edgeMargin
+            leftMargin: bar_root.edgeMargin
+            topMargin: bar_root.edgeMargin
+            rightMargin: bar_root.edgeMargin
         }
 
     }
@@ -40,9 +40,9 @@ PanelWindow {
             horizontalCenter: parent.horizontalCenter
             bottom: parent.bottom
             top: parent.top
-            leftMargin: root.edgeMargin
-            topMargin: root.edgeMargin
-            rightMargin: root.edgeMargin
+            leftMargin: bar_root.edgeMargin
+            topMargin: bar_root.edgeMargin
+            rightMargin: bar_root.edgeMargin
         }
 
     }
@@ -52,9 +52,9 @@ PanelWindow {
             right: parent.right
             bottom: parent.bottom
             top: parent.top
-            leftMargin: root.edgeMargin
-            topMargin: root.edgeMargin
-            rightMargin: root.edgeMargin
+            leftMargin: bar_root.edgeMargin
+            topMargin: bar_root.edgeMargin
+            rightMargin: bar_root.edgeMargin
         }
 
     }

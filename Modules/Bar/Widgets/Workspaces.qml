@@ -25,7 +25,7 @@ RowLayout {
         return text;
     }
 
-    spacing: 5
+    spacing: 10
 
     Repeater {
         id: repeater
@@ -37,16 +37,22 @@ RowLayout {
                 return w.id === index + 1;
             })
             property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
+            property bool onScreen: {
+                if (bar_root.screen.name == ws?.monitor.name)
+                    true;
+                else
+                    false;
+            }
             property bool keep: {
-            if (Config.keepWorkspaces.includes(index + 1)) {
-                true;
-            } else {
-                false;
-            }}
+                if (Config.keepWorkspaces.includes(index + 1))
+                    true;
+                else
+                    false;
+            }
 
             text: getWorkspaceText(index)
             color: isActive ? Colors.md3.primary : (ws ? Colors.md3.on_background : Colors.md3.surface_container_highest)
-            visible: ws ? true : keep
+            visible: onScreen ? (ws ? true : keep) : false
 
             font {
                 family: Fonts.code
