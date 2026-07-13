@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Services.Pipewire
+import qs.Commons
 pragma Singleton
 
 Singleton {
@@ -47,6 +48,7 @@ Singleton {
 
   function setVolume(newVolume: real) {
     if (!Pipewire.ready || (!sink?.audio)) {
+      Logger.w("AudioService", "No sink available or not ready")
       return;
     }
 
@@ -58,6 +60,7 @@ Singleton {
 
 
     if (!sink?.ready || !sink?.audio) {
+      Logger.w("AudioService", "No sink available or not ready")
       return;
     }
 
