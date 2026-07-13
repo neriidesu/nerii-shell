@@ -1,4 +1,3 @@
-// TODO: Fix overlap on long window name
 // TODO: Weather widget
 // TODO: Animations
 // TODO: Start menu
