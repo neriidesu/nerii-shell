@@ -1,3 +1,8 @@
+// TODO: Spotify integration
+// TODO: Weather widget
+// TODO: Animations
+// TODO: Start menu
+
 import QtQuick
 import QtQuick.Layouts
 import Quickshell

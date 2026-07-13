@@ -12,13 +12,19 @@ RowLayout {
             type: -1
         }
 
+        Network {
+        }
+
+        Separator {
+        }
+
         Volume {
         }
 
         Separator {
         }
 
-        Network {
+        Tray {
         }
 
         Separator {
