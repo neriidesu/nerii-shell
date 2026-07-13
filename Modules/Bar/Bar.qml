@@ -18,9 +18,15 @@ PanelWindow {
         anchors.fill: parent
         anchors.leftMargin: 14
         anchors.rightMargin: 14
+        spacing: 4
 
-        BarGroup {
-            Workspaces {
+        RowLayout {
+            id: left_modules
+
+            BarGroup {
+                Workspaces {
+                }
+
             }
 
         }
@@ -29,21 +35,22 @@ PanelWindow {
             Layout.fillWidth: true
         }
 
-        Window {
-        }
+        RowLayout {
+            id: right_modules
 
-        Item {
-            Layout.fillWidth: true
-        }
+            Volume {
+            }
 
-        Volume {
-        }
+            Network {
+            }
 
-        Battery {
-            visible: Config.showBattery
-        }
+            Battery {
+                visible: Config.showBattery
+            }
 
-        Clock {
+            Clock {
+            }
+
         }
 
     }
