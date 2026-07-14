@@ -1,4 +1,5 @@
 // TODO: Implement noctalia panel service on tray
+// TODO: Standardize heights and margin in Style.qml
 // TODO: Start menu
 // TODO: Media panel
 // TODO: Weather panel
@@ -9,28 +10,18 @@ import Quickshell
 import qs.Commons
 import qs.Modules.Bar.Widgets
 
-PanelWindow {
+Item {
     id: bar_root
 
-    readonly property real edgeMargin: 10
+    property ShellScreen screen: null
 
-    implicitHeight: 40 + edgeMargin
-    color: "transparent"
-
-    anchors {
-        top: true
-        left: true
-        right: true
-    }
+    anchors.fill: parent
 
     LeftModules {
         anchors {
             left: parent.left
             bottom: parent.bottom
             top: parent.top
-            leftMargin: bar_root.edgeMargin
-            topMargin: bar_root.edgeMargin
-            rightMargin: bar_root.edgeMargin
         }
 
     }
@@ -40,9 +31,6 @@ PanelWindow {
             horizontalCenter: parent.horizontalCenter
             bottom: parent.bottom
             top: parent.top
-            leftMargin: bar_root.edgeMargin
-            topMargin: bar_root.edgeMargin
-            rightMargin: bar_root.edgeMargin
         }
 
     }
@@ -52,9 +40,6 @@ PanelWindow {
             right: parent.right
             bottom: parent.bottom
             top: parent.top
-            leftMargin: bar_root.edgeMargin
-            topMargin: bar_root.edgeMargin
-            rightMargin: bar_root.edgeMargin
         }
 
     }

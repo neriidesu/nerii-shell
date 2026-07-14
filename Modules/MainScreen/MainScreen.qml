@@ -1,0 +1,224 @@
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Effects
+import Quickshell
+import Quickshell.Wayland
+import qs.Commons
+// All panels
+import qs.Modules.Bar
+import qs.Services
+
+/**
+* MainScreen - Single PanelWindow per screen that manages all panels and the bar
+*/
+PanelWindow {
+    id: root
+    Component.onCompleted: {
+        Logger.d("MainScreen", "Initialized for screen:", screen?.name, "- Dimensions:", screen.width, "x", screen?.height, "- Position:", screen?.x, ",", screen?.y);
+    }
+    WlrLayershell.layer: WlrLayer.Top
+    WlrLayershell.namespace: "nerii-shell-background-" + (screen?.name || "unknown")
+    WlrLayershell.exclusionMode: ExclusionMode.Ignore // Don't reserve space - BarExclusionZone handles that
+    WlrLayershell.keyboardFocus: {
+        // No panel open anywhere: no keyboard focus needed
+        if (!root.isAnyPanelOpen)
+            return WlrKeyboardFocus.None;
+
+        // Panel open on THIS screen: use panel's preferred focus mode
+        if (root.isPanelOpen) {
+            // Hyprland's Exclusive captures ALL input globally (including pointer),
+            // preventing click-to-close from working on other monitors.
+            // Workaround: briefly use Exclusive when panel opens (for text input focus),
+            // then switch to OnDemand (for click-to-close on other screens).
+            if (CompositorService.isHyprland)
+                return PanelService.isInitializingKeyboard ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.OnDemand;
+
+            return PanelService.openedPanel.exclusiveKeyboard ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.OnDemand;
+        }
+        // Panel open on ANOTHER screen: OnDemand allows receiving pointer events for click-to-close
+        return WlrKeyboardFocus.OnDemand;
+    }
+
+    anchors {
+        top: true
+        bottom: true
+        left: true
+        right: true
+    }
+    color: "transparent"
+    property bool isPanelOpen: (PanelService.openedPanel !== null) && (PanelService.openedPanel.screen === screen)
+    property bool isPanelClosing: (PanelService.openedPanel !== null) && PanelService.openedPanel.isClosing
+    property bool isAnyPanelOpen: PanelService.openedPanel !== null
+
+    // Check if bar should be visible on this screen
+    readonly property bool barShouldShow: true
+
+    // Make everything click-through except bar
+    mask: Region {
+        id: clickableMask
+        // Cover entire window (everything is masked/click-through)
+        x: 0
+        y: 0
+        width: root.width
+        height: root.height
+        intersection: Intersection.Xor
+
+        // Only include regions that are actually needed
+        // panelRegions is handled by PanelService, bar is local to this screen
+        regions: [barMaskRegion, backgroundMaskRegion]
+
+        // Bar region - subtract bar area from mask (only if bar should be shown on this screen)
+        Region {
+          id: barMaskRegion
+
+          readonly property real barThickness: Style.barHeight
+
+          // Bar / Frame Mask
+          Region {
+            // Mode: Simple or Floating
+            x: barPlaceholder.x
+            y: barPlaceholder.y
+            width: (root.barShouldShow) ? barPlaceholder.width : 0
+            height: (root.barShouldShow) ? barPlaceholder.height : 0
+            intersection: Intersection.Subtract
+          }
+        }
+
+        // Background region for click-to-close - reactive sizing
+        // Uses isAnyPanelOpen so clicking on any screen's background closes the panel
+        Region {
+          id: backgroundMaskRegion
+          x: 0
+          y: 0
+          width: root.isAnyPanelOpen ? root.width : 0
+          height: root.isAnyPanelOpen ? root.height : 0
+          intersection: Intersection.Subtract
+        }
+    }
+
+    // ---------------------------------------
+    // Container for all UI elements
+    Item {
+        id: container
+        width: root.width
+        height: root.height
+
+        // Background MouseArea for closing panels when clicking outside
+        // Uses isAnyPanelOpen so clicking on any screen's background closes the panel
+        MouseArea {
+            anchors.fill: parent
+            enabled: root.isAnyPanelOpen
+            acceptedButtons: Qt.LeftButton | Qt.RightButton | Qt.MiddleButton
+            onClicked: mouse => {
+                if (PanelService.openedPanel) {
+                    PanelService.openedPanel.close();
+                }
+            }
+            z: 0 // Behind panels and bar
+        }
+
+        // ---------------------------------------
+        // All panels always exist
+        // ---------------------------------------
+
+        // ---------------------------------------
+        // Bar background placeholder - just for background positioning (actual bar content is in BarContentWindow)
+        Item {
+            id: barPlaceholder
+
+
+            // Screen reference
+            property ShellScreen screen: root.screen
+
+            // Bar background positioning propertyies
+            readonly property real barMargin: Config.barMargin
+            readonly property real barHeight: Style.barHeight
+
+            // Expose bar dimensions directly on this Item for BarBackground
+            // Use screen dimensions directly
+            x: barMargin
+            y: barMargin
+            width: {
+                return (screen?.width ?? 0) - barMargin * 2;
+            }
+            height: barHeight
+        }
+    }
+
+    // Centralized Keyboard Shortcuts
+
+    // These shortcuts delegate to the opened panel's handler functions
+    // Panels can implement: onEscapePressed, onTabPressed, onBackTabPressed,
+    // onUpPressed, onDownPressed, onReturnPressed, etc...
+    Shortcut {
+        sequence: "Esc"
+        enabled: root.isPanelOpen && (PanelService.openedPanel.onEscapePressed !== undefined) && !PanelService.isKeybindRecording
+        onActivated: PanelService.openedPanel.onEscapePressed()
+    }
+
+    Shortcut {
+        sequence: "Tab"
+        enabled: root.isPanelOpen && (PanelService.openedPanel.onTabPressed !== undefined)
+        onActivated: PanelService.openedPanel.onTabPressed()
+    }
+
+    Shortcut {
+        sequence: "Backtab"
+        enabled: root.isPanelOpen && (PanelService.openedPanel.onBackTabPressed !== undefined)
+        onActivated: PanelService.openedPanel.onBackTabPressed()
+    }
+
+    Shortcut {
+        sequence: "Up"
+        enabled: root.isPanelOpen && (PanelService.openedPanel.onUpPressed !== undefined) && !PanelService.isKeybindRecording
+        onActivated: PanelService.openedPanel.onUpPressed()
+    }
+
+    Shortcut {
+        sequence: "Down"
+        enabled: root.isPanelOpen && (PanelService.openedPanel.onDownPressed !== undefined) && !PanelService.isKeybindRecording
+        onActivated: PanelService.openedPanel.onDownPressed()
+    }
+
+    Shortcut {
+        sequence: "Enter"
+        enabled: root.isPanelOpen && (PanelService.openedPanel.onEnterPressed !== undefined) && !PanelService.isKeybindRecording
+        onActivated: PanelService.openedPanel.onEnterPressed()
+    }
+
+    Shortcut {
+        sequence: "Left"
+        enabled: root.isPanelOpen && (PanelService.openedPanel.onLeftPressed !== undefined) && !PanelService.isKeybindRecording
+        onActivated: PanelService.openedPanel.onLeftPressed()
+    }
+
+    Shortcut {
+        sequence: "Right"
+        enabled: root.isPanelOpen && (PanelService.openedPanel.onRightPressed !== undefined) && !PanelService.isKeybindRecording
+        onActivated: PanelService.openedPanel.onRightPressed()
+    }
+
+    Shortcut {
+        sequence: "Home"
+        enabled: root.isPanelOpen && (PanelService.openedPanel.onHomePressed !== undefined)
+        onActivated: PanelService.openedPanel.onHomePressed()
+    }
+
+    Shortcut {
+        sequence: "End"
+        enabled: root.isPanelOpen && (PanelService.openedPanel.onEndPressed !== undefined)
+        onActivated: PanelService.openedPanel.onEndPressed()
+    }
+
+    Shortcut {
+        sequence: "PgUp"
+        enabled: root.isPanelOpen && (PanelService.openedPanel.onPageUpPressed !== undefined)
+        onActivated: PanelService.openedPanel.onPageUpPressed()
+    }
+
+    Shortcut {
+        sequence: "PgDown"
+        enabled: root.isPanelOpen && (PanelService.openedPanel.onPageDownPressed !== undefined)
+        onActivated: PanelService.openedPanel.onPageDownPressed()
+    }
+}

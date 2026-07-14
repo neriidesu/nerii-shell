@@ -31,6 +31,7 @@ RowLayout {
         }
 
         Tray {
+            screen: bar_root.screen
         }
 
         Separator {

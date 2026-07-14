@@ -3,6 +3,7 @@ import Quickshell
 pragma Singleton
 
 Singleton {
+    property real barMargin: 10
     property bool directoriesCreated: false
     readonly property string shellName: "nerii-shell"
     readonly property string cacheDir: ensureTrailingSlash((Quickshell.env("XDG_CACHE_HOME") || (Quickshell.env("HOME") + "/" + ".cache") + "/" + shellName + "/"))
