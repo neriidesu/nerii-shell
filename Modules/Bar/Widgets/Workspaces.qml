@@ -44,15 +44,20 @@ RowLayout {
                     false;
             }
             property bool keep: {
-                if (Config.keepWorkspaces.includes(index + 1))
+                if (Object.keys(Config.keepWorkspaces).includes(bar_root.screen.name)) {
+                    if (Config.keepWorkspaces[bar_root.screen.name].includes(index + 1))
                     true;
-                else
+                    else
                     false;
+                }
+
+
+                
             }
 
             text: getWorkspaceText(index)
             color: isActive ? Colors.md3.primary : (ws ? Colors.md3.on_background : Colors.md3.surface_container_highest)
-            visible: onScreen ? (ws ? true : keep) : false
+            visible: ws ? onScreen : keep 
 
             font {
                 family: Fonts.code

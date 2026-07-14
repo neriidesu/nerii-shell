@@ -6,7 +6,10 @@ Singleton {
     property bool showWifi: false
     property bool showEth: true
     property bool debug: true
-    property var keepWorkspaces: [1, 2, 3, 4, 10]
+    property var keepWorkspaces: {
+        "DP-2": [1, 10],
+        "DP-3": [2, 3, 4]
+    }
     property var blacklistTrayIds: ["spotify-client"]
     property var preferredPlayer: "spotify"
 }

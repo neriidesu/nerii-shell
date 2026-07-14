@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import qs.Commons
 import qs.Modules.Bar.Widgets
+import qs.Services
 
 RowLayout {
     id: left_modules
@@ -16,9 +17,11 @@ RowLayout {
         }
 
         Separator {
+            visible: MediaService.currentPlayer
         }
 
         Media {
+            visible: MediaService.currentPlayer
         }
 
         Separator {
