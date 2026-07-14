@@ -12,6 +12,12 @@ RowLayout {
             type: -1
         }
 
+        Weather {
+        }
+
+        Separator {
+        }
+
         Network {
         }
 

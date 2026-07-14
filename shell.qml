@@ -10,6 +10,7 @@ ShellRoot {
         sourceComponent: Item {
             Component.onCompleted: {
                 Qt.callLater(function() {
+                    LocationService.init();
                     IPCService.init();
                 });
             }
