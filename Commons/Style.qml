@@ -8,8 +8,8 @@ Singleton {
     readonly property real fontSizeXXS: 8
     readonly property real fontSizeXS: 9
     readonly property real fontSizeS: 10
-    readonly property real fontSizeM: 11
-    readonly property real fontSizeL: 13
+    readonly property real fontSizeM: 12
+    readonly property real fontSizeL: 14
     readonly property real fontSizeXL: 16
     readonly property real fontSizeXXL: 18
     readonly property real fontSizeXXXL: 24

@@ -25,7 +25,7 @@ RowLayout {
         return text;
     }
 
-    spacing: 10
+    spacing: Style.marginM
 
     Repeater {
         id: repeater
@@ -61,13 +61,13 @@ RowLayout {
 
             font {
                 family: Fonts.code
-                weight: 600
-                pixelSize: 14
+                weight: Style.fontWeightSemiBold
+                pixelSize: Style.fontSizeL
             }
 
             Behavior on color {
                 ColorAnimation {
-                    duration: 150
+                    duration: Style.animationFast
                 }
 
             }

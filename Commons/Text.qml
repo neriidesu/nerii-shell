@@ -7,7 +7,7 @@ Text {
 
     font {
         family: Fonts.code
-        pixelSize: 12
+        pixelSize: Style.fontSizeM
     }
 
 }

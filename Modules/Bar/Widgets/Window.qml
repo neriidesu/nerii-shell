@@ -18,7 +18,7 @@ Text {
 
     font {
         letterSpacing: 1
-        weight: 200
+        weight: Style.fontWeightLight
     }
 
 }

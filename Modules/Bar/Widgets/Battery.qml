@@ -28,7 +28,7 @@ BarGroup {
         color: root.charging ? Colors.yellow : root.level <= 15 ? Colors.status_err : root.level <= 30 ? Colors.status_pending : Colors.status_ok
 
         font {
-            pixelSize: 20
+            pixelSize: Style.fontSizeXXL
         }
 
     }
@@ -39,7 +39,7 @@ BarGroup {
         font {
             family: Fonts.jp
             letterSpacing: 2
-            pixelSize: 14
+            pixelSize: Style.fontSizeL
         }
 
     }

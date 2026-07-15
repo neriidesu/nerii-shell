@@ -14,12 +14,12 @@ Item {
     Row {
         id: row
 
-        spacing: 2
+        spacing: Style.marginXXS
 
         Text {
             id: prefix
 
-            text: "外気温は"
+            text: "外気温は "
             anchors.verticalCenter: parent.verticalCenter
             font.family: Fonts.jp
             color: Colors.md3.inverse_primary

@@ -55,7 +55,7 @@ Item {
         }
 
         anchors.fill: parent
-        spacing: 5
+        spacing: Style.marginS
 
         Connections {
             // Update width automatically
@@ -100,14 +100,14 @@ Item {
                     id: hoverIndicator
 
                     anchors.fill: trayIcon
-                    anchors.margins: -2
+                    anchors.margins: -Style.marginXXS
                     height: 4
                     color: trayDelegate.isHovered ? Colors.a(Colors.md3.primary, 0.5) : "transparent"
-                    radius: 2
+                    radius: Style.radiusXS
 
                     Behavior on color {
                         ColorAnimation {
-                            duration: 150
+                            duration: Style.animationFast
                             easing.type: Easing.OutCubic
                         }
 

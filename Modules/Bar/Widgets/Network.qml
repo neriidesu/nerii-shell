@@ -37,7 +37,7 @@ RowLayout {
 
             text: wifi.icon
             color: Networking.wifiEnabled ? Colors.purple : Colors.grey_0
-            font.pixelSize: 14
+            font.pixelSize: Style.fontSizeL
         }
 
         Text {
@@ -79,7 +79,7 @@ RowLayout {
 
             text: eth.icon
             color: Networking.wifiEnabled ? Colors.purple : Colors.grey_0
-            font.pixelSize: 14
+            font.pixelSize: Style.fontSizeL
         }
 
         Text {

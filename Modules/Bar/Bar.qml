@@ -1,5 +1,3 @@
-// TODO: Implement noctalia panel service on tray
-// TODO: Standardize heights and margin in Style.qml
 // TODO: Start menu
 // TODO: Media panel
 // TODO: Weather panel

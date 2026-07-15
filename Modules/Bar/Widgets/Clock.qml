@@ -8,7 +8,7 @@ Text {
     font {
         family: Fonts.code
         letterSpacing: 2
-        pixelSize: 14
+        pixelSize: Style.fontSizeL
     }
 
 }

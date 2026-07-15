@@ -23,6 +23,6 @@ Text {
             break;
         }
     }
-    font.pixelSize: 14
+    font.pixelSize: Style.fontSizeL
     color: Colors.md3.primary
 }

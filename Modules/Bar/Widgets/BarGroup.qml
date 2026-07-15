@@ -6,8 +6,8 @@ import qs.Commons
 Item {
     id: root
 
-    property real padding: 12
-    property real spacing: 5
+    property real padding: Style.marginL
+    property real spacing: Style.marginS
     default property alias items: rowLayout.children
 
     implicitWidth: rowLayout.implicitWidth + padding * 2
@@ -22,7 +22,7 @@ Item {
 
         border {
             color: Colors.md3.primary
-            width: 2
+            width: Style.borderM
         }
 
         anchors {
@@ -48,7 +48,7 @@ Item {
 
     Behavior on implicitWidth {
         NumberAnimation {
-            duration: 150
+            duration: Style.animationFast
             easing.type: Easing.InOutCubic
         }
 

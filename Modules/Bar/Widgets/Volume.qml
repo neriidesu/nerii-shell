@@ -51,7 +51,7 @@ Item {
             Layout.alignment: Qt.AlignVCenter
 
             font {
-                pixelSize: 20
+                pixelSize: Style.fontSizeXXL
             }
 
         }

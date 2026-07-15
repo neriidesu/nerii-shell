@@ -25,11 +25,11 @@ Item {
     Rectangle {
         anchors.fill: root
         color: mouse.hovered ? Colors.a(Colors.md3.primary, 0.5) : "transparent"
-        radius: 2
+        radius: Style.radiusS
 
         Behavior on color {
             ColorAnimation {
-                duration: 150
+                duration: Style.animationFast
             }
 
         }
@@ -63,7 +63,7 @@ Item {
 
             Layout.alignment: Qt.AlignVCenter
             text: MediaService.isPlaying ? "" : ""
-            font.pixelSize: 16
+            font.pixelSize: Style.fontSizeXL
             Layout.minimumWidth: font.pixelSize / 4 * 3
         }
 
