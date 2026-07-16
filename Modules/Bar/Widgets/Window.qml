@@ -6,12 +6,13 @@ import qs.Services
 
 Item {
 
-    implicitWidth: text.implicitWidth
+    implicitWidth: Math.max(100, text.contentWidth)
     implicitHeight: Style.barHeight
     Text {
         id: text
-
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.fill: parent
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
 
         readonly property int maxLength: 60
         readonly property string title: {
