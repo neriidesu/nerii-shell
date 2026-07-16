@@ -47,7 +47,7 @@ Singleton {
     readonly property int radiusXS: 2
     readonly property int radiusS: 2
     readonly property int radiusM: 0
-    readonly property int radiusL: 0
+    readonly property int radiusL: 4
     // Border
     readonly property int borderS: 1
     readonly property int borderM: 2

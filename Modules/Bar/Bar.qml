@@ -1,7 +1,3 @@
-// TODO: Start menu
-// TODO: Media panel
-// TODO: Weather panel
-
 import QtQuick
 import QtQuick.Layouts
 import Quickshell

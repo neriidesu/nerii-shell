@@ -19,6 +19,8 @@ Singleton {
     property var preferredPlayer: "spotify"
     property string locationName: "Mölndal,Sweden"
     property bool updateWeather: true
+    property bool panelsAttachedToBar: true
+    property bool animationsDisabled: false
 
     // Preprocess paths by adding trailing "/"
     function ensureTrailingSlash(path) {
