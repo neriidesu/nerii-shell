@@ -54,7 +54,7 @@ Item {
         anchors.fill: parent
         hoverEnabled: true
         onClicked: {
-            PanelService.getPanel("sessionMenuPanel", screen)?.toggle();
+            PanelService.getPanel("sessionMenuPanel", screen)?.toggle(parent);
         }
 
         onEntered: {

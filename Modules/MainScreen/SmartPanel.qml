@@ -133,6 +133,7 @@ Item {
             } else {
                 // buttonName is a widget name, look it up
                 // buttonItem = BarService.lookupWidget(buttonName, screen.name);
+                Logger.d("hi")
             }
         }
 
@@ -312,14 +313,14 @@ Item {
             // For horizontal bars, center panel on button X position
             var panelX = root.buttonPosition.x + root.buttonWidth / 2 - panelWidth / 2;
             if (panelContent.allowAttach) {
-                var cornerInset = Style.radiusL * 2;
-                var barLeftEdge =  root.barMargin + cornerInset;
-                var barRightEdge = root.width - root.barMargin - cornerInset;
+                var barLeftEdge = -2;
+                var barRightEdge = root.width + 2;
                 panelX = Math.max(barLeftEdge, Math.min(panelX, barRightEdge - panelWidth));
             } else {
                 panelX = Math.max(effMarginL, Math.min(panelX, root.width - panelWidth - effMarginR));
             }
             calculatedX = panelX;
+
         } else {
             // Standard anchor positioning
             if (root.panelAnchorHorizontalCenter) {
@@ -333,31 +334,18 @@ Item {
                 }
             } else if (root.panelAnchorLeft) {
                 if (root.effectivePanelAnchorLeft) {
-                    calculatedX = 0;
+                    calculatedX = -2;
                 } else {
                     calculatedX = Style.marginL;
                 }
             } else {
-                if (panelContent.allowAttach) {
-                    var cornerInset = Style.radiusL * 2
-                    var barEdge = root.barMargin + cornerInset
-                    var centeredX = (root.width - panelWidth) / 2;
-                    calculatedX = Math.max(barEdge, Math.min(centeredX, barEdge - panelWidth))
-
-                    calculatedX = (root.width - panelWidth ) / 4
-                } else {
-                    calculatedX = (root.width - panelWidth / 2);
-                }
+                calculatedX = (root.width - panelWidth) / 2;
             }
         }
 
         // ===== Y POSITIONING =====
         if (root.useButtonPosition && root.height > 0 && panelHeight > 0) {
-            if(panelContent.allowAttach) {
-                calculatedY = topBarEdgeWithOverlap;
-            } else {
-                calculatedY = root.barHeight + Style.marginM;
-            }
+            calculatedY = root.barHeight + Style.marginM;
         } else {
             // Standard anchor positioning
             var barOffset = !panelContent.allowAttach ? root.barHeight + Style.marginM : 0;
@@ -365,6 +353,8 @@ Item {
             if (panelContent.allowAttach) {
                 if (root.effectivePanelAnchorTop || !root.hasExplicitVerticalAnchor) {
                     calculatedY = topBarEdgeWithOverlap;
+
+                    calculatedY = root.barHeight + root.barMargin
                 }
             }
 
@@ -373,6 +363,7 @@ Item {
                     var availableStart = root.barHeight + root.barMargin;
                     var availableHeight = root.height - availableStart;
                     calculatedY = availableStart + (availableHeight - panelHeight) / 2 ;
+
                 } else if (root.panelAnchorTop) {
                     if (root.effectivePanelAnchorTop) {
                         calculatedY = topBarEdgeWithOverlap 
@@ -385,6 +376,8 @@ Item {
                     } else {
                         calculatedY = root.height - panelHeight - Style.marginL 
                     }
+                    calculatedY = root.height - (root.barHeight + root.barMargin * 2) * 2 
+
                 } else {
                     calculatedY = barOffset + Style.marginL
                 }
@@ -392,8 +385,8 @@ Item {
         }
 
         // Apply calculated positions (set targets for animation)
-        panelBackground.targetX = calculatedX;
-        panelBackground.targetY = calculatedY;
+        panelBackground.targetX = calculatedX/2 ;
+        panelBackground.targetY = calculatedY/2 - 2;
     }
 
     // Watch for changes in content-driven sizes and update position
