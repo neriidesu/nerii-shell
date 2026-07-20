@@ -56,8 +56,24 @@ Singleton {
     }
 
     IpcHandler {
+        function setWallpaper(path: string) {
+            WallpaperService.setWallpaper(path);
+        }
+
+        function kill() {
+            WallpaperService.kill();
+        }
+
+        target: "wallpaper"
+    }
+
+    IpcHandler {
         function generateDefaultConfig() {
             Config.generateDefaultConfig();
+        }
+
+        function overwriteConfig() {
+            Config.configFileView.writeAdapter();
         }
 
         target: "debug"

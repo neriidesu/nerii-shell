@@ -8,6 +8,7 @@ Singleton {
     id: root
 
     readonly property alias data: adapter
+    readonly property alias configFileView: configFileView
     property real barMargin: 10
     property bool directoriesCreated: false
     property bool reloadConfig: false
@@ -61,8 +62,8 @@ Singleton {
         Quickshell.execDetached(["mkdir", "-p", cacheDir]);
         Quickshell.execDetached(["mkdir", "-p", configDir]);
         directoriesCreated = true;
+        // generateDefaultConfig();
         configFileView.adapter = adapter;
-        Logger.d("s", configFileView.path, configFile);
     }
 
     Timer {
@@ -169,6 +170,7 @@ Singleton {
         property JsonObject bar
         property JsonObject media
         property JsonObject weather
+        property JsonObject wallpaper
 
         misc: JsonObject {
             property bool debug: false
@@ -191,6 +193,10 @@ Singleton {
         weather: JsonObject {
             property string locationName: ""
             property bool updateWeather: true
+        }
+
+        wallpaper: JsonObject {
+            property string wallpaperPath: ""
         }
 
     }

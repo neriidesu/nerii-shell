@@ -10,19 +10,29 @@ import qs.Modules.MainScreen
 import qs.Services
 
 ShellRoot {
-    // Variants {
-    //     model: Quickshell.screens
-    //     Bar {
-    //         required property var modelData
-    //         screen: modelData
-    //     }
-    // }
+    property bool configLoaded: false
+
+    Component.onCompleted: {
+        Logger.i("Shell", "---------------------------");
+        Logger.i("Shell", "nerii-shell Hewwo! /`._.´\\");
+        Logger.i("Shell", "---------------------------");
+    }
+
+    Connections {
+        function onConfigLoaded() {
+            configLoaded = true;
+        }
+
+        target: Config ? Config : null
+    }
 
     Loader {
+        active: configLoaded
 
         sourceComponent: Item {
             Component.onCompleted: {
                 Qt.callLater(function() {
+                    WallpaperService.init();
                     LocationService.init();
                     IPCService.init();
                 });
