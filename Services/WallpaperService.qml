@@ -28,11 +28,11 @@ Singleton {
 
     function startWallpaper() {
         if (!hasInitialized) {
-            Qt.callLater(startWallpaper);
+            Logger.e("WallpaperService", "Tried to call startWallpaper while WallpaperService not initialized");
             return ;
         }
         if (isAnimated) {
-            Logger.d("WallpaperService", "Wallpaper is l-we");
+            Logger.d("WallpaperService", "Wallpaper is lwe");
             lweArgs = "";
             for (var i = 0; i < Quickshell.screens.length; i++) {
                 lweArgs = lweArgs + `--screen-root ${Quickshell.screens[i].name} --bg ${wallpaperFile.slice(0,wallpaperFile.lastIndexOf('.'))} `;

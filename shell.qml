@@ -1,6 +1,8 @@
-// TODO: Start menu
 // TODO: Media panel
 // TODO: Weather panel
+// TODO: clipboard history
+// TODO: wallpaper switcher
+// TODO: wofi & wofi calc replacement
 
 import QtQuick
 import Quickshell
@@ -31,8 +33,8 @@ ShellRoot {
 
         sourceComponent: Item {
             Component.onCompleted: {
+                WallpaperService.init();
                 Qt.callLater(function() {
-                    WallpaperService.init();
                     LocationService.init();
                     IPCService.init();
                 });
