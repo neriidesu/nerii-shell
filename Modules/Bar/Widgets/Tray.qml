@@ -45,7 +45,7 @@ Item {
             if (SystemTray.items && SystemTray.items.values) {
                 var newItems = [];
                 for (let i = 0; i < SystemTray.items.values.length; i++) {
-                    if (!Config.blacklistTrayIds.includes(SystemTray.items.values[i].id))
+                    if (!Config.data.bar.blacklistTrayIds.includes(SystemTray.items.values[i].id))
                         newItems.push(SystemTray.items.values[i]);
 
                 }
@@ -120,7 +120,7 @@ Item {
 
                     source: modelData.icon
                     visible: {
-                        !Config.blacklistTrayIds.includes(modelData.id);
+                        !Config.data.bar.blacklistTrayIds.includes(modelData.id);
                     }
                     height: iconSize
                     width: iconSize

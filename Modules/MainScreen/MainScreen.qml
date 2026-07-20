@@ -133,7 +133,7 @@ PanelWindow {
             property ShellScreen screen: root.screen
 
             // Bar background positioning propertyies
-            readonly property real barMargin: Config.barMargin
+            readonly property real barMargin: Config.data.bar.barMargin
             readonly property real barHeight: Style.barHeight
 
             // Expose bar dimensions directly on this Item for BarBackground

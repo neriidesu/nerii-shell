@@ -1,0 +1,21 @@
+{
+  "configVersion": 0,
+  "misc": {
+    "debug": false
+  },
+  "bar": {
+    "showBattery": true,
+    "showWifi": true,
+    "showEth": true,
+    "keepWorkspaces": null,
+    "blacklistTrayIds": [],
+    "barMargin": 10
+  },
+  "media": {
+    "preferredPlayer": ""
+  },
+  "weather": {
+    "locationName": "",
+    "updateWeather": true
+  }
+}

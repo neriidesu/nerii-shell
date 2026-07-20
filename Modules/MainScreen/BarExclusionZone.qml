@@ -14,7 +14,7 @@ PanelWindow {
     id: root
 
     property real thickness: Style.barHeight
-    readonly property real barMargin: Config.barMargin
+    readonly property real barMargin: Config.data.bar.barMargin
 
     // Invisible - just reserves space
     color: "transparent"

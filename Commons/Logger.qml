@@ -16,9 +16,9 @@ Singleton {
         }
     }
 
-    // Debug log (only when Config.debug is true)
+    // Debug log (only when Config.data.misc.debug is true)
     function d(...args) {
-        if (Config.debug) {
+        if (Config.data.misc.debug) {
             var msg = _formatMessage(...args);
             console.debug(msg);
         }

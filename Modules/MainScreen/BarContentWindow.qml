@@ -30,7 +30,7 @@ PanelWindow {
     WlrLayershell.layer: WlrLayer.Top
     WlrLayershell.exclusionMode: ExclusionMode.Ignore // Don't reserve space - BarExclusionZone in MainScreen handles that
 
-    readonly property real barMargin: Config.barMargin
+    readonly property real barMargin: Config.data.bar.barMargin
     readonly property real barHeight: Style.barHeight
 
     // Hover tracking

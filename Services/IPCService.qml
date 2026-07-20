@@ -55,4 +55,12 @@ Singleton {
         target: "media"
     }
 
+    IpcHandler {
+        function generateDefaultConfig() {
+            Config.generateDefaultConfig();
+        }
+
+        target: "debug"
+    }
+
 }

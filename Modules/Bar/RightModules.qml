@@ -38,11 +38,11 @@ RowLayout {
         }
 
         Battery {
-            visible: Config.showBattery
+            visible: Config.data.bar.showBattery
         }
 
         Separator {
-            visible: Config.showBattery
+            visible: Config.data.bar.showBattery
         }
 
         Clock {

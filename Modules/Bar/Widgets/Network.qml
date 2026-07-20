@@ -28,7 +28,7 @@ RowLayout {
             return String.fromCodePoint(985375 + (tier - 1) * 3);
         }
 
-        visible: Config.showWifi
+        visible: Config.data.bar.showWifi
         implicitHeight: wifi_icon.implicitHeight
         implicitWidth: wifi_icon.implicitWidth + wifi_label.implicitWidth
 
@@ -70,7 +70,7 @@ RowLayout {
             return String.fromCodePoint(986269);
         }
 
-        visible: Config.showEth
+        visible: Config.data.bar.showEth
         implicitHeight: eth_icon.implicitHeight
         implicitWidth: eth_icon.implicitWidth + eth_label.implicitWidth
 

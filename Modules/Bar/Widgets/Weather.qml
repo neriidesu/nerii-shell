@@ -6,7 +6,7 @@ import qs.Services
 Item {
     id: root
 
-    readonly property bool weatherReady: Config.updateWeather && (LocationService.data.weather !== null)
+    readonly property bool weatherReady: Config.data.weather.updateWeather && (LocationService.data.weather !== null)
 
     implicitHeight: row.height
     implicitWidth: row.width

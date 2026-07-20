@@ -12,7 +12,7 @@ Singleton {
     property string locationFile: (Config.cacheDir + "location.json")
     property int weatherUpdateFrequency: 30 * 60
     property bool isFetchingWeather: false
-    readonly property bool locationConfigured: Config.locationName !== ""
+    readonly property bool locationConfigured: Config.data.weather.locationName !== ""
     readonly property alias data: adapter
     // Stable UI properties - only updated when location is successfully geocoded
     property bool coordinatesReady: false
@@ -51,13 +51,13 @@ Singleton {
     // Main update function - geocodes location if needed, then fetches weather if enabled
     function update() {
         updateLocation();
-        if (Config.updateWeather)
+        if (Config.data.weather.updateWeather)
             updateWeatherData();
 
     }
 
     function updateLocation() {
-        const locationChanged = adapter.name !== Config.locationName;
+        const locationChanged = adapter.name !== Config.data.weather.locationName;
         const needsGeocoding = (adapter.latitude === "") || (adapter.longitude === "") || locationChanged;
         if (!needsGeocoding)
             return ;
@@ -68,10 +68,10 @@ Singleton {
         isFetchingWeather = true;
         if (locationChanged) {
             root.coordinatesReady = false;
-            Logger.d("Location", "Location changed from", adapter.name, "to", Config.locationName);
+            Logger.d("Location", "Location changed from", adapter.name, "to", Config.data.weather.locationName);
         }
-        geocodeLocation(Config.locationName, function(latitude, longitude, name, country) {
-            adapter.name = Config.locationName;
+        geocodeLocation(Config.data.weather.locationName, function(latitude, longitude, name, country) {
+            adapter.name = Config.data.weather.locationName;
             adapter.latitude = latitude.toString();
             adapter.longitude = longitude.toString();
             root.stableLatitude = adapter.latitude;
@@ -79,7 +79,7 @@ Singleton {
             root.stableName = `${name}, ${country}`;
             root.coordinatesReady = true;
             isFetchingWeather = false;
-            Logger.i("Location", `Geocoded ${Config.locationName}: ${root.stableLatitude}, ${root.stableLongitude}`);
+            Logger.i("Location", `Geocoded ${Config.data.weather.locationName}: ${root.stableLatitude}, ${root.stableLongitude}`);
             if (locationChanged) {
                 adapter.weatherLastFetch = 0;
                 updateWeatherData();
@@ -89,7 +89,7 @@ Singleton {
 
     // Fetch weather data if enabled and coordinates are available
     function updateWeatherData() {
-        if (!Config.updateWeather)
+        if (!Config.data.weather.updateWeather)
             return ;
 
         if (isFetchingWeather)
@@ -210,7 +210,7 @@ Singleton {
         id: updateTimer
 
         interval: 20 * 1000
-        running: Config.updateWeather
+        running: Config.data.weather.updateWeather
         repeat: true
         onTriggered: {
             update();

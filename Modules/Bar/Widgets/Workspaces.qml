@@ -44,8 +44,11 @@ RowLayout {
                     false;
             }
             property bool keep: {
-                if (Object.keys(Config.keepWorkspaces).includes(bar_root.screen.name)) {
-                    if (Config.keepWorkspaces[bar_root.screen.name].includes(index + 1))
+                if (Config.data.bar.keepWorkspaces == null) {
+                    return false
+                }
+                if (Object.keys(Config.data.bar.keepWorkspaces).includes(bar_root.screen.name)) {
+                    if (Config.data.bar.keepWorkspaces[bar_root.screen.name].includes(index + 1))
                     true;
                     else
                     false;

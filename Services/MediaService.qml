@@ -82,7 +82,7 @@ Singleton {
             }
         }
         // fallback if nothing is playing)
-        const preferred = (Config.preferredPlayer || "");
+        const preferred = (Config.data.media.preferredPlayer || "");
         if (preferred !== "") {
             for (var i = 0; i < availablePlayers.length; i++) {
                 const p = availablePlayers[i];

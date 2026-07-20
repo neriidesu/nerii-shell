@@ -70,7 +70,7 @@ Item {
     // Expose panel region for background rendering
     readonly property var panelRegion: panelContent.geometryPlaceholder
     readonly property real barHeight: Style.barHeight
-    readonly property real barMargin: Config.barMargin
+    readonly property real barMargin: Config.data.bar.barMargin
      readonly property real attachmentOverlap: 1 // Panel extends into bar area to fix hairline gap with fractional scaling
     // Helper to detect if any anchor is explicitly set
     readonly property bool hasExplicitHorizontalAnchor: panelAnchorHorizontalCenter || panelAnchorLeft || panelAnchorRight
