@@ -40,6 +40,7 @@ Singleton {
             if (hyprpaper.running)
                 hyprpaper.running = false;
 
+            lwe.running = false;
             lwe.command = ["sh", "-c", "linux-wallpaperengine --silent " + lweArgs.trim()];
             lwe.running = true;
         } else {
