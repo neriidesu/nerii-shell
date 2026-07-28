@@ -64,6 +64,11 @@ Singleton {
             WallpaperService.kill();
         }
 
+        function restart() {
+            WallpaperService.kill();
+            WallpaperService.startWallpaper();
+        }
+
         target: "wallpaper"
     }
 

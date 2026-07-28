@@ -1,8 +1,8 @@
-// TODO: Media panel
 // TODO: Weather panel
 // TODO: clipboard history
 // TODO: wallpaper switcher
 // TODO: wofi & wofi calc replacement
+// TODO: Media panel
 
 import QtQuick
 import Quickshell
