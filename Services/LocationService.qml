@@ -167,6 +167,14 @@ Singleton {
         xhr.send();
     }
 
+    function parseWMO(wmo, isDay) {
+        var wmoIndex = JSON.parse(wmoIndexFileView.text());
+        if (isDay)
+            return wmoIndex[wmo]["day"];
+        else
+            return wmoIndex[wmo]["night"];
+    }
+
     function errorCallback(module, message) {
         Logger.w(module, message);
         isFetchingWeather = false;
@@ -203,6 +211,13 @@ Singleton {
             property var weather: null
         }
 
+    }
+
+    FileView {
+        id: wmoIndexFileView
+
+        path: Quickshell.shellDir + "/Assets/wmo.json"
+        blockLoading: true
     }
 
     // Update timer runs when weather is enabled or location-based scheduling is active

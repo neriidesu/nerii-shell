@@ -7,6 +7,7 @@ import qs.Commons
 // All panels
 import qs.Modules.Bar
 import qs.Modules.Panels.SessionMenu
+import qs.Modules.Panels.WeatherMenu
 import qs.Services
 
 /**
@@ -123,6 +124,11 @@ PanelWindow {
             objectName: "sessionMenuPanel-" + (root.screen?.name || "unknown")
             screen: root.screen
         } 
+        WeatherMenu{
+            id: weatherMenuPanel
+            objectName: "weatherMenuPanel-" + (root.screen?.name || "unknown")
+            screen: root.screen
+        }
         // ---------------------------------------
         // Bar background placeholder - just for background positioning (actual bar content is in BarContentWindow)
         Item {

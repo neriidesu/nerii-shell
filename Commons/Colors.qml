@@ -14,6 +14,7 @@ Singleton {
     property string green: "#A7C080"
     property string blue: "#7FBBB3"
     property string purple: "#D699B6"
+    property string mauve: "#cba6f7"
     property string aqua: "#83C092"
     property string orange: "#E69875"
     property string status_ok: "#A7C080"

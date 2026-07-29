@@ -1,0 +1,338 @@
+{
+	"0":{
+		"day":{
+			"description":"Sunny",
+			"icon":"",
+			"color":"#DBBC7F"
+		},
+		"night":{
+			"description":"Clear",
+			"icon":"",
+			"color":"#b4befe"
+		}
+	},
+	"1":{
+		"day":{
+			"description":"Mainly Sunny",
+			"icon":"",
+			"color":"#DBBC7F"
+		},
+		"night":{
+			"description":"Mainly Clear",
+			"icon":"",
+			"color":"#b4befe"
+		}
+	},
+	"2":{
+		"day":{
+			"description":"Partly Cloudy",
+			"icon":"",
+			"color":"#DBBC7F"
+		},
+		"night":{
+			"description":"Partly Cloudy",
+			"icon":"",
+			"color":"#b4befe"
+		}
+	},
+	"3":{
+		"day":{
+			"description":"Cloudy",
+			"icon":"",
+			"color":"#9DA9A0"
+		},
+		"night":{
+			"description":"Cloudy",
+			"icon":"",
+			"color":"#859289"
+		}
+	},
+	"45":{
+		"day":{
+			"description":"Foggy",
+			"icon":"",
+			"color":"#9DA9A0"
+		},
+		"night":{
+			"description":"Foggy",
+			"icon":"",
+			"color":"#859289"
+		}
+	},
+	"48":{
+		"day":{
+			"description":"Rime Fog",
+			"icon":"",
+			"color":"#9DA9A0"
+		},
+		"night":{
+			"description":"Rime Fog",
+			"icon":"",
+			"color":"#859289"
+		}
+	},
+	"51":{
+		"day":{
+			"description":"Light Drizzle",
+			"icon":"",
+			"color":"#9DA9A0"
+		},
+		"night":{
+			"description":"Light Drizzle",
+			"icon":"",
+			"color":"#859289"
+		}
+	},
+	"53":{
+		"day":{
+			"description":"Drizzle",
+			"icon":"",
+			"color":"#9DA9A0"
+		},
+		"night":{
+			"description":"Drizzle",
+			"icon":"",
+			"color":"#859289"
+		}
+	},
+	"55":{
+		"day":{
+			"description":"Heavy Drizzle",
+			"icon":"",
+			"color":"#9DA9A0"
+		},
+		"night":{
+			"description":"Heavy Drizzle",
+			"icon":"",
+			"color":"#859289"
+		}
+	},
+	"56":{
+		"day":{
+			"description":"Light Freezing Drizzle",
+			"icon":"",
+			"color":"#9DA9A0"
+		},
+		"night":{
+			"description":"Light Freezing Drizzle",
+			"icon":"",
+			"color":"#859289"
+		}
+	},
+	"57":{
+		"day":{
+			"description":"Freezing Drizzle",
+			"icon":"",
+			"color":"#9DA9A0"
+		},
+		"night":{
+			"description":"Freezing Drizzle",
+			"icon":"",
+			"color":"#859289"
+		}
+	},
+	"61":{
+		"day":{
+			"description":"Light Rain",
+			"icon":"",
+			"color":"#89b4fa"
+		},
+		"night":{
+			"description":"Light Rain",
+			"icon":"",
+			"color":"#89b4fa"
+		}
+	},
+	"63":{
+		"day":{
+			"description":"Rain",
+			"icon":"",
+			"color":"#89b4fa"
+		},
+		"night":{
+			"description":"Rain",
+			"icon":"",
+			"color":"#89b4fa"
+		}
+	},
+	"65":{
+		"day":{
+			"description":"Heavy Rain",
+			"icon":"",
+			"color":"#89b4fa"
+		},
+		"night":{
+			"description":"Heavy Rain",
+			"icon":"",
+			"color":"#89b4fa"
+		}
+	},
+	"66":{
+		"day":{
+			"description":"Light Freezing Rain",
+			"icon":"",
+			"color":"#89b4fa"
+		},
+		"night":{
+			"description":"Light Freezing Rain",
+			"icon":"",
+			"color":"#89b4fa"
+		}
+	},
+	"67":{
+		"day":{
+			"description":"Freezing Rain",
+			"icon":"",
+			"color":"#89b4fa"
+		},
+		"night":{
+			"description":"Freezing Rain",
+			"icon":"",
+			"color":"#89b4fa"
+		}
+	},
+	"71":{
+		"day":{
+			"description":"Light Snow",
+			"icon":"",
+			"color": "#cdd6f4"
+		},
+		"night":{
+			"description":"Light Snow",
+			"icon":"",
+			"color": "#cdd6f4"
+		}
+	},
+	"73":{
+		"day":{
+			"description":"Snow",
+			"icon":"",
+			"color": "#cdd6f4"
+		},
+		"night":{
+			"description":"Snow",
+			"icon":"",
+			"color": "#cdd6f4"
+		}
+	},
+	"75":{
+		"day":{
+			"description":"Heavy Snow",
+			"icon":"",
+			"color": "#cdd6f4"
+		},
+		"night":{
+			"description":"Heavy Snow",
+			"icon":"",
+			"color": "#cdd6f4"
+		}
+	},
+	"77":{
+		"day":{
+			"description":"Snow Grains",
+			"icon":"",
+			"color": "#cdd6f4"
+		},
+		"night":{
+			"description":"Snow Grains",
+			"icon":"",
+			"color": "#cdd6f4"
+		}
+	},
+	"80":{
+		"day":{
+			"description":"Light Showers",
+			"icon":"",
+			"color":"#89b4fa"
+		},
+		"night":{
+			"description":"Light Showers",
+			"icon":"",
+			"color":"#89b4fa"
+		}
+	},
+	"81":{
+		"day":{
+			"description":"Showers",
+			"icon":"",
+			"color":"#89b4fa"
+		},
+		"night":{
+			"description":"Showers",
+			"icon":"",
+			"color":"#89b4fa"
+		}
+	},
+	"82":{
+		"day":{
+			"description":"Heavy Showers",
+			"icon":"",
+			"color":"#89b4fa"
+		},
+		"night":{
+			"description":"Heavy Showers",
+			"icon":"",
+			"color":"#89b4fa"
+		}
+	},
+	"85":{
+		"day":{
+			"description":"Light Snow Showers",
+			"icon":"",
+			"color": "#cdd6f4"
+		},
+		"night":{
+			"description":"Light Snow Showers",
+			"icon":"",
+			"color": "#cdd6f4"
+		}
+	},
+	"86":{
+		"day":{
+			"description":"Snow Showers",
+			"icon":"",
+			"color": "#cdd6f4"
+		},
+		"night":{
+			"description":"Snow Showers",
+			"icon":"",
+			"color": "#cdd6f4"
+		}
+	},
+	"95":{
+		"day":{
+			"description":"Thunderstorm",
+			"icon":"",
+			"color":"#DBBC7F"
+		},
+		"night":{
+			"description":"Thunderstorm",
+			"icon":"",
+			"color":"#DBBC7F"
+		}
+	},
+	"96":{
+		"day":{
+			"description":"Light Thunderstorms With Hail",
+			"icon":"",
+			"color":"#DBBC7F"
+		},
+		"night":{
+			"description":"Light Thunderstorms With Hail",
+			"icon":"",
+			"color":"#DBBC7F"
+		}
+	},
+	"99":{
+		"day":{
+			"description":"Thunderstorm With Hail",
+			"icon":"",
+			"color":"#DBBC7F"
+		},
+		"night":{
+			"description":"Thunderstorm With Hail",
+			"icon":"",
+			"color":"#DBBC7F"
+		}
+	}
+}

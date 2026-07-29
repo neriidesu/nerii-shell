@@ -5,6 +5,12 @@ pragma Singleton
 Singleton {
     id: root
 
+    // Current date
+    property var now: new Date()
+    // Returns a Unix Timestamp (in seconds)
+    readonly property int timestamp: {
+        return Math.floor(root.now / 1000);
+    }
     readonly property string time: {
         Qt.formatDateTime(clock.date, "hh:mm");
     }

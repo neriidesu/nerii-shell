@@ -1,4 +1,3 @@
-// TODO: Weather panel
 // TODO: clipboard history
 // TODO: wallpaper switcher
 // TODO: wofi & wofi calc replacement

@@ -50,4 +50,11 @@ Item {
 
     }
 
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            PanelService.getPanel("weatherMenuPanel", screen)?.toggle(parent);
+        }
+    }
+
 }
