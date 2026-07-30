@@ -10,7 +10,6 @@ SmartPanel {
     id: root
 
     readonly property bool weatherReady: Config.data.weather.updateWeather && (LocationService.data.weather !== null)
-    property color panelBackgroundColor: Colors.a(Colors.md3.surface, 0.9)
 
     panelContent: Item {
         id: panelContent
@@ -99,27 +98,27 @@ SmartPanel {
                         var dir = LocationService.data.weather.current_weather.winddirection;
                         var threshold = 45 / 2;
                         if (dir > 45 - threshold && dir < 45 + threshold)
-                            return " NW (" + dir + "°)";
+                            return " SE (" + dir + "°)";
 
                         if (dir > 90 - threshold && dir < 90 + threshold)
-                            return " W (" + dir + "°)";
+                            return " E (" + dir + "°)";
 
                         if (dir > 135 - threshold && dir < 135 + threshold)
-                            return " SW (" + dir + "°)";
+                            return " NE (" + dir + "°)";
 
                         if (dir > 180 - threshold && dir < 180 + threshold)
-                            return " S (" + dir + "°)";
+                            return " N (" + dir + "°)";
 
                         if (dir > 225 - threshold && dir < 225 + threshold)
-                            return " SE (" + dir + "°)";
+                            return " NW (" + dir + "°)";
 
                         if (dir > 270 - threshold && dir < 270 + threshold)
-                            return " E (" + dir + "°)";
+                            return " W (" + dir + "°)";
 
                         if (dir > 315 - threshold && dir < 315 + threshold)
-                            return " NE (" + dir + "°)";
+                            return " SW (" + dir + "°)";
                         else
-                            return " N (" + dir + "°)";
+                            return " S (" + dir + "°)";
                     }
 
                     text: "  " + windSpeed + " m/s " + windDirection
@@ -194,13 +193,13 @@ SmartPanel {
                                     if (!root.weatherReady)
                                         return "";
 
-                                    return LocationService.data.weather.daily.temperature_2m_max[modelData];
+                                    return LocationService.data.weather.daily.temperature_2m_max[modelData].toFixed(1).padStart(5, ' ');
                                 }
                                 property string tempMin: {
                                     if (!root.weatherReady)
                                         return "";
 
-                                    return LocationService.data.weather.daily.temperature_2m_min[modelData];
+                                    return LocationService.data.weather.daily.temperature_2m_min[modelData].toFixed(1).padEnd(5, ' ');
                                 }
                                 property string weathercode: {
                                     if (!root.weatherReady)
@@ -237,7 +236,7 @@ SmartPanel {
                                 }
 
                                 Text {
-                                    text: day.tempMax + "/" + day.tempMin
+                                    text: day.tempMax + " / " + day.tempMin
                                     font.pixelSize: Style.fontSizeL
                                 }
 
