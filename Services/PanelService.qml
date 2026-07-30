@@ -204,6 +204,48 @@ Singleton {
         didClose();
     }
 
+    // Open launcher panel (handles both normal and overlay mode)
+    function openLauncher(screen) {
+        // Close any regular panel first
+        if (openedPanel) {
+            closingPanel = openedPanel;
+            assignToSlot(1, closingPanel);
+            openedPanel.close();
+            openedPanel = null;
+        }
+        // Open overlay launcher
+        overlayLauncherOpen = true;
+        overlayLauncherScreen = screen;
+        willOpen();
+    }
+
+    // Toggle launcher panel
+    function toggleLauncher(screen) {
+        if (overlayLauncherOpen && overlayLauncherScreen === screen)
+            closeOverlayLauncher();
+        else
+            openLauncher(screen);
+    }
+
+    // Close overlay launcher
+    function closeOverlayLauncher() {
+        if (overlayLauncherOpen) {
+            overlayLauncherOpen = false;
+            overlayLauncherScreen = null;
+            didClose();
+        }
+    }
+
+    // Close overlay launcher immediately (for app launches)
+    function closeOverlayLauncherImmediately() {
+        if (overlayLauncherOpen) {
+            closedImmediately = true;
+            overlayLauncherOpen = false;
+            overlayLauncherScreen = null;
+            didClose();
+        }
+    }
+
     // Timer to switch from Exclusive to OnDemand keyboard focus on Hyprland
     Timer {
         id: keyboardInitTimer

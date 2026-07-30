@@ -94,6 +94,15 @@ Singleton {
         listProc.running = true;
     }
 
+    function pasteText(text) {
+        if (!text)
+          return;
+        const escaped = text.replace(/'/g, "'\\''");
+        const cmd = `printf '%s' '${escaped}' | wl-copy && wtype -M ctrl -M shift v`;
+        pasteProc.command = ["sh", "-c", cmd];
+        pasteProc.running = true;
+    }
+
     // Fallback: periodically refresh list so UI updates even if not in clip mode
     Timer {
         interval: 5000

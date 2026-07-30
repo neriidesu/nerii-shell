@@ -36,14 +36,7 @@ Singleton {
     property string background_blue: "#384B55"
     property string background_purple: "#463F48"
     property string background_visual: "#4C3743"
-    property string mOnHover: a(md3.primary, 0.5)
-
-    function a(hex, alpha) {
-        let a = (Math.round(alpha * 255)).toString(16);
-        while (a.length < 2)a = "0" + a
-        let c = "#" + a + hex.slice(1);
-        return c;
-    }
+    property string mOnHover: Qt.alpha(md3.primary, 0.5)
 
     FileView {
         path: Quickshell.env("HOME") + "/.local/state/quickshell/generated/colors.json"

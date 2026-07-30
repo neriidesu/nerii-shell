@@ -24,7 +24,7 @@ Item {
 
     Rectangle {
         anchors.fill: root
-        color: mouse.hovered ? Colors.a(Colors.md3.primary, 0.5) : "transparent"
+        color: mouse.hovered ? Qt.alpha(Colors.md3.primary, 0.5) : "transparent"
         radius: Style.radiusS
 
         Behavior on color {

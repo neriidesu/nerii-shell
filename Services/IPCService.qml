@@ -84,4 +84,13 @@ Singleton {
         target: "debug"
     }
 
+    IpcHandler {
+        function toggle() {
+            var screen = CompositorService.getFocusedScreen();
+            PanelService.toggleLauncher(screen);
+        }
+
+        target: "launcher"
+    }
+
 }

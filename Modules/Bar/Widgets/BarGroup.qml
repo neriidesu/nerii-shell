@@ -17,7 +17,7 @@ Item {
     Rectangle {
         id: background
 
-        color: Colors.a(Colors.md3.background, 0.75)
+        color: Qt.alpha(Colors.md3.background, 0.75)
         radius: 0
 
         border {

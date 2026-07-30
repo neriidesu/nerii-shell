@@ -330,7 +330,7 @@ PopupWindow {
                             Text {
                                 id: text
                                 Layout.fillWidth: true
-                                color: (modelData?.enabled ?? true) ? Colors.md3.on_background : Color.md3.on_surface
+                                color: (modelData?.enabled ?? true) ? Colors.md3.on_background : Colors.md3.on_surface
                                 text: modelData?.text !== "" ? modelData?.text.replace(/[\n\r]+/g, ' ') : "..."
                                 font.pixelSize: Style.fontSizeS
                                 verticalAlignment: Text.AlignVCenter

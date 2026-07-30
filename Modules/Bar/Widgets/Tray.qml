@@ -102,7 +102,7 @@ Item {
                     anchors.fill: trayIcon
                     anchors.margins: -Style.marginXXS
                     height: 4
-                    color: trayDelegate.isHovered ? Colors.a(Colors.md3.primary, 0.5) : "transparent"
+                    color: trayDelegate.isHovered ? Qt.alpha(Colors.md3.primary, 0.5) : "transparent"
                     radius: Style.radiusXS
 
                     Behavior on color {

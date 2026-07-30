@@ -20,7 +20,7 @@ Item {
     property real preferredHeight: 900
     property real preferredWidthRatio
     property real preferredHeightRatio
-    property color panelBackgroundColor: Colors.a(Colors.md3.surface, .5)
+    property color panelBackgroundColor: Qt.alpha(Colors.md3.surface, .5)
     property color panelBorderColor: Colors.md3.primary
     property var buttonItem: null
     property bool forceAttachToBar: false

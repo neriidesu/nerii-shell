@@ -95,7 +95,7 @@ Item {
         id: pressIndicator
 
         anchors.fill: parent
-        color: isPressed ? Colors.a(Colors.md3.on_surface, 0.5) : "transparent"
+        color: isPressed ? Qt.alpha(Colors.md3.on_surface, 0.5) : "transparent"
         radius: button.radius
 
         Behavior on color {
@@ -112,7 +112,7 @@ Item {
         id: hoverIndicator
 
         anchors.fill: parent
-        color: isHovered ? Colors.a(hoverColor, 0.2) : "transparent"
+        color: isHovered ? Qt.alpha(hoverColor, 0.2) : "transparent"
         radius: button.radius
 
         Behavior on color {

@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Hyprland
+import qs.Commons
 pragma Singleton
 
 Singleton {
@@ -38,6 +39,25 @@ Singleton {
             }
         }
         return null;
+    }
+
+    function spawn(command) {
+        try {
+            const cmd = command instanceof Array ? command.join(" ") : String(command);
+            dispatchCommand("exec", cmd, `hl.dsp.exec_cmd("${luaQuote(cmd)}")`);
+        } catch (e) {
+            Logger.e("HyprlandService", "Failed to spawn command:", e);
+        }
+    }
+
+    // Dispatch helpers
+    function luaQuote(str) {
+        return String(str).replace(/\\/g, "\\\\").replace(/"/g, "\\\"").replace(/\n/g, "\\n").replace(/\r/g, "\\r");
+    }
+
+    function dispatchCommand(legacyDispatcher, legacyArgs, luaCommand) {
+        Logger.d("HyprlandService", "Dispatch (Lua):", luaCommand);
+        Quickshell.execDetached(["hyprctl", "dispatch", luaCommand]);
     }
 
 }

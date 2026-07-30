@@ -171,6 +171,7 @@ Singleton {
         property JsonObject media
         property JsonObject weather
         property JsonObject wallpaper
+        property JsonObject appLauncher
 
         misc: JsonObject {
             property bool debug: false
@@ -197,6 +198,10 @@ Singleton {
 
         wallpaper: JsonObject {
             property string wallpaperPath: ""
+        }
+
+        appLauncher: JsonObject {
+            property string terminalCommand: "kitty"
         }
 
     }
