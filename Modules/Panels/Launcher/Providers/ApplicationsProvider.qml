@@ -121,16 +121,12 @@ Item {
                 "limit": 20
             });
             // Sort pinned first within fuzzy results while preserving fuzzysort order otherwise
-            const pinned = [];
             const nonPinned = [];
             for (const r of fuzzyResults) {
                 const app = r.obj;
-                if (isAppPinned(app))
-                    pinned.push(r);
-                else
-                    nonPinned.push(r);
+                nonPinned.push(r);
             }
-            return pinned.concat(nonPinned).map((result) => {
+            return nonPinned.map((result) => {
                 return createResultEntry(result.obj, result.score);
             });
         } else {

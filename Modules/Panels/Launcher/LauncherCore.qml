@@ -36,7 +36,7 @@ Rectangle {
     readonly property var defaultProvider: appsProvider
     readonly property var currentProvider: activeProvider || defaultProvider
     // ---
-    readonly property int effectiveIconSize: 24
+    readonly property int effectiveIconSize: 36
     readonly property int badgeSize: effectiveIconSize
     readonly property int entryHeight: badgeSize + Style.marginXL + Style.marginS
     // ---
@@ -423,20 +423,18 @@ Rectangle {
 
     ColumnLayout {
         anchors.fill: parent
-        anchors.topMargin: Style.marginL
         anchors.bottomMargin: Style.marginL
-        spacing: Style.marginL
+        spacing: 0
 
         NTextInput {
             id: searchInput
 
             Layout.fillWidth: true
             radius: Style.radiusM
-            Layout.leftMargin: Style.marginL
-            Layout.rightMargin: Style.marginL
             text: root.searchText
             placeholderText: "Search..."
             fontSize: Style.fontSizeM
+            border.width: 0
             onTextChanged: root.searchText = text
             Component.onCompleted: {
                 if (searchInput.inputItem) {
@@ -448,13 +446,17 @@ Rectangle {
             }
         }
 
+        NDivider {
+            Layout.fillWidth: true
+        }
+
         // Results view
         NSlideSwapView {
             id: resultsSwapView
 
+            Layout.leftMargin: 1
+            Layout.rightMargin: 1
             Layout.fillWidth: true
-            Layout.leftMargin: Style.marginL
-            Layout.rightMargin: Style.marginL
             Layout.fillHeight: true
             animationsEnabled: !root.animationsDisabled
             sourceComponent: root.isSingleView ? singleViewComponent : (root.isGridView ? gridViewComponent : listViewComponent)
@@ -475,7 +477,6 @@ Rectangle {
                 wheelScrollMultiplier: 4
                 width: parent.width
                 height: parent.height
-                spacing: Style.marginS
                 model: root.results
                 currentIndex: root.selectedIndex
                 cacheBuffer: resultsList.height * 2
@@ -509,7 +510,6 @@ Rectangle {
                 NBox {
                     anchors.fill: parent
                     color: Colors.md3.surface_variant
-                    forceOpaque: true
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 

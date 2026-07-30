@@ -9,7 +9,6 @@ Item {
     id: root
 
     property color color: Colors.md3.surface_variant
-    property bool forceOpaque: false
     property alias radius: bg.radius
     property alias border: bg.border
 
@@ -20,12 +19,7 @@ Item {
         radius: Style.radiusM
         border.color: Colors.md3.primary
         border.width: Style.borderS
-        color: {
-            if (forceOpaque)
-                return root.color;
-
-            return Qt.alpha(root.color, 0.5);
-        }
+        color: root.color
     }
 
 }

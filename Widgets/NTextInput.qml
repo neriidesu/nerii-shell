@@ -21,6 +21,7 @@ ColumnLayout {
     property real radius: Style.radiusM
     property real minimumInputWidth: 80 * Style.uiScaleRatio
     property bool showClearButton: true
+    property alias border: frame.border
     property alias text: input.text
     property alias placeholderText: input.placeholderText
     property alias inputMethodHints: input.inputMethodHints

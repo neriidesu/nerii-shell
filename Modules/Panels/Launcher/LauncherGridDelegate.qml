@@ -29,7 +29,6 @@ Item {
         anchors.fill: parent
         anchors.margins: Style.marginXXS
         color: gridEntryContainer.isSelected ? Colors.md3.tertiary : Colors.md3.surface_variant
-        forceOpaque: gridEntryContainer.isSelected
 
         ColumnLayout {
             anchors.fill: parent

@@ -16,8 +16,8 @@ NBox {
     width: ListView.view.width
     implicitHeight: launcher.entryHeight
     clip: true
-    color: entry.isSelected ? Qt.alpha(Colors.md3.tertiary, 0.5) : Colors.md3.surface_variant
-    forceOpaque: entry.isSelected
+    color: entry.isSelected ? Qt.alpha(Colors.md3.on_primary, 0.5) : "transparent"
+    border.width: 0
     // Prepare item when it becomes visible (e.g., decode images)
     Component.onCompleted: {
         var provider = modelData.provider;
@@ -119,7 +119,7 @@ NBox {
                             text: modelData.icon
                             font.pixelSize: Style.fontSizeXXXL
                             visible: modelData.icon && !modelData.displayString
-                            color: (entry.isSelected) ? Colors.md3.tertiary : Colors.md3.on_surface
+                            color: (entry.isSelected) ? Colors.md3.on_surface : Colors.md3.on_surface
                         }
 
                     }
@@ -218,7 +218,7 @@ NBox {
                     text: modelData.name || "Unknown"
                     font.pixelSize: Style.fontSizeL
                     font.weight: Style.fontWeightBold
-                    color: entry.isSelected ? Colors.md3.tertiary : Colors.md3.on_surface_variant
+                    color: entry.isSelected ? Colors.md3.on_surface : Colors.md3.on_surface_variant
                     elide: Text.ElideRight
                     maximumLineCount: 1
                     wrapMode: Text.Wrap
@@ -229,7 +229,7 @@ NBox {
                 Text {
                     text: modelData.description || ""
                     font.pixelSize: Style.fontSizeS
-                    color: entry.isSelected ? Colors.md3.tertiary : Colors.md3.on_surface_variant
+                    color: entry.isSelected ? Colors.md3.on_surface : Colors.md3.on_surface_variant
                     elide: Text.ElideRight
                     maximumLineCount: 1
                     Layout.fillWidth: true
