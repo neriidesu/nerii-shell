@@ -2,6 +2,7 @@
 // TODO: wallpaper switcher
 // TODO: wofi & wofi calc replacement
 // TODO: Media panel
+// TODO: Custom Styles
 
 import QtQuick
 import Quickshell

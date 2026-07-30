@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Hyprland
 pragma Singleton
 
 Singleton {
@@ -23,6 +24,20 @@ Singleton {
 
     function shutdown() {
         Quickshell.execDetached(["sh", "-c", "systemctl poweroff"]);
+    }
+
+    // Get focused screen from compositor
+    function getFocusedScreen() {
+        const hyprMon = Hyprland.focusedMonitor;
+        if (hyprMon) {
+            const monitorName = hyprMon.name;
+            for (let i = 0; i < Quickshell.screens.length; i++) {
+                if (Quickshell.screens[i].name === monitorName)
+                    return Quickshell.screens[i];
+
+            }
+        }
+        return null;
     }
 
 }
