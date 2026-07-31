@@ -425,6 +425,15 @@ Rectangle {
         }
     }
 
+    FunProvider {
+        id: funProvider
+
+        Component.onCompleted: {
+            registerProvider(this);
+            Logger.d("Launcher", "Registered: FunProvider");
+        }
+    }
+
     Timer {
         id: mouseTrackingDelayTimer
 
