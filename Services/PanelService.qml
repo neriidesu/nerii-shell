@@ -246,6 +246,35 @@ Singleton {
         }
     }
 
+    // ==================== Unified Launcher API ====================
+    function isLauncherOpen(screen) {
+        return overlayLauncherOpen && overlayLauncherScreen === screen;
+    }
+
+    function getLauncherSearchText(screen) {
+        return overlayLauncherCore ? overlayLauncherCore.searchText : "";
+    }
+
+    function setLauncherSearchText(screen, text) {
+        if (overlayLauncherCore)
+            overlayLauncherCore.setSearchText(text);
+
+    }
+
+    function openLauncherWithSearch(screen, searchText) {
+        openLauncher(screen);
+        // Set search text after core is ready
+        Qt.callLater(() => {
+            if (overlayLauncherCore)
+                overlayLauncherCore.setSearchText(searchText);
+
+        });
+    }
+
+    function closeLauncher(screen) {
+        closeOverlayLauncher();
+    }
+
     // Timer to switch from Exclusive to OnDemand keyboard focus on Hyprland
     Timer {
         id: keyboardInitTimer

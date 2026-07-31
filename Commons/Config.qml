@@ -202,6 +202,8 @@ Singleton {
 
         appLauncher: JsonObject {
             property string terminalCommand: "kitty"
+            // Icon mode: "tabler" or "native"
+            property string iconMode: "tabler"
         }
 
     }

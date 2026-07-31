@@ -39,6 +39,33 @@ Singleton {
         return `${year}${month}${day}-${hours}${minutes}${seconds}`;
     }
 
+    // Format a date into
+    function formatRelativeTime(date) {
+        if (!date)
+            return "";
+
+        const diff = Date.now() - date.getTime();
+        if (diff < 60000)
+            return "now";
+
+        if (diff < 120000)
+            return "1 minute ago";
+
+        if (diff < 3.6e+06)
+            return Math.floor(diff / 60000) + " minutes ago";
+
+        if (diff < 7.2e+06)
+            return "1 hour ago";
+
+        if (diff < 8.64e+07)
+            return Math.floor(diff / 3.6e+06) + " minutes ago";
+
+        if (diff < 1.728e+08)
+            return "1 day ago";
+
+        return Math.floor(diff / 8.64e+07) + " days ago";
+    }
+
     SystemClock {
         id: clock
 

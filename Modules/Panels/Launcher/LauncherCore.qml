@@ -318,12 +318,10 @@ Rectangle {
             event.accepted = true;
             break;
         case Qt.Key_Enter:
-            Logger.d(event.key);
             activate();
             event.accepted = true;
             break;
         case Qt.Key_Return:
-            Logger.d(event.key);
             activate();
             event.accepted = true;
             break;
@@ -407,6 +405,16 @@ Rectangle {
         Component.onCompleted: {
             registerProvider(this);
             Logger.d("Launcher", "Registered: ApplicationsProvider");
+        }
+    }
+
+    // ClipboardProvider
+    ClipboardProvider {
+        id: clipProvider
+
+        Component.onCompleted: {
+            registerProvider(this);
+            Logger.d("Launcher", "Registered: ClipboardProvider");
         }
     }
 

@@ -3,6 +3,7 @@
 // TODO: wofi & wofi calc replacement
 // TODO: Media panel
 // TODO: Custom Styles
+// TODO: Get random catgirl (inspired by https://github.com/NyarchLinux/CatgirlDownloader/blob/master/src/catgirl.py)
 
 import QtQuick
 import Quickshell

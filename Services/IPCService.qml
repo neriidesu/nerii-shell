@@ -90,6 +90,21 @@ Singleton {
             PanelService.toggleLauncher(screen);
         }
 
+        function clipboard() {
+            var screen = CompositorService.getFocusedScreen();
+            var searchText = PanelService.getLauncherSearchText(screen);
+            var isInClipMode = searchText.startsWith(">clip");
+            if (!PanelService.isLauncherOpen(screen))
+                // Closed -> open in clipboard mode
+                PanelService.openLauncherWithSearch(screen, ">clip ");
+            else if (isInClipMode)
+                // Already in clipboard mode -> close
+                PanelService.closeLauncher(screen);
+            else
+                // In another mode -> switch to clipboard mode
+                PanelService.setLauncherSearchText(screen, ">clip ");
+        }
+
         target: "launcher"
     }
 

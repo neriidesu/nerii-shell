@@ -7,6 +7,7 @@ pragma Singleton
 Singleton {
     id: root
 
+    property bool active: true
     property bool loading: false
     property var items: []
     // Approximate first-seen timestamps for entries this session (seconds)
@@ -31,6 +32,10 @@ Singleton {
     property int _decodeRequestId: 0
 
     signal listCompleted()
+
+    onActiveChanged: {
+        Logger.d("ClipboardService", "Active state changed to: ",root.active)
+    }
 
     function get() {
         decode(1309, (cb) => {
@@ -83,7 +88,7 @@ Singleton {
         captureTextProc.command = ["wl-paste", "--no-newline"];
         captureTextProc.running = true;
     }
-
+    
     function list(maxPreviewWidth) {
         if (listProc.running)
             return ;
@@ -94,6 +99,26 @@ Singleton {
         listProc.running = true;
     }
 
+    function copyToClipboard(id) {
+        if (!root.cliphistAvailable) {
+        return;
+        }
+        copyProc.command = ["sh", "-c", `cliphist decode ${id} | wl-copy`];
+        copyProc.running = true;
+    }
+
+    function pasteFromClipboard(id, mime) {
+        if (!root.cliphistAvailable) {
+            return;
+        }
+        const isImage = mime && mime.startsWith("image/");
+        const typeArg = isImage ? ` --type ${mime}` : "";
+        const pasteKeys = isImage ? "wtype -M ctrl -k v" : "wtype -M ctrl -M shift  v";
+        const cmd = `cliphist decode ${id} | wl-copy${typeArg} && ${pasteKeys}`;
+        pasteProc.command = ["sh", "-c", cmd];
+        pasteProc.running = true;
+    }
+
     function pasteText(text) {
         if (!text)
           return;
@@ -101,6 +126,33 @@ Singleton {
         const cmd = `printf '%s' '${escaped}' | wl-copy && wtype -M ctrl -M shift v`;
         pasteProc.command = ["sh", "-c", cmd];
         pasteProc.running = true;
+    }
+
+    function wipeAll(){
+        // Clear caches
+        root.contentCache = {};
+        root.imageDataById = {};
+        root._imageDataInsertOrder = [];
+        root._latestTextContent = "";
+        root._latestTextId = "";
+
+        Quickshell.execDetached(["cliphist", "wipe"]);
+        revision++;
+        Qt.callLater(() => list());
+    }
+
+    // Parse image metadata from cliphist preview string
+    function parseImageMeta(preview) {
+        const re = /\[\[\s*binary data\s+([\d\.]+\s*(?:KiB|MiB|GiB|B))\s+(\w+)\s+(\d+)x(\d+)\s*\]\]/i;
+        const match = (preview || "").match(re);
+        if (!match)
+            return null;
+        return {
+            "size": match[1],
+            "fmt": (match[2] || "").toUpperCase(),
+            "w": Number(match[3]),
+            "h": Number(match[4])
+        };
     }
 
     // Fallback: periodically refresh list so UI updates even if not in clip mode

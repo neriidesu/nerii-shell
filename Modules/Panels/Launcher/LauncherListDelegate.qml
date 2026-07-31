@@ -116,6 +116,8 @@ NBox {
                         id: tablerIconComponent
 
                         Text {
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
                             text: modelData.icon
                             font.pixelSize: Style.fontSizeXXXL
                             visible: modelData.icon && !modelData.displayString

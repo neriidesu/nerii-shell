@@ -54,7 +54,6 @@ Item {
                 // Same appId AND same exec = true duplicate, skip it
                 Logger.d("ApplicationsProvider", `Skipping duplicate: ${appId}`);
                 return false;
-                Logger.d(event.key);
             }
             seen.set(appId, execCmd);
             return true;
