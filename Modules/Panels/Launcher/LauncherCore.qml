@@ -425,6 +425,15 @@ Rectangle {
         }
     }
 
+    CalculatorProvider {
+        id: calculatorProvider
+
+        Component.onCompleted: {
+            registerProvider(this);
+            Logger.d("Launcher", "Registered: CalculatorProvider");
+        }
+    }
+
     FunProvider {
         id: funProvider
 

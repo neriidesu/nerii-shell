@@ -109,7 +109,7 @@ Item {
 
         // Special command: clear
         if (query === "clear")
-            return cmdClear;
+            return [cmdClear];
 
         // Show loading state if data is being loaded
         if (ClipboardService.loading || isWaitingForData)

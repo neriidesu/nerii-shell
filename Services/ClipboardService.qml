@@ -224,7 +224,11 @@ Singleton {
                 // Record first seen time for new ids (approximate copy time)
                 if (!root.firstSeenById[id]) {
                     const assumedAge = i * 15 * 60;
-                    root.firstSeenById[id] = Time.timestamp - assumedAge;
+                    const t = Time.timestamp
+                    if(root.firstSeenById[id-1] && t - assumedAge < root.firstSeenById[id-1])
+                        root.firstSeenById[id] = root.firstSeenById[id-1]
+                    else
+                        root.firstSeenById[id] = Time.timestamp - assumedAge;
                 }
                 // Smart type detection
                 var contentType = "text";
