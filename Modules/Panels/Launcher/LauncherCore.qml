@@ -398,7 +398,6 @@ Rectangle {
     // -----------------------
     // Provider components
     // -----------------------
-    // ApplicationProvider
     ApplicationsProvider {
         id: appsProvider
 
@@ -408,13 +407,21 @@ Rectangle {
         }
     }
 
-    // ClipboardProvider
     ClipboardProvider {
         id: clipProvider
 
         Component.onCompleted: {
             registerProvider(this);
             Logger.d("Launcher", "Registered: ClipboardProvider");
+        }
+    }
+
+    CommandProvider {
+        id: commandProvider
+
+        Component.onCompleted: {
+            registerProvider(this);
+            Logger.d("Launcher", "Registered: CommandProvider");
         }
     }
 
