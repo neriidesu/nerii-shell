@@ -6,7 +6,7 @@ Singleton {
     id: root
 
     // Current date
-    property var now: new Date()
+    property var now: clock.date
     // Returns a Unix Timestamp (in seconds)
     readonly property int timestamp: {
         return Math.floor(root.now / 1000);
@@ -22,6 +22,34 @@ Singleton {
     }
     readonly property string jp_date: {
         Qt.formatDateTime(clock.date, "yyyy年MM月dd日");
+    }
+
+    function formatStandard(date, ref) {
+        if (!date)
+            date = new Date();
+
+        if (!ref)
+            ref = new Date(0);
+
+        const monthMap = new Map([[0, "Jan"], [1, "Feb"], [2, "Mar"], [3, "Apr"], [4, "May"], [5, "Jun"], [6, "Jul"], [7, "Aug"], [8, "Sep"], [9, "Oct"], [10, "Nov"], [11, "Dec"]]);
+        const dayMap = new Map([[0, "Sun"], [1, "Mon"], [2, "Tue"], [3, "Wed"], [4, "Thu"], [5, "Fri"], [6, "Sat"]]);
+        const year = date.getFullYear();
+        const month = monthMap.get(date.getMonth());
+        const day = date.getDate();
+        const weekday = dayMap.get(date.getDay());
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        if (date.getFullYear() != ref.getFullYear())
+            return `${weekday} ${month} ${day} ${hours}:${minutes}:${seconds} ${year}`;
+
+        if (date.getMonth() != ref.getMonth() || (date > ref && date.getDate() > ref.getDate() + 6) || (date < ref && date.getDate() < ref.getDate() - 6))
+            return `${weekday} ${month} ${day} ${hours}:${minutes}:${seconds}`;
+
+        if (date.getDate() != ref.getDate())
+            return `${weekday} ${hours}:${minutes}:${seconds}`;
+
+        return `${hours}:${minutes}:${seconds}`;
     }
 
     // Formats a Date object into a YYYYMMDD-HHMMSS string.
@@ -69,7 +97,7 @@ Singleton {
     SystemClock {
         id: clock
 
-        precision: SystemClock.Minutes
+        precision: SystemClock.Seconds
     }
 
 }

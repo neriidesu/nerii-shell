@@ -434,6 +434,15 @@ Rectangle {
         }
     }
 
+    TimeCalculationProvider {
+        id: timeCalculationProvider
+
+        Component.onCompleted: {
+            registerProvider(this);
+            Logger.d("Launcher", "Registered: TimeCalculationProvider");
+        }
+    }
+
     FunProvider {
         id: funProvider
 

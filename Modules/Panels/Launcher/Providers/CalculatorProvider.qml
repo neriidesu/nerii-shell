@@ -54,7 +54,7 @@ Item {
     // Check if a string is a valid math expression
     function isMathExpression(expr) {
         // Allow: digits, operators, parentheses, decimal points, whitespace, letters (for functions), commas
-        if (!/^[\d\s\+\-\*\/\(\)\.\%\^a-zA-Z,]+$/.test(expr))
+        if (!/^[\d\s\+\-\*\/\:\(\)\.\%\^a-zA-Z,]+$/.test(expr))
             return false;
 
         // Must contain at least one operator OR a function call (letter followed by parenthesis)
