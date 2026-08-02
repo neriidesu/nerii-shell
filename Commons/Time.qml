@@ -72,7 +72,7 @@ Singleton {
         if (!date)
             return "";
 
-        const diff = Date.now() - date.getTime();
+        const diff = Math.abs(Date.now() - date.getTime());
         if (diff < 60000)
             return "now";
 
