@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.UPower
 import qs.Commons
+import qs.Widgets
 
 BarGroup {
     id: root
@@ -23,23 +24,19 @@ BarGroup {
         return String.fromCodePoint(983162 + (Math.floor(level / 10) - 1));
     }
 
-    Text {
+    NIcon {
         text: root.icon
         color: root.charging ? Colors.yellow : root.level <= 15 ? Colors.status_err : root.level <= 30 ? Colors.status_pending : Colors.status_ok
-
-        font {
-            pixelSize: Style.fontSizeXXL
-        }
-
+        size: Style.fontSizeXXL
     }
 
-    Text {
+    NText {
         text: root.level + "%"
+        size: Style.fontSizeL
 
         font {
             family: Fonts.jp
             letterSpacing: 2
-            pixelSize: Style.fontSizeL
         }
 
     }

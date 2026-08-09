@@ -564,9 +564,9 @@ Rectangle {
                         Item {
                             Layout.alignment: Qt.AlignTop | Qt.AlignLeft
 
-                            Text {
+                            NText {
                                 text: root.results.length > 0 ? root.results[0].name : ""
-                                font.pixelSize: Style.fontSizeL
+                                size: Style.fontSizeL
                                 font.weight: Font.Bold
                                 color: Colors.md3.primary
                             }
@@ -583,10 +583,10 @@ Rectangle {
                             horizontalPolicy: ScrollBar.AlwaysOff
                             reserveScrollbarSpace: false
 
-                            Text {
+                            NText {
                                 width: descriptionScrollView.availableWidth
                                 text: root.results.length > 0 ? root.results[0].description : ""
-                                font.pixelSize: Style.fontSizeM
+                                size: Style.fontSizeM
                                 font.weight: Font.Bold
                                 color: Colors.md3.on_surface
                                 horizontalAlignment: Text.AlignHLeft
@@ -676,7 +676,7 @@ Rectangle {
                 Layout.bottomMargin: Style.marginS
             }
 
-            Text {
+            NText {
                 Layout.fillWidth: true
                 text: {
                     if (root.results.length === 0) {
@@ -693,7 +693,7 @@ Rectangle {
                     var prefix = root.activeProvider && root.activeProvider.name ? root.activeProvider.name + ": " : "";
                     return prefix + root.results.length;
                 }
-                font.pixelSize: Style.fontSizeXS
+                size: Style.fontSizeXS
                 color: Colors.md3.surface_variant
                 horizontalAlignment: Text.AlignCenter
             }

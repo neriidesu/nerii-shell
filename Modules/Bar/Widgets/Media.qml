@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import qs.Commons
 import qs.Services
+import qs.Widgets
 
 Item {
     id: root
@@ -51,19 +52,19 @@ Item {
 
         }
 
-        Text {
+        NText {
             id: label
 
             Layout.alignment: Qt.AlignVCenter
             text: title
         }
 
-        Text {
+        NIcon {
             id: playing
 
             Layout.alignment: Qt.AlignVCenter
             text: MediaService.isPlaying ? "" : ""
-            font.pixelSize: Style.fontSizeXL
+            size: Style.fontSizeXL
             Layout.minimumWidth: font.pixelSize / 4 * 3
         }
 

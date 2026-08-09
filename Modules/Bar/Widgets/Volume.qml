@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Services.Pipewire
 import qs.Commons
 import qs.Services
+import qs.Widgets
 
 Item {
     implicitWidth: root.width
@@ -43,20 +44,16 @@ Item {
             right: parent.right
         }
 
-        Text {
+        NIcon {
             id: icon
 
             text: root.icon
             color: root.ready ? Colors.md3.on_background : Colors.status_err
             Layout.alignment: Qt.AlignVCenter
-
-            font {
-                pixelSize: Style.fontSizeXXL
-            }
-
+            size: Style.fontSizeXXL
         }
 
-        Text {
+        NText {
             id: label
 
             text: {

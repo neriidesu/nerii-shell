@@ -104,9 +104,9 @@ Item {
                     Component {
                         id: gridTablerIconComponent
 
-                        Text {
+                        NIcon {
                             text: modelData.icon
-                            font.pixelSize: Style.fontSizeXXXL
+                            size: Style.fontSizeXXXL
                             visible: modelData.icon && !modelData.displayString
                             color: (gridEntryContainer.isSelected) ? Colors.md3.tertiary : Colors.md3.on_surface
                         }
@@ -128,13 +128,13 @@ Item {
                 }
 
                 // String display
-                Text {
+                NText {
                     id: gridStringDisplay
 
                     anchors.centerIn: parent
                     visible: !!modelData.displayString || (!gridImagePreview.visible && !gridIconLoader.visible)
                     text: modelData.displayString ? modelData.displayString : (modelData.name ? modelData.name.charAt(0).toUpperCase() : "?")
-                    font.pixelSize: {
+                    size: {
                         if (modelData.displayString) {
                             // Use custom size if provided, otherwise default scaling
                             if (modelData.displayStringSize)
@@ -169,10 +169,10 @@ Item {
                     color: Colors.md3.surface_variant
                     radius: Style.radiusXXS
 
-                    Text {
+                    NIcon {
                         anchors.centerIn: parent
                         text: modelData.badgeIcon || ""
-                        font.pixelSize: Style.fontSizeS
+                        size: Style.fontSizeS
                         color: Colors.md3.on_surfaceVariant
                     }
 
@@ -181,10 +181,10 @@ Item {
             }
 
             // Text content (hidden when hideLabel is true)
-            Text {
+            NText {
                 visible: !modelData.hideLabel
                 text: modelData.name || "Unknown"
-                font.pixelSize: {
+                size: {
                     if (launcher.providerHasDisplayString && modelData.displayString)
                         return Style.fontSizeS * Style.uiScaleRatio;
 

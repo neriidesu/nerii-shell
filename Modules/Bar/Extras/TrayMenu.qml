@@ -284,13 +284,13 @@ PopupWindow {
                                         }
                                     }
 
-                                    Text {
+                                    NIcon {
                                         visible: parent.parent.isChecked
                                         anchors.centerIn: parent
                                         // anchors.horizontalCenterOffset: -1
                                         text: ""
                                         color: parent.parent.activeColor
-                                        font.pixelSize: Math.max(Style.fontSizeXXS, parent.width * 0.6)
+                                        size: Math.max(Style.fontSizeXXS, parent.width * 0.6)
                                     }
                                 }
 
@@ -327,12 +327,12 @@ PopupWindow {
                                 }
                             }
 
-                            Text {
+                            NText {
                                 id: text
                                 Layout.fillWidth: true
                                 color: (modelData?.enabled ?? true) ? Colors.md3.on_background : Colors.md3.on_surface
                                 text: modelData?.text !== "" ? modelData?.text.replace(/[\n\r]+/g, ' ') : "..."
-                                font.pixelSize: Style.fontSizeS
+                                size: Style.fontSizeS
                                 verticalAlignment: Text.AlignVCenter
                                 wrapMode: Text.WordWrap
                             }
@@ -345,9 +345,9 @@ PopupWindow {
                                 fillMode: Image.PreserveAspectFit
                             }
 
-                            Text {
+                            NIcon {
                                 text: modelData?.hasChildren ? "󰍜" : ""
-                                font.pixelSize: Style.fontSizeS
+                                size: Style.fontSizeS
                                 verticalAlignment: Text.AlignVCenter
                                 visible: modelData?.hasChildren ?? false
                                 color: (mouseArea.containsMouse ? Colors.md3.tertiary : Colors.md3.on_background)

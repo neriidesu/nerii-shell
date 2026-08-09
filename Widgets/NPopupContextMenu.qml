@@ -173,22 +173,22 @@ PopupWindow {
         Qt.callLater(calculateWidth);
     }
 
-    Text {
+    NText {
         id: textMeasure
 
         visible: false
-        font.pixelSize: Style.fontSizeS
+        size: Style.fontSizeS
         wrapMode: Text.NoWrap
         elide: Text.ElideNone
         width: undefined
     }
 
-    Text {
+    NIcon {
         id: iconMeasure
 
         visible: false
         text: "󰂚"
-        font.pixelSize: Style.fontSizeS
+        size: Style.fontSizeS
     }
 
     Item {
@@ -260,10 +260,10 @@ PopupWindow {
                             anchors.rightMargin: Style.marginM
                             spacing: Style.marginS
 
-                            Text {
+                            NIcon {
                                 visible: modelData.icon !== undefined
                                 text: modelData.icon || ""
-                                font.pixelSize: Style.fontSizeS
+                                size: Style.fontSizeS
                                 color: mouseArea.containsMouse ? Colors.md3.primary : Colors.md3.on_background
                                 verticalAlignment: Text.AlignVCenter
 
@@ -276,9 +276,9 @@ PopupWindow {
 
                             }
 
-                            Text {
+                            NText {
                                 text: modelData.label || modelData.text || ""
-                                font.pixelSize: Style.fontSizeS
+                                size: Style.fontSizeS
                                 color: mouseArea.containsMouse ? Colors.md3.primary : Colors.md3.on_background
                                 verticalAlignment: Text.AlignVCenter
                                 Layout.fillWidth: true

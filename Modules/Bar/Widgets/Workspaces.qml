@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Io
 import qs.Commons
+import qs.Widgets
 
 RowLayout {
     function getWorkspaceText(index) {
@@ -32,7 +33,7 @@ RowLayout {
 
         model: 10
 
-        Text {
+        NText {
             property var ws: Hyprland.workspaces.values.find((w) => {
                 return w.id === index + 1;
             })
@@ -65,8 +66,8 @@ RowLayout {
             font {
                 family: Fonts.code
                 weight: Style.fontWeightSemiBold
-                pixelSize: Style.fontSizeL
             }
+                size: Style.fontSizeL
 
             Behavior on color {
                 ColorAnimation {

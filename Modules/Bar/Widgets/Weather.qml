@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import qs.Commons
 import qs.Services
+import qs.Widgets
 
 Item {
     id: root
@@ -16,7 +17,7 @@ Item {
 
         spacing: Style.marginXXS
 
-        Text {
+        NText {
             id: prefix
 
             text: "外気温は "
@@ -25,7 +26,7 @@ Item {
             color: Colors.md3.inverse_primary
         }
 
-        Text {
+        NText {
             id: tempText
 
             property string temp: {
@@ -40,7 +41,7 @@ Item {
             color: Colors.md3.primary
         }
 
-        Text {
+        NText {
             id: suffix
 
             text: "°C"

@@ -60,7 +60,7 @@ Item {
 
             }
 
-            Text {
+            NIcon {
                 id: icon
 
                 visible: actuallyShowIcon
@@ -68,15 +68,15 @@ Item {
                 horizontalAlignment: Text.AlignHCenter
                 Layout.preferredWidth: parent.width
                 color: root.isHovered ? hoverColor : Colors.md3.on_background
+                size: root.size
 
                 font {
-                    pixelSize: root.size
                     weight: Style.fontWeightBold
                 }
 
             }
 
-            Text {
+            NText {
                 id: text
 
                 visible: showLabel

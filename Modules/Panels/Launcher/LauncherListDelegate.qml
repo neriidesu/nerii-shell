@@ -115,11 +115,11 @@ NBox {
                     Component {
                         id: tablerIconComponent
 
-                        Text {
+                        NIcon {
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
                             text: modelData.icon
-                            font.pixelSize: Style.fontSizeXXXL
+                            size: Style.fontSizeXXXL
                             visible: modelData.icon && !modelData.displayString
                             color: (entry.isSelected) ? Colors.md3.on_surface : Colors.md3.on_surface
                         }
@@ -149,13 +149,13 @@ NBox {
                 }
 
                 // String display - takes precedence when displayString is present
-                Text {
+                NText {
                     id: stringDisplay
 
                     anchors.centerIn: parent
                     visible: !!modelData.displayString || (!imagePreview.visible && !iconLoader.visible)
                     text: modelData.displayString ? modelData.displayString : (modelData.name ? modelData.name.charAt(0).toUpperCase() : "?")
-                    font.pixelSize: modelData.displayString ? (modelData.displayStringSize || Style.fontSizeXXXL) : Style.fontSizeXXL
+                    size: modelData.displayString ? (modelData.displayStringSize || Style.fontSizeXXXL) : Style.fontSizeXXL
                     font.weight: Style.fontWeightBold
                     color: modelData.displayString ? Colors.md3.on_surface : Colors.md3.on_primary
                 }
@@ -171,7 +171,7 @@ NBox {
                     color: Colors.md3.surface_variant
                     radius: Style.radiusXXS
 
-                    Text {
+                    NText {
                         id: formatLabel
 
                         anchors.centerIn: parent
@@ -183,7 +183,7 @@ NBox {
                             const parts = desc.split(" \u2022 ");
                             return parts[0] || "IMG";
                         }
-                        font.pixelSize: Style.fontSizeXXS
+                        size: Style.fontSizeXXS
                         color: Colors.md3.surface_variant
                     }
 
@@ -200,10 +200,10 @@ NBox {
                     color: Colors.md3.surface_variant
                     radius: Style.radiusXXS
 
-                    Text {
+                    NIcon {
                         anchors.centerIn: parent
                         text: modelData.badgeIcon || ""
-                        font.pixelSize: Style.fontSizeS
+                        size: Style.fontSizeS
                         color: Colors.md3.surface_variant
                     }
 
@@ -216,9 +216,9 @@ NBox {
                 Layout.fillWidth: true
                 spacing: 0
 
-                Text {
+                NText {
                     text: modelData.name || "Unknown"
-                    font.pixelSize: Style.fontSizeL
+                    size: Style.fontSizeL
                     font.weight: Style.fontWeightBold
                     color: entry.isSelected ? Colors.md3.on_surface : Colors.md3.on_surface_variant
                     elide: Text.ElideRight
@@ -228,9 +228,9 @@ NBox {
                     Layout.fillWidth: true
                 }
 
-                Text {
+                NText {
                     text: modelData.description || ""
-                    font.pixelSize: Style.fontSizeS
+                    size: Style.fontSizeS
                     color: entry.isSelected ? Colors.md3.on_surface : Colors.md3.on_surface_variant
                     elide: Text.ElideRight
                     maximumLineCount: 1

@@ -4,6 +4,7 @@ import Quickshell
 import qs.Commons
 import qs.Modules.Bar.Widgets
 import qs.Services
+import qs.Widgets
 
 Item {
     id: root
@@ -37,7 +38,7 @@ Item {
                 type: -1
             }
 
-            Text {
+            NText {
                 horizontalAlignment: Text.AlignHCenter
                 text: "Session Menu"
                 Layout.fillWidth: true
