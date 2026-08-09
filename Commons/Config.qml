@@ -198,6 +198,9 @@ Singleton {
 
         wallpaper: JsonObject {
             property string wallpaperPath: ""
+            property string wallpaperDir: ""
+            property string lweDir: ""
+            property bool enableLwe: false
         }
 
         appLauncher: JsonObject {

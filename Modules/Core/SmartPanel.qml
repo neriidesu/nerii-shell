@@ -43,6 +43,7 @@ Item {
     property real barMargin: Config.data.bar.barMargin
     property real barHeight: Style.barHeight
 
+    clip: true
 
     signal opened()
     signal closed()

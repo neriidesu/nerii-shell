@@ -22,7 +22,6 @@ SmartPanel {
         Rectangle {
             id: content
 
-            clip: true
             color: root.panelBackgroundColor
             width: parent.width
             height: parent.height

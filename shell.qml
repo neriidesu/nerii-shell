@@ -1,4 +1,3 @@
-// TODO: wallpaper switcher
 // TODO: Media panel
 // TODO: Custom Styles
 

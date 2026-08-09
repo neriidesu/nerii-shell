@@ -85,6 +85,10 @@ Singleton {
     }
 
     IpcHandler {
+        // Closed -> open in clipboard mode
+        // Already in clipboard mode -> close
+        // In another mode -> switch to clipboard mode
+
         function toggle() {
             var screen = CompositorService.getFocusedScreen();
             PanelService.toggleLauncher(screen);
@@ -95,17 +99,23 @@ Singleton {
             var searchText = PanelService.getLauncherSearchText(screen);
             var isInClipMode = searchText.startsWith(">clip");
             if (!PanelService.isLauncherOpen(screen))
-                // Closed -> open in clipboard mode
                 PanelService.openLauncherWithSearch(screen, ">clip ");
             else if (isInClipMode)
-                // Already in clipboard mode -> close
                 PanelService.closeLauncher(screen);
             else
-                // In another mode -> switch to clipboard mode
                 PanelService.setLauncherSearchText(screen, ">clip ");
         }
 
         target: "launcher"
+    }
+
+    IpcHandler {
+        function toggle(name: string) {
+            var screen = CompositorService.getFocusedScreen();
+            PanelService.getPanel(name, screen).toggle();
+        }
+
+        target: "panel"
     }
 
 }

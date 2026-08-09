@@ -11,7 +11,7 @@ ScrollView {
     property color handlePressedColor: handleColor
     property color trackColor: "transparent"
     property real handleWidth: Math.round(6 * Style.uiScaleRatio)
-    property real handleRadius: Style.iRadiusM
+    property real handleRadius: Style.radiusM
     property int verticalPolicy: ScrollBar.AsNeeded
     property int horizontalPolicy: ScrollBar.AsNeeded
     property bool preventHorizontalScroll: horizontalPolicy === ScrollBar.AlwaysOff
@@ -24,7 +24,7 @@ ScrollView {
     property bool reserveScrollbarSpace: true
     property real userRightPadding: 0
     // Keep scrollbars visible whenever overflow exists (without forcing visibility when not scrollable)
-    property bool showScrollbarWhenScrollable: Settings.data.ui.scrollbarAlwaysVisible
+    property bool showScrollbarWhenScrollable: true
     // Scroll speed multiplier for mouse wheel (1.0 = default, higher = faster)
     property real wheelScrollMultiplier: 2
     property int smoothWheelAnimationDuration: Style.animationNormal
@@ -46,11 +46,6 @@ ScrollView {
 
         const flickable = root._internalFlickable;
         const step = delta * root.wheelScrollMultiplier;
-        if (!Settings.data.general.smoothScrollEnabled || Settings.data.general.animationDisabled) {
-            flickable.contentY = root.clampScrollY(flickable.contentY - step);
-            root._wheelTargetY = flickable.contentY;
-            return ;
-        }
         if (!wheelScrollAnimation.running)
             root._wheelTargetY = flickable.contentY;
 

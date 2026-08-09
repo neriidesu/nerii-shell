@@ -11,7 +11,7 @@ Item {
     property color handlePressedColor: handleColor
     property color trackColor: "transparent"
     property real handleWidth: 6
-    property real handleRadius: Style.iRadiusM
+    property real handleRadius: Style.radiusM
     property int verticalPolicy: ScrollBar.AsNeeded
     property int horizontalPolicy: ScrollBar.AlwaysOff
     readonly property bool verticalScrollBarActive: {
@@ -27,7 +27,7 @@ Item {
     property int gradientHeight: 16
     property bool reserveScrollbarSpace: true
     // Keep scrollbars visible whenever overflow exists (without forcing visibility when not scrollable)
-    property bool showScrollbarWhenScrollable: Settings.data.ui.scrollbarAlwaysVisible
+    property bool showScrollbarWhenScrollable: true
     // Available width for content (excludes scrollbar space when reserveScrollbarSpace is true)
     // Note: Always reserves space when enabled to avoid binding loops with cellWidth calculations
     readonly property real availableWidth: width - (reserveScrollbarSpace ? handleWidth + Style.marginXS : 0)
@@ -75,7 +75,7 @@ Item {
     // Animate items when the model is reordered (e.g. ListModel.move())
     property bool animateMovement: false
     // Scroll speed multiplier for mouse wheel (1.0 = default, higher = faster)
-    property real wheelScrollMultiplier: 2
+    property real wheelScrollMultiplier: 1.5
     property int smoothWheelAnimationDuration: Style.animationNormal
     property real _wheelTargetY: 0
     // Track selection index for gradient visibility (set externally)
@@ -125,11 +125,6 @@ Item {
             return ;
 
         const step = delta * root.wheelScrollMultiplier;
-        if (!Settings.data.general.smoothScrollEnabled || Settings.data.general.animationDisabled) {
-            gridView.contentY = root.clampScrollY(gridView.contentY - step);
-            root._wheelTargetY = gridView.contentY;
-            return ;
-        }
         if (!wheelScrollAnimation.running)
             root._wheelTargetY = gridView.contentY;
 

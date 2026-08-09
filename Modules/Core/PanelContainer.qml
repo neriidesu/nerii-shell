@@ -8,6 +8,7 @@ import qs.Modules.Core
 // Panels
 import qs.Modules.Panels.SessionMenu
 import qs.Modules.Panels.WeatherMenu
+import qs.Modules.Panels.Wallpaper
 
 PanelWindow {
     id: root
@@ -99,6 +100,11 @@ PanelWindow {
             objectName: "weatherMenuPanel-" + (root.screen?.name || "unknown")
             screen: root.screen
         }
+        Wallpaper{
+            id: wallpaperPanel
+            objectName: "wallpaperPanel-" + (root.screen?.name || "unknown")
+            screen: root.screen
+        }
     }
 
 
@@ -138,7 +144,7 @@ PanelWindow {
     }
 
     Shortcut {
-        sequence: "Enter"
+        sequences: ["Enter", "Return"]
         enabled: root.isPanelOpen && (PanelService.openedPanel.onEnterPressed !== undefined) && !PanelService.isKeybindRecording
         onActivated: PanelService.openedPanel.onEnterPressed()
     }
