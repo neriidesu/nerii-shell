@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Networking
 import qs.Commons
+import qs.Widgets
 
 RowLayout {
     id: root
@@ -32,15 +33,15 @@ RowLayout {
         implicitHeight: wifi_icon.implicitHeight
         implicitWidth: wifi_icon.implicitWidth + wifi_label.implicitWidth
 
-        Text {
+        NIcon {
             id: wifi_icon
 
             text: wifi.icon
             color: Networking.wifiEnabled ? Colors.purple : Colors.grey_0
-            font.pixelSize: Style.fontSizeL
+            size: Style.fontSizeL
         }
 
-        Text {
+        NText {
             id: wifi_label
 
             text: {
@@ -74,15 +75,15 @@ RowLayout {
         implicitHeight: eth_icon.implicitHeight
         implicitWidth: eth_icon.implicitWidth + eth_label.implicitWidth
 
-        Text {
+        NIcon {
             id: eth_icon
 
             text: eth.icon
             color: Networking.wifiEnabled ? Colors.purple : Colors.grey_0
-            font.pixelSize: Style.fontSizeL
+            size: Style.fontSizeL
         }
 
-        Text {
+        NText {
             id: eth_label
             
             text: eth.wifiDevice ? eth.wifiDevice.name: "-"

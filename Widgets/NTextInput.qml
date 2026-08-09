@@ -128,7 +128,7 @@ ColumnLayout {
                     anchors.fill: parent
                     spacing: 0
 
-                    Text {
+                    NIcon {
                         id: inputIcon
 
                         text: root.inputIcon

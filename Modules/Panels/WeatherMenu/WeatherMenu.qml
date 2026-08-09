@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import qs.Commons
-import qs.Modules.MainScreen
+import qs.Modules.Core
 import qs.Services
 import qs.Widgets
 
@@ -15,18 +15,17 @@ SmartPanel {
         id: panelContent
 
         readonly property real contentPreferredWidth: 350
-        readonly property real contentPreferredHeight: content.height
+        readonly property real contentPreferredHeight: 500
 
         anchors.fill: parent
 
         Rectangle {
             id: content
 
+            clip: true
             color: root.panelBackgroundColor
-            x: Style.marginL
-            y: Style.marginL
-            width: parent.width - Style.margin2L
-            height: 500 - Style.margin2L
+            width: parent.width
+            height: parent.height
 
             border {
                 color: root.panelBorderColor
@@ -40,7 +39,7 @@ SmartPanel {
                 anchors.fill: parent
                 spacing: Style.marginM
 
-                Text {
+                NText {
                     text: "今日の天気"
                     font.family: Fonts.jp
                     Layout.alignment: Qt.AlignHCenter
@@ -49,21 +48,17 @@ SmartPanel {
                 RowLayout {
                     Layout.alignment: Qt.AlignHCenter
 
-                    Text {
+                    NIcon {
                         id: icon
 
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         text: LocationService.parseWMO(LocationService.data.weather.current_weather.weathercode, LocationService.data.weather.current_weather.is_day)["icon"] + " "
                         color: LocationService.parseWMO(LocationService.data.weather.current_weather.weathercode, LocationService.data.weather.current_weather.is_day)["color"]
-
-                        font {
-                            pixelSize: Style.fontSizeXXXL * 2
-                        }
-
+                        size: Style.fontSizeXXXL * 2
                     }
 
-                    Text {
+                    NText {
                         property string temp: {
                             if (!root.weatherReady)
                                 return "";
@@ -83,7 +78,7 @@ SmartPanel {
 
                 }
 
-                Text {
+                NText {
                     property int windSpeed: {
                         if (!root.weatherReady)
                             return "";
@@ -223,32 +218,32 @@ SmartPanel {
                                 Layout.alignment: Qt.AlignHCenter
                                 spacing: Style.marginS
 
-                                Text {
+                                NText {
                                     text: day.time
-                                    font.pixelSize: Style.fontSizeL
+                                    size: Style.fontSizeL
                                     font.family: Fonts.jp
                                 }
 
-                                Text {
+                                NIcon {
                                     text: LocationService.parseWMO(day.weathercode, true)["icon"]
-                                    font.pixelSize: Style.fontSizeL
+                                    size: Style.fontSizeL
                                     color: LocationService.parseWMO(day.weathercode, true)["color"]
                                 }
 
-                                Text {
+                                NText {
                                     text: day.tempMax + " / " + day.tempMin
-                                    font.pixelSize: Style.fontSizeL
+                                    size: Style.fontSizeL
                                 }
 
-                                Text {
+                                NText {
                                     text: " " + day.sunrise
-                                    font.pixelSize: Style.fontSizeL
+                                    size: Style.fontSizeL
                                     color: Colors.orange
                                 }
 
-                                Text {
+                                NText {
                                     text: " " + day.sunset
-                                    font.pixelSize: Style.fontSizeL
+                                    size: Style.fontSizeL
                                     color: Colors.mauve
                                 }
 

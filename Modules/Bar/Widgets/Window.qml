@@ -3,12 +3,13 @@ import Quickshell
 import Quickshell.Hyprland
 import qs.Commons
 import qs.Services
+import qs.Widgets
 
 Item {
 
     implicitWidth: Math.max(100, text.contentWidth)
     implicitHeight: Style.barHeight
-    Text {
+    NText {
         id: text
         anchors.fill: parent
         horizontalAlignment: Text.AlignHCenter

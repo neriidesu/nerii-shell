@@ -6,7 +6,7 @@ import QtQuick
 import Quickshell
 import qs.Commons
 import qs.Modules.Bar
-import qs.Modules.MainScreen
+import qs.Modules.Core
 import qs.Modules.Panels.Launcher
 import qs.Services
 
@@ -50,10 +50,37 @@ ShellRoot {
                 });
             }
 
-            AllScreens {
+            Variants {
+                model: Quickshell.screens
+
+                delegate: Item {
+                    property var modelData
+
+                    Bar {
+                        screen: modelData
+                        Component.onCompleted: {
+                            Logger.d("Shell", "Bar loaded for screen:", modelData.name);
+                        }
+                    }
+
+                    PanelContainer {
+                        screen: modelData
+                        Component.onCompleted: {
+                            Logger.d("Shell", "PanelContainer loaded for screen:", modelData.name);
+                        }
+                    }
+
+                    PopupMenuWindow {
+                        screen: modelData
+                        Component.onCompleted: {
+                            Logger.d("Shell", "PopupMenuWindow loaded for screen:", modelData.name);
+                        }
+                    }
+
+                }
+
             }
 
-            // Launcher overlay window (for overlay layer mode)
             Loader {
                 active: true
 

@@ -1,8 +1,9 @@
 import QtQuick
 import Quickshell
 import qs.Commons
+import qs.Widgets
 
-Text {
+NText {
     //type:  -1 '[' 0 '|' 1 ']'
 
     property var type
@@ -23,6 +24,6 @@ Text {
             break;
         }
     }
-    font.pixelSize: Style.fontSizeL
+    size: Style.fontSizeL
     color: Colors.md3.primary
 }

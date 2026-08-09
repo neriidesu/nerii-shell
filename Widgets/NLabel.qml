@@ -26,15 +26,15 @@ ColumnLayout {
         Layout.fillWidth: true
         visible: root.label !== ""
 
-        Text {
+        NIcon {
             visible: root.icon !== ""
             text: root.icon
-            font.pixelSize: Style.fontSizeXXL
+            size: Style.fontSizeXXL
             color: root.iconColor
             Layout.rightMargin: Style.marginS
         }
 
-        Text {
+        NText {
             //   // Settings indicator dot positioned right after the text content
             //   Loader {
             //     active: root.showIndicator
@@ -50,7 +50,7 @@ ColumnLayout {
 
             Layout.fillWidth: true
             text: root.label
-            font.pixelSize: root.labelSize
+            size: root.labelSize
             font.weight: Style.fontWeightSemiBold
             color: labelColor
             wrapMode: Text.WordWrap
@@ -58,11 +58,11 @@ ColumnLayout {
 
     }
 
-    Text {
+    NText {
         visible: root.description !== ""
         Layout.fillWidth: true
         text: root.description
-        font.pixelSize: Style.fontSizeS
+        size: Style.fontSizeS
         color: root.descriptionColor
         wrapMode: Text.WordWrap
         textFormat: Text.StyledText

@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import qs.Commons
-import qs.Modules.MainScreen
+import qs.Modules.Core
 import qs.Services
 import qs.Widgets
 
@@ -13,18 +13,17 @@ SmartPanel {
         id: panelContent
 
         readonly property real contentPreferredWidth: 500
-        readonly property real contentPreferredHeight: content.height
+        readonly property real contentPreferredHeight: 100 + Style.marginM
 
         anchors.fill: parent
+        clip: true
 
         Rectangle {
             id: content
 
             color: root.panelBackgroundColor
-            x: Style.marginL
-            y: Style.marginL
-            width: parent.width - Style.margin2L
-            height: 125 - Style.margin2L
+            width: parent.width
+            height: parent.height
 
             border {
                 color: root.panelBorderColor
