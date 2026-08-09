@@ -1,26 +1,34 @@
 import QtQuick
-import QtQuick.Controls
-import QtQuick.Effects
+import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 import qs.Commons
-// All panels
-import qs.Modules.Bar
+import qs.Services
+import qs.Modules.Core
+// Panels
 import qs.Modules.Panels.SessionMenu
 import qs.Modules.Panels.WeatherMenu
-import qs.Services
 
-/**
-* MainScreen - Single PanelWindow per screen that manages all panels and the bar
-*/
 PanelWindow {
     id: root
+    property bool isPanelOpen: (PanelService.openedPanel !== null) && (PanelService.openedPanel.screen === screen)
+    property bool isPanelClosing: (PanelService.openedPanel !== null) && PanelService.openedPanel.isClosing
+    property bool isAnyPanelOpen: PanelService.openedPanel !== null
+    
+    color: "transparent"
+    
+    anchors {
+        top: true
+        bottom: true
+        left: true
+        right: true
+    }
+
     Component.onCompleted: {
-        Logger.d("MainScreen", "Initialized for screen:", screen?.name, "- Dimensions:", screen.width, "x", screen?.height, "- Position:", screen?.x, ",", screen?.y);
+        Logger.d("PanelContainer", "Initialized for screen:", screen?.name, "- Dimensions:", screen.width, "x", screen?.height, "- Position:", screen?.x, ",", screen?.y);
     }
     WlrLayershell.layer: WlrLayer.Top
     WlrLayershell.namespace: "nerii-shell-background-" + (screen?.name || "unknown")
-    WlrLayershell.exclusionMode: ExclusionMode.Ignore // Don't reserve space - BarExclusionZone handles that
     WlrLayershell.keyboardFocus: {
         // No panel open anywhere: no keyboard focus needed
         if (!root.isAnyPanelOpen)
@@ -38,50 +46,13 @@ PanelWindow {
         return WlrKeyboardFocus.OnDemand;
     }
 
-    anchors {
-        top: true
-        bottom: true
-        left: true
-        right: true
-    }
-    color: "transparent"
-    property bool isPanelOpen: (PanelService.openedPanel !== null) && (PanelService.openedPanel.screen === screen)
-    property bool isPanelClosing: (PanelService.openedPanel !== null) && PanelService.openedPanel.isClosing
-    property bool isAnyPanelOpen: PanelService.openedPanel !== null
-
-    // Check if bar should be visible on this screen
-    readonly property bool barShouldShow: true
-
-    // Make everything click-through except bar
     mask: Region {
         id: clickableMask
-        // Cover entire window (everything is masked/click-through)
         x: 0
         y: 0
         width: root.width
         height: root.height
         intersection: Intersection.Xor
-
-        // Only include regions that are actually needed
-        // panelRegions is handled by PanelService, bar is local to this screen
-        regions: [barMaskRegion, backgroundMaskRegion]
-
-        // Bar region - subtract bar area from mask (only if bar should be shown on this screen)
-        Region {
-          id: barMaskRegion
-
-          readonly property real barThickness: Style.barHeight
-
-          // Bar / Frame Mask
-          Region {
-            // Mode: Simple or Floating
-            x: barPlaceholder.x
-            y: barPlaceholder.y
-            width: (root.barShouldShow) ? barPlaceholder.width : 0
-            height: (root.barShouldShow) ? barPlaceholder.height : 0
-            intersection: Intersection.Subtract
-          }
-        }
 
         // Background region for click-to-close - reactive sizing
         // Uses isAnyPanelOpen so clicking on any screen's background closes the panel
@@ -95,8 +66,6 @@ PanelWindow {
         }
     }
 
-    // ---------------------------------------
-    // Container for all UI elements
     Item {
         id: container
         width: root.width
@@ -116,42 +85,22 @@ PanelWindow {
             z: 0 // Behind panels and bar
         }
 
-        // ---------------------------------------
-        // All panels always exist
-        // ---------------------------------------
+        // --------------
+        // --- Panels ---
+        // --------------
+
         SessionMenu {
             id: sessionMenuPanel
-            objectName: "sessionMenuPanel-" + (root.screen?.name || "unknown")
             screen: root.screen
-        } 
+            objectName: "sessionMenuPanel-" + (root.screen?.name || "unknown")
+        }
         WeatherMenu{
             id: weatherMenuPanel
             objectName: "weatherMenuPanel-" + (root.screen?.name || "unknown")
             screen: root.screen
         }
-        // ---------------------------------------
-        // Bar background placeholder - just for background positioning (actual bar content is in BarContentWindow)
-        Item {
-            id: barPlaceholder
-
-
-            // Screen reference
-            property ShellScreen screen: root.screen
-
-            // Bar background positioning propertyies
-            readonly property real barMargin: Config.data.bar.barMargin
-            readonly property real barHeight: Style.barHeight
-
-            // Expose bar dimensions directly on this Item for BarBackground
-            // Use screen dimensions directly
-            x: barMargin
-            y: barMargin
-            width: {
-                return (screen?.width ?? 0) - barMargin * 2;
-            }
-            height: barHeight
-        }
     }
+
 
     // Centralized Keyboard Shortcuts
 
@@ -229,4 +178,5 @@ PanelWindow {
         enabled: root.isPanelOpen && (PanelService.openedPanel.onPageDownPressed !== undefined)
         onActivated: PanelService.openedPanel.onPageDownPressed()
     }
+
 }

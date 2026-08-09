@@ -16,7 +16,7 @@ Item {
 
         BarGroup {
             id: normal_group
-            visible: !root.isHovered && !PanelService.getPanel("sessionMenuPanel", screen).isPanelOpen
+            visible: !root.isHovered //&& !PanelService.getPanel("sessionMenuPanel", screen).isPanelOpen
             Separator {
                 type: -1
             }
@@ -31,7 +31,7 @@ Item {
         }
 
         BarGroup {
-            visible: root.isHovered || PanelService.getPanel("sessionMenuPanel", screen).isPanelOpen
+            visible: root.isHovered //|| PanelService.getPanel("sessionMenuPanel", screen).isPanelOpen
             Layout.preferredWidth: normal_group.width
             Separator {
                 type: -1
@@ -54,7 +54,7 @@ Item {
         anchors.fill: parent
         hoverEnabled: true
         onClicked: {
-            PanelService.getPanel("sessionMenuPanel", screen)?.toggle(parent);
+            PanelService.getPanel("sessionMenuPanel", screen)?.toggle();
         }
 
         onEntered: {
