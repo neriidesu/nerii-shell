@@ -86,7 +86,7 @@ SmartPanel {
         stdout: StdioCollector {
             onStreamFinished: {
                 WallpaperService.setWallpaper(this.text);
-                Quickshell.execDetached(["matugen", "image", this.text, "--source-color-index", 0]);
+                MatugenService.fromWallpaper(this.text);
                 ToastService.showIconNotice("Wallpaper", "Wallpaper has been updated", this.text);
             }
         }

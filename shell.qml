@@ -43,6 +43,7 @@ ShellRoot {
                 Qt.callLater(function() {
                     LocationService.init();
                     IPCService.init();
+                    MatugenService.init();
                 });
             }
 

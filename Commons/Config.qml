@@ -171,10 +171,20 @@ Singleton {
         property JsonObject weather
         property JsonObject wallpaper
         property JsonObject appLauncher
+        property JsonObject colors
 
         misc: JsonObject {
             property bool debug: false
             property string theme: ""
+        }
+
+        colors: JsonObject {
+            property bool genFromWallpaper: true
+            property bool genFromColor: false
+            property bool genWithTheme: false
+            property string themeName: ""
+            property string themeDir: ""
+            property string primaryHex: ""
         }
 
         bar: JsonObject {
