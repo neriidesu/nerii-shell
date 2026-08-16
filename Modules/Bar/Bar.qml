@@ -12,10 +12,11 @@ PanelWindow {
 
     id: barWindow
 
-    readonly property real barMargin: Config.data.bar.barMargin
+    readonly property real barMargin: Style.barMargin
     readonly property real barHeight: Style.barHeight
+    readonly property bool barIsSeparate: Style.barIsSeparate
 
-    color: "transparent"
+    color: barIsSeparate ? "transparent" : Style.cBarBackground
     // Set a tight window size
     implicitWidth: barWindow.screen.width
     implicitHeight: barHeight
@@ -32,7 +33,7 @@ PanelWindow {
         top: barMargin
         left: barMargin
         right: barMargin
-    }
+    }    
 
     // Bar content loader - loaded once, stays active for lifetime
     Loader {

@@ -52,6 +52,14 @@ Singleton {
             MediaService.previous();
         }
 
+        function increaseVolume() {
+            MediaService.increaseVolume();
+        }
+
+        function decreaseVolume() {
+            MediaService.decreaseVolume();
+        }
+
         target: "media"
     }
 
@@ -116,6 +124,14 @@ Singleton {
         }
 
         target: "panel"
+    }
+
+    IpcHandler {
+        function quit() {
+            ShellService.quit();
+        }
+
+        target: "shell"
     }
 
 }

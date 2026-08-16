@@ -25,10 +25,13 @@ SmartPanel {
             color: root.panelBackgroundColor
             width: parent.width
             height: parent.height
+            radius: Style.radiusM
+            topLeftRadius: root.isConnected ? 0 : undefined
+            topRightRadius: root.isConnected ? 0 : undefined
 
             border {
                 color: root.panelBorderColor
-                width: Style.borderM
+                width: root.showBorders ? Style.borderM : 0
             }
 
             ColumnLayout {

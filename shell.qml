@@ -1,6 +1,3 @@
-// TODO: Media panel
-// TODO: Custom Styles
-
 import QtQuick
 import Quickshell
 import qs.Commons

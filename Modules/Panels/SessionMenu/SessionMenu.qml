@@ -16,7 +16,6 @@ SmartPanel {
         readonly property real contentPreferredHeight: 100 + Style.marginM
 
         anchors.fill: parent
-        clip: true
 
         Rectangle {
             id: content
@@ -24,10 +23,13 @@ SmartPanel {
             color: root.panelBackgroundColor
             width: parent.width
             height: parent.height
+            radius: Style.radiusM
+            topLeftRadius: root.isConnected ? 0 : undefined
+            topRightRadius: root.isConnected ? 0 : undefined
 
             border {
                 color: root.panelBorderColor
-                width: Style.borderM
+                width: root.showBorders ? Style.borderM : 0
             }
 
             RowLayout {
@@ -45,7 +47,7 @@ SmartPanel {
                     icon: "󰌾"
                     hoverColor: Colors.grey_0
                     onClicked: {
-                        close();
+                        closeImmediately();
                         CompositorService.lock();
                     }
                 }
@@ -58,7 +60,7 @@ SmartPanel {
                     icon: "󰍃"
                     hoverColor: Colors.purple
                     onClicked: {
-                        close();
+                        closeImmediately();
                         CompositorService.logout();
                     }
                 }
@@ -71,7 +73,7 @@ SmartPanel {
                     icon: "󰤄"
                     hoverColor: Colors.blue
                     onClicked: {
-                        close();
+                        closeImmediately();
                         CompositorService.hibernate();
                     }
                 }
@@ -84,7 +86,7 @@ SmartPanel {
                     icon: "󰜉"
                     hoverColor: Colors.yellow
                     onClicked: {
-                        close();
+                        closeImmediately();
                         CompositorService.reboot();
                     }
                 }
@@ -97,7 +99,7 @@ SmartPanel {
                     icon: "󰐥"
                     hoverColor: Colors.status_err
                     onClicked: {
-                        close();
+                        closeImmediately();
                         CompositorService.shutdown();
                     }
                 }

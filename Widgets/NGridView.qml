@@ -225,61 +225,9 @@ Item {
         gridView.moveCurrentIndexRight();
     }
 
-    // Dynamically create gradient overlays
-    function createGradients() {
-        if (!showGradientMasks)
-            return ;
-
-        Qt.createQmlObject(`
-      import QtQuick
-      import qs.Commons
-      Rectangle {
-        x: 0
-        y: 0
-        width: root.availableWidth
-        height: root.gradientHeight
-        z: 1
-        visible: root.showGradientMasks && root.contentOverflows
-        opacity: (gridView.contentY <= 1 || root.selectionOnFirstVisibleRow) ? 0 : 1
-        Behavior on opacity {
-          NumberAnimation { duration: Style.animationFast; easing.type: Easing.InOutQuad }
-        }
-        gradient: Gradient {
-          GradientStop { position: 0.0; color: root.gradientColor }
-          GradientStop { position: 1.0; color: "transparent" }
-        }
-      }
-    `, root, "topGradient");
-        Qt.createQmlObject(`
-      import QtQuick
-      import qs.Commons
-      Rectangle {
-        x: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: -1
-        width: root.availableWidth
-        height: root.gradientHeight + 1
-        z: 1
-        visible: root.showGradientMasks && root.contentOverflows
-        opacity: ((gridView.contentY + gridView.height >= gridView.contentHeight - 1) || root.selectionOnLastVisibleRow) ? 0 : 1
-        Behavior on opacity {
-          NumberAnimation { duration: Style.animationFast; easing.type: Easing.InOutQuad }
-        }
-        gradient: Gradient {
-          GradientStop { position: 0.0; color: "transparent" }
-          GradientStop { position: 1.0; color: root.gradientColor }
-        }
-      }
-    `, root, "bottomGradient");
-    }
-
     // Set reasonable implicit sizes for Layout usage
     implicitWidth: 200
     implicitHeight: 200
-    Component.onCompleted: {
-        _wheelTargetY = gridView.contentY;
-        createGradients();
-    }
 
     GridView {
         id: gridView

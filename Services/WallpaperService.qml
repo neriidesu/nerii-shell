@@ -31,7 +31,7 @@ Singleton {
             Logger.e("WallpaperService", "Tried to call startWallpaper while WallpaperService not initialized");
             return ;
         }
-        if (isAnimated) {
+        if (isAnimated && Config.data.wallpaper.enableLwe) {
             Logger.d("WallpaperService", "Wallpaper is lwe");
             lweArgs = "";
             for (var i = 0; i < Quickshell.screens.length; i++) {

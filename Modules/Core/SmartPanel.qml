@@ -8,7 +8,6 @@ import qs.Services
 */
 Item {
     id: root
-
     // Screen property
     property ShellScreen screen: null
     // Panel content: Text, icons, etc...
@@ -24,6 +23,7 @@ Item {
     property point targetPosition: Qt.point(0,0)
     property point startingPosition: Qt.point(0,0)
     // Panel Position
+    property bool isConnected
     property bool useImplicitPosition: false
     property int implicitX: 0
     property int implictY: 0
@@ -35,13 +35,17 @@ Item {
     property int buttonHeight: 0
     property var buttonItem: null
     // Colors
-    property color panelBackgroundColor: Qt.alpha(Colors.md3.surface, 0.5)
+    property color panelBackgroundColor: Style.cPanelBackground
     property color panelBorderColor: Colors.md3.primary
     // Panel Settings
     property bool closeWithEscape: true
+    property bool showBorders: Style.showPanelBorders
     // Shortcuts
-    property real barMargin: Config.data.bar.barMargin
+    property real barMargin: Style.barMargin
     property real barHeight: Style.barHeight
+    property bool allowPanelConnect: Style.allowPanelConnect
+    property real topGap: Style.topGap
+    property real bottomGap: Style.bottomGap
 
     clip: true
 
@@ -161,25 +165,38 @@ Item {
         }
         switch (verticalPosition) {
         case "top":
-            calculatedY = 0;
-            startingPosition.y = 0;
+            if (allowPanelConnect) {
+                isConnected = true
+                calculatedY = -topGap - 3;
+                startingPosition.y = -topGap - 3;
+            } else {
+                calculatedY = 0;
+                startingPosition.y = 0;
+            }
             break;
         case "center":
             calculatedY = (screen.height - barHeight - (barMargin * 3) - panelBackground.height - 6) / 2;
             startingPosition.y = (screen.height - barHeight - (barMargin * 3) + 6) / 4
             break;
         case "bottom":
-            calculatedY = screen.height - barHeight - (barMargin * 3) - panelBackground.height - 6;
-            startingPosition.y = (screen.height - barHeight - (barMargin * 3) + 6) / 2;
+            calculatedY = screen.height - barHeight - barMargin - topGap - bottomGap - panelBackground.height - (bottomGap /2);
+            startingPosition.y = (screen.height - barHeight - barMargin - topGap - bottomGap + (bottomGap /2)) / 2;
             break;
         }
         if (useButtonPosition) {
             calculatedX = buttonPosition.x + buttonWidth / 2 - panelBackground.width / 2;
             startingPosition.x = (buttonPosition.x + buttonWidth / 2) / 2;
-            calculatedY = 0;
-            startingPosition.y = 0;
+            if (allowPanelConnect) {
+                isConnected = true
+                calculatedY = -topGap - 3;
+                startingPosition.y = -topGap - 3;
+            } else {
+                calculatedY = 0;
+                startingPosition.y = 0;
+            }
         }
-        panelBackground.x = calculatedX / 2;
+        startingPosition.x = Math.min(Math.max(startingPosition.x, barMargin/2),(screen.width - panelBackground.width - barMargin) / 2)
+        panelBackground.x = Math.min(Math.max(calculatedX / 2,barMargin/2),(screen.width - panelBackground.width - barMargin) / 2);
         panelBackground.y = (calculatedY + Style.marginL) / 2;
         targetPosition.x = panelBackground.x
         targetPosition.y = panelBackground.y

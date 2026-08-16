@@ -22,7 +22,7 @@ Variants {
         sourceComponent: PanelWindow {
             id: launcherWindow
 
-            readonly property int barThickness: Math.round(Style.barHeight + Config.data.bar.barMargin)
+            readonly property int barThickness: Math.round(Style.barHeight + Style.barMargin)
             readonly property int listPanelWidth: 500
             readonly property int previewPanelWidth: 400
 
@@ -64,7 +64,7 @@ Variants {
 
                 Rectangle {
                     anchors.fill: parent
-                    color: Qt.alpha(Colors.md3.surface, 0.75)
+                    color: Style.cPanelBackground
                     radius: Style.radiusM
                     border.color: Colors.md3.primary
                     border.width: Style.borderS

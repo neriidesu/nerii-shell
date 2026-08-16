@@ -9,7 +9,6 @@ Singleton {
 
     readonly property alias data: adapter
     readonly property alias configFileView: configFileView
-    property real barMargin: 10
     property bool directoriesCreated: false
     property bool reloadConfig: false
     property bool isLoaded: false
@@ -175,6 +174,7 @@ Singleton {
 
         misc: JsonObject {
             property bool debug: false
+            property string theme: ""
         }
 
         bar: JsonObject {
@@ -184,7 +184,6 @@ Singleton {
             property var keepWorkspaces: {
             }
             property var blacklistTrayIds: []
-            property real barMargin: 10
         }
 
         media: JsonObject {

@@ -1,14 +1,14 @@
 {
   "configVersion": 0,
   "misc": {
-    "debug": false
+    "debug": false,
+    "theme": ""
   },
   "bar": {
     "showBattery": true,
     "showWifi": true,
     "showEth": true,
-    "blacklistTrayIds": [],
-    "barMargin": 10
+    "blacklistTrayIds": []
   },
   "media": {
     "preferredPlayer": ""
@@ -18,6 +18,13 @@
     "updateWeather": true
   },
   "wallpaper": {
-    "wallpaperPath": ""
+    "wallpaperPath": "",
+    "wallpaperDir": "",
+    "lweDir": "",
+    "enableLwe": false
+  },
+  "appLauncher": {
+    "terminalCommand": "kitty",
+    "iconMode": "tabler"
   }
 }

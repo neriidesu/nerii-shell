@@ -17,7 +17,8 @@ Item {
     Rectangle {
         id: background
 
-        color: Qt.alpha(Colors.md3.background, 0.75)
+        visible: Style.barIsSeparate
+        color: Style.cDefaultBackground
         radius: 0
 
         border {

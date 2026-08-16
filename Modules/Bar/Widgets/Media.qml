@@ -8,7 +8,7 @@ import qs.Widgets
 Item {
     id: root
 
-    readonly property int coverSize: 30
+    readonly property int coverSize: Math.min(32, Style.barHeight - Style.margin2XS)
     readonly property int maxLength: 30
     readonly property string title: {
         var artist = MediaService.trackArtist;
@@ -20,7 +20,7 @@ Item {
         return o;
     }
 
-    implicitHeight: row_layout.implicitHeight
+    implicitHeight: coverSize
     implicitWidth: row_layout.implicitWidth + row_layout.spacing
 
     Rectangle {
@@ -40,32 +40,37 @@ Item {
     RowLayout {
         id: row_layout
 
-        Image {
+        anchors.fill: root
+
+        NImageRounded {
             id: cover
 
+            width: coverSize
+            height: coverSize
+            radius: Style.radiusM
             source: MediaService.trackArtUrl
-
-            sourceSize {
-                width: coverSize
-                height: coverSize
-            }
-
+            sourceWidth: coverSize
+            sourceHeight: coverSize
         }
 
         NText {
             id: label
 
-            Layout.alignment: Qt.AlignVCenter
+            height: coverSize
             text: title
+            Layout.fillHeight: true
+            verticalAlignment: Text.AlignVCenter
         }
 
         NIcon {
             id: playing
 
-            Layout.alignment: Qt.AlignVCenter
+            height: coverSize
+            verticalAlignment: Text.AlignVCenter
             text: MediaService.isPlaying ? "" : ""
             size: Style.fontSizeXL
             Layout.minimumWidth: font.pixelSize / 4 * 3
+            Layout.fillHeight: true
         }
 
     }
@@ -74,7 +79,7 @@ Item {
         property int wheelAccumulator: 0
 
         anchors.fill: row_layout
-        onClicked: {
+        onClicked: function(event) {
             MediaService.playPause();
         }
         onWheel: function(wheel) {

@@ -31,6 +31,9 @@ SmartPanel {
             return ;
         }
         wallpaperlGenProcStatic.exec([wallpaperlBin, "genpreviews", wallpaperDir, wallpaperCacheDir]);
+        if (!Config.data.wallpaper.enableLwe)
+            return ;
+
         if (lweDir == "") {
             Logger.w("WallpaperPanel", "No lwe dir chosen.");
             return ;
@@ -154,6 +157,14 @@ SmartPanel {
 
     }
 
+    Connections {
+        function onEnableLweChanged() {
+            getWallpapers();
+        }
+
+        target: Config.data.wallpaper
+    }
+
     panelContent: Item {
         id: panelContent
 
@@ -168,6 +179,9 @@ SmartPanel {
             color: root.panelBackgroundColor
             width: parent.width
             height: parent.height
+            radius: Style.radiusM
+            topLeftRadius: root.isConnected ? 0 : undefined
+            topRightRadius: root.isConnected ? 0 : undefined
 
             border {
                 color: root.panelBorderColor
@@ -177,6 +191,8 @@ SmartPanel {
             NGridView {
                 id: gridView
 
+                anchors.topMargin: Style.borderM
+                anchors.bottomMargin: Style.borderM
                 visible: isReady
                 anchors.fill: parent
                 model: wallpaperModel
@@ -195,28 +211,31 @@ SmartPanel {
                     Rectangle {
                         color: "transparent"
                         anchors.fill: parent
+                        radius: Style.radiusM
+                        clip: true
 
-                        border {
+                        Rectangle {
+                            anchors.fill: parent
                             color: gridView.currentIndex == index ? root.panelBorderColor : "transparent"
-                            width: Style.borderL
+                            radius: Style.radiusM
                         }
 
                         Rectangle {
                             anchors.fill: preview
                             color: preview.status == Image.Ready ? (isAnimated ? Colors.md3.tertiary : "transparent") : "transparent"
+                            radius: Style.radiusM
                         }
 
-                        Image {
+                        NImageRounded {
                             id: preview
 
-                            // sourceSize.height: 135
-                            asynchronous: true
+                            radius: Style.radiusM
                             cache: true
                             anchors.fill: parent
                             anchors.margins: Style.borderL
                             fillMode: Image.PreserveAspectCrop
                             source: path
-                            sourceSize.width: 240
+                            sourceWidth: 240
                             visible: !isAnimated
                         }
 
