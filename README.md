@@ -21,8 +21,10 @@ nerii-shell is **not** a drop-in replacement for major shells like noctalia. For
 - Top bar with widgets for common stuff like workspaces, media, clock, audio, etc
 - Fully* featured IPC
 - Wallpaper selector
+- Launcher with calculator and other useful stuff**
 
 \*fully enough
+\**i think it's useful
 
 # Installation
 
