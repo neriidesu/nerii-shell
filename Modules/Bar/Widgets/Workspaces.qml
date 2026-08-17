@@ -38,8 +38,8 @@ Row {
 
             property string label: {
                 if (Config.data.bar.workspaceIcons != null){
-                    if (Object.keys(Config.data.bar.workspaceIcons).includes(index.toString())) {
-                        return Config.data.bar.workspaceIcons[index]
+                    if (Object.keys(Config.data.bar.workspaceIcons).includes((index + 1).toString())) {
+                        return Config.data.bar.workspaceIcons[index + 1]
                     }
                 }
 

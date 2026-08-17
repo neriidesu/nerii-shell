@@ -102,7 +102,7 @@ Singleton {
             return rect;
             break;
         default:
-            return rect;
+            return empty;
             break;
         }
     }
@@ -110,6 +110,10 @@ Singleton {
     // -----------------------------------------------------
     // List all themes to allow selection through config ---
     // -----------------------------------------------------
+    Theme {
+        id: empty
+    }
+
     Sleek {
         id: sleek
     }

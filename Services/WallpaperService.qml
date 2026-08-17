@@ -6,6 +6,8 @@ pragma Singleton
 
 Singleton {
     property string wallpaperPath: Config.data.wallpaper.wallpaperPath
+    property string lweDir: Config.data.wallpaper.lweDir
+    property bool lweEnbaled: Config.data.wallpaper.enableLwe
     property string wallpaperFile
     property bool isAnimated: false
     property bool prevIsAnimated
@@ -63,7 +65,10 @@ Singleton {
     function loadProperties() {
         var pathArr = wallpaperPath.split("/");
         wallpaperFile = pathArr.pop();
-        isAnimated = (pathArr.pop() == "we") ? true : false;
+        if (lweEnbaled) {
+            var lwePathArr = Config.ensureTrailingSlash(lweDir).slice(0, -1).split("/");
+            isAnimated = (pathArr.pop() == lwePathArr.pop()) ? true : false;
+        }
         Logger.d("WallpaperService", wallpaperFile, isAnimated);
     }
 

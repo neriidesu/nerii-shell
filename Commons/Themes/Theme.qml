@@ -16,8 +16,7 @@ Item {
     readonly property bool allowPanelConnect: false
     // Fonts
     readonly property string fontJp: "Yu Mincho"
-    readonly property string fontMono: "Fira Code Nerd Font"
-    readonly property string fontDefault: fontMono
+    readonly property string fontDefault: "Fira Code Nerd Font"
     // Font size
     readonly property real fontSizeXXS: 8
     readonly property real fontSizeXS: 9
