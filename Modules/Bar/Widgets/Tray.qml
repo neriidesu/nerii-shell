@@ -5,6 +5,9 @@ import Quickshell.Services.SystemTray
 import qs.Commons
 import qs.Services
 
+/*
+* Tray widget forked from noctalia-v4 (https://github.com/noctalia-dev/noctalia/tree/legacy-v4)
+*/
 Item {
     id: root
 
@@ -61,7 +64,8 @@ Item {
             // Update width automatically
 
             function onValuesChanged() {
-                root.implicitWidth = row.items.length * iconSize + row.spacing * 2;
+                root.implicitWidth = row.spacing * 2 + ((row.items.length - 1) * (iconSize + row.spacing));
+                repeater.implicitWidth = row.spacing * 2 + ((row.items.length - 1) * (iconSize + row.spacing));
             }
 
             target: SystemTray.items
@@ -72,7 +76,7 @@ Item {
 
             model: row.items
             implicitHeight: iconSize
-            implicitWidth: model.length * iconSize + row.spacing * 2
+            implicitWidth: row.spacing * 2 + ((model.length - 1) * (iconSize + row.spacing))
 
             delegate: Item {
                 id: trayDelegate
@@ -144,10 +148,8 @@ Item {
                             if (popupMenuWindow)
                                 popupMenuWindow.close();
 
-                            // TooltipService.show(tooltipAnchor, modelData.tooltipTitle || modelData.name || modelData.id || "Tray Item", BarService.getTooltipDirection(root.screen?.name));
                             root.hoveredItemIndex = trayDelegate.index;
                         } else if (root.hoveredItemIndex === trayDelegate.index) {
-                            // TooltipService.hide(tooltipAnchor);
                             root.hoveredItemIndex = -1;
                         }
                     }

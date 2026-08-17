@@ -8,7 +8,7 @@ NText {
     size: Style.fontSizeL
 
     font {
-        family: Fonts.code
+        family: Style.fontDefault
         letterSpacing: 2
     }
 

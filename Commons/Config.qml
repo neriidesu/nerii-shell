@@ -1,3 +1,7 @@
+/*
+* Config handler, forked from noctalia-v4 (https://github.com/noctalia-dev/noctalia/tree/legacy-v4)
+*/
+
 import "../Helpers/QtObj2JS.js" as QtObj2JS
 import QtQuick
 import Quickshell
@@ -12,13 +16,15 @@ Singleton {
     property bool directoriesCreated: false
     property bool reloadConfig: false
     property bool isLoaded: false
-    readonly property int configVersion: 0
     readonly property string shellName: "nerii-shell"
+    /*
+    Shell directories
+    - Default config directory: ~/.config/nerii-shell
+    - Default cache directory: ~/.cache/nerii-shell
+    */
     readonly property string cacheDir: ensureTrailingSlash((Quickshell.env("XDG_CACHE_HOME") || (Quickshell.env("HOME") + "/" + ".cache") + "/" + shellName + "/"))
     readonly property string configDir: ensureTrailingSlash((Quickshell.env("XDG_CONFIG_HOME") || (Quickshell.env("HOME") + "/" + ".config") + "/" + shellName + "/"))
     readonly property string configFile: configDir + "config.json"
-    property bool panelsAttachedToBar: true
-    property bool animationsDisabled: false
     // Cached default config object
     property var _defaultConfig: null
 
@@ -91,14 +97,6 @@ Singleton {
         onLoaded: function() {
             if (!isLoaded) {
                 Logger.i("Config", "Config Loaded");
-                // var rawJson = null;
-                // try {
-                //     rawJson = JSON.parse(configFileView.text());
-                // } catch (e) {
-                //     Logger.w("Config", "Could not parse raw JSON for migrations");
-                // }
-                // runVersionedMigrations(rawJson);
-                // adapter.configVersion = configVersion;
                 root.isLoaded = true;
                 root.configLoaded();
             } else {
@@ -164,7 +162,6 @@ Singleton {
     JsonAdapter {
         id: adapter
 
-        property int configVersion: 0
         property JsonObject misc
         property JsonObject bar
         property JsonObject media
@@ -193,6 +190,8 @@ Singleton {
             property bool showEth: true
             property var keepWorkspaces: {
             }
+            property var workspaceIcons: {
+            }
             property var blacklistTrayIds: []
         }
 
@@ -214,8 +213,6 @@ Singleton {
 
         appLauncher: JsonObject {
             property string terminalCommand: "kitty"
-            // Icon mode: "tabler" or "native"
-            property string iconMode: "tabler"
         }
 
     }

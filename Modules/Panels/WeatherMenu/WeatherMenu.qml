@@ -43,7 +43,7 @@ SmartPanel {
 
                 NText {
                     text: "今日の天気"
-                    font.family: Fonts.jp
+                    font.family: Style.fontJp
                     Layout.alignment: Qt.AlignHCenter
                 }
 
@@ -223,7 +223,7 @@ SmartPanel {
                                 NText {
                                     text: day.time
                                     size: Style.fontSizeL
-                                    font.family: Fonts.jp
+                                    font.family: Style.fontJp
                                 }
 
                                 NIcon {

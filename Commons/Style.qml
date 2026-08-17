@@ -5,6 +5,10 @@ import qs.Commons
 import qs.Commons.Themes
 pragma Singleton
 
+/*
+* Universal style and theme handling
+* Reveals variables from current theme as set in config and calculates others
+*/
 Singleton {
     property var theme
     // Bar
@@ -12,6 +16,9 @@ Singleton {
     readonly property real barMargin: theme.barMargin
     readonly property bool barIsSeparate: theme.barIsSeparate
     readonly property bool allowPanelConnect: theme.allowPanelConnect
+    // Fonts
+    readonly property string fontJp: theme.fontJp
+    readonly property string fontDefault: theme.fontDefault
     // Font size
     readonly property real fontSizeXXS: theme.fontSizeXXS
     readonly property real fontSizeXS: theme.fontSizeXS
@@ -100,9 +107,9 @@ Singleton {
         }
     }
 
-    /*
-        List all themes to allow selection through config
-    */
+    // -----------------------------------------------------
+    // List all themes to allow selection through config ---
+    // -----------------------------------------------------
     Sleek {
         id: sleek
     }
@@ -111,7 +118,7 @@ Singleton {
         id: rect
     }
 
-    // Hyprctl processes
+    // Get hyprland window gaps
     Process {
         id: hyprctlGapsOut
 

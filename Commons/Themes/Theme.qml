@@ -1,3 +1,9 @@
+/*
+* Base Theme properties
+* "Default" values, overridden in each theme.
+* See Rect/Sleek for examples
+*/
+
 import QtQuick
 import Quickshell
 import qs.Commons
@@ -8,6 +14,10 @@ Item {
     readonly property real barMargin: 10
     readonly property bool barIsSeparate: false
     readonly property bool allowPanelConnect: false
+    // Fonts
+    readonly property string fontJp: "Yu Mincho"
+    readonly property string fontMono: "Fira Code Nerd Font"
+    readonly property string fontDefault: fontMono
     // Font size
     readonly property real fontSizeXXS: 8
     readonly property real fontSizeXS: 9

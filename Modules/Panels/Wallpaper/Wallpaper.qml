@@ -1,6 +1,6 @@
-import "../Launcher/Helpers/LauncherNavigation.js" as LauncherNav
-import Qt5Compat.GraphicalEffects
+import "../../../Helpers/GridNavigation.js" as GridNav
 import QtQuick
+import QtQuick.Effects
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
@@ -10,8 +10,6 @@ import qs.Services
 import qs.Widgets
 
 SmartPanel {
-    // select wallpaper
-
     id: root
 
     property int selectedIndex: 0
@@ -26,6 +24,9 @@ SmartPanel {
     readonly property string wallpaperlBin: Quickshell.shellDir + "/Helpers/wallpaperl"
 
     function getWallpapers() {
+        wallpaperModel.clear();
+        gotStaticWallpapers = false;
+        gotLweWallpapers = false;
         if (wallpaperDir == "") {
             Logger.w("WallpaperPanel", "No wallpaper dir chosen.");
             return ;
@@ -48,31 +49,35 @@ SmartPanel {
     }
 
     function onUpPressed() {
-        selectedIndex = LauncherNav.selectPreviousRow(selectedIndex, wallpaperModel.count, gridColumns);
+        selectedIndex = GridNav.selectPreviousRow(selectedIndex, wallpaperModel.count, gridColumns);
     }
 
     function onDownPressed() {
-        selectedIndex = LauncherNav.selectNextRow(selectedIndex, wallpaperModel.count, gridColumns);
+        selectedIndex = GridNav.selectNextRow(selectedIndex, wallpaperModel.count, gridColumns);
     }
 
     function onRightPressed() {
-        selectedIndex = LauncherNav.selectNext(selectedIndex, wallpaperModel.count);
+        selectedIndex = GridNav.selectNext(selectedIndex, wallpaperModel.count);
     }
 
     function onLeftPressed() {
-        selectedIndex = LauncherNav.selectPrevious(selectedIndex, wallpaperModel.count);
+        selectedIndex = GridNav.selectPrevious(selectedIndex, wallpaperModel.count);
     }
 
     function onHomePressed() {
-        selectedIndex = LauncherNav.selectFirst();
+        selectedIndex = GridNav.selectFirst();
     }
 
     function onEndPressed() {
-        selectedIndex = LauncherNav.selectLast(wallpaperModel.count);
+        selectedIndex = GridNav.selectLast(wallpaperModel.count);
     }
 
     verticalPosition: "center"
     Component.onCompleted: {
+        getWallpapers();
+    }
+    // Refresh wallpaper list when window closed to make sure selector stays semi-up-to-date, while hiding loading times
+    onClosed: {
         getWallpapers();
     }
 
@@ -242,7 +247,6 @@ SmartPanel {
                         Image {
                             id: mask
 
-                            // sourceSize.height: 135
                             asynchronous: true
                             cache: true
                             anchors.fill: parent
@@ -253,10 +257,11 @@ SmartPanel {
                             visible: false
                         }
 
-                        OpacityMask {
+                        MultiEffect {
                             anchors.fill: preview
                             source: preview
                             maskSource: mask
+                            maskEnabled: true
                             visible: isAnimated
                         }
 

@@ -15,7 +15,7 @@ Item {
     property bool showIcon: false
     property bool actuallyShowIcon: {
         if (showImage && showIcon) {
-            Logger.d("NButton", "Can't show both image and icon, prioritizing image.");
+            Logger.w("NButton", "Can't show both image and icon, prioritizing image.");
             return false;
         }
         return showIcon;

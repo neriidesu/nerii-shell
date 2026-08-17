@@ -5,38 +5,25 @@ import qs.Commons
 pragma Singleton
 
 Singleton {
-    property alias md3: jsonAdapter.md3
-    property alias base16: jsonAdapter.base16
-    property alias palette: jsonAdapter.palette
-    property string foreground: "#D3C6AA" // on_background
+    // Preset Colors
+    // Everforest
+    property string grey_0: "#7A8478"
+    property string grey_1: "#859289"
+    property string grey_2: "#9DA9A0"
     property string red: "#E67E80"
     property string yellow: "#DBBC7F"
     property string green: "#A7C080"
     property string blue: "#7FBBB3"
     property string purple: "#D699B6"
-    property string mauve: "#cba6f7"
+    property string mauve: "#cba6f7" //Catppuccin insert color
     property string aqua: "#83C092"
     property string orange: "#E69875"
     property string status_ok: "#A7C080"
     property string status_pending: "#D3C6AA"
-    property string status_err: "#E67E80" // error
-    property string grey_0: "#7A8478"
-    property string grey_1: "#859289"
-    property string grey_2: "#9DA9A0"
-    property string background_dim: "#1E2326" // surface
-    property string background_0: "#272E33" // background
-    property string background_1: "#2E383C" // surface_container_lowest
-    property string background_2: "#374145" // surface_container_low
-    property string background_3: "#414B50" // surface_container
-    property string background_4: "#495156" // surface_container_high
-    property string background_5: "#4F5B58" // surface_container_highest
-    property string background_red: "#493B40"
-    property string background_yellow: "#45443C"
-    property string background_green: "#3C4841"
-    property string background_blue: "#384B55"
-    property string background_purple: "#463F48"
-    property string background_visual: "#4C3743"
-    property string mOnHover: Qt.alpha(md3.primary, 0.5)
+    property string status_err: "#E67E80"
+    property alias md3: jsonAdapter.md3
+    property alias base16: jsonAdapter.base16
+    property alias palette: jsonAdapter.palette
 
     FileView {
         path: Quickshell.env("HOME") + "/.local/state/quickshell/generated/colors.json"

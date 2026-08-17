@@ -1,6 +1,5 @@
 // Rounded group container using the variant surface color.
 // To be used in side panels and settings panes to group fields or buttons.
-// Opacity is based on panelBackgroundOpacity but clamped to a minimum to avoid full transparency.
 
 import QtQuick
 import qs.Commons

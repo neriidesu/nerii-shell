@@ -11,7 +11,6 @@ Item {
     // Provider metadata
     property string name: "Clipboard"
     property var launcher: null
-    property string iconMode: Config.data.appLauncher.iconMode
     property string supportedLayouts: "list" // List view for clipboard content
     property bool wrapNavigation: false // Don't wrap at end of list
     // Provider capabilities
@@ -172,7 +171,7 @@ Item {
         return {
             "name": meta ? `Image ${meta.w}×${meta.h}` : "Image",
             "description": desc,
-            "icon": iconMode === "tabler" ? "photo" : "image",
+            "icon": "",
             "isTablerIcon": true,
             "isImage": true,
             "imageWidth": meta ? meta.w : 0,

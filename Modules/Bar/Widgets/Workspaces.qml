@@ -1,31 +1,11 @@
 import QtQuick
-import QtQuick.Layouts
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Io
 import qs.Commons
 import qs.Widgets
 
-RowLayout {
-    function getWorkspaceText(index) {
-        var text = "undefined";
-        switch (index + 1) {
-        case 3:
-            text = "";
-            break;
-        case 4:
-            text = "";
-            break;
-        case 10:
-            text = "󰍜";
-            break;
-        default:
-            text = index + 1;
-            break;
-        }
-        return text;
-    }
-
+Row {
     spacing: Style.marginM
 
     Repeater {
@@ -53,18 +33,25 @@ RowLayout {
                     true;
                     else
                     false;
-                }
-
-
-                
+                }   
             }
 
-            text: getWorkspaceText(index)
+            property string label: {
+                if (Config.data.bar.workspaceIcons != null){
+                    if (Object.keys(Config.data.bar.workspaceIcons).includes(index.toString())) {
+                        return Config.data.bar.workspaceIcons[index]
+                    }
+                }
+
+                return (index + 1);
+            }
+
+            text: label
             color: isActive ? Colors.md3.primary : (ws ? Colors.md3.on_background : Colors.md3.surface_container_highest)
             visible: ws ? onScreen : keep 
 
             font {
-                family: Fonts.code
+                family: Style.fontDefault
                 weight: Style.fontWeightSemiBold
             }
                 size: Style.fontSizeL

@@ -100,17 +100,11 @@ Singleton {
     }
 
     function copyToClipboard(id) {
-        if (!root.cliphistAvailable) {
-        return;
-        }
         copyProc.command = ["sh", "-c", `cliphist decode ${id} | wl-copy`];
         copyProc.running = true;
     }
 
     function pasteFromClipboard(id, mime) {
-        if (!root.cliphistAvailable) {
-            return;
-        }
         const isImage = mime && mime.startsWith("image/");
         const typeArg = isImage ? ` --type ${mime}` : "";
         const pasteKeys = isImage ? "wtype -M ctrl -k v" : "wtype -M ctrl -M shift  v";

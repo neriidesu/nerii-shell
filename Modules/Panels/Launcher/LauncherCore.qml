@@ -1,4 +1,4 @@
-import "Helpers/LauncherNavigation.js" as LauncherNav
+import "../../../Helpers/GridNavigation.js" as LauncherNav
 import "Providers"
 import QtQuick
 import QtQuick.Controls
@@ -10,7 +10,7 @@ import qs.Services
 import qs.Services
 import qs.Widgets
 
-// Core launcher logic and UI - shared between SmartPanel (Launcher.qml) and overlay (LauncherOverlayWindow.qml)
+// Core launcher logic and UI
 Rectangle {
     id: root
 
@@ -39,58 +39,6 @@ Rectangle {
     readonly property int effectiveIconSize: 36
     readonly property int badgeSize: effectiveIconSize
     readonly property int entryHeight: badgeSize + Style.marginXL + Style.marginS
-    // ---
-    readonly property bool providerHasDisplayString: results.length > 0 && !!results[0].displayString
-    // ---
-    readonly property string providerSupportedLayouts: {
-        if (activeProvider && activeProvider.supportedLayouts)
-            return activeProvider.supportedLayouts;
-
-        if (results.length > 0 && results[0].provider && results[0].provider.supportedLayouts)
-            return results[0].provider.supportedLayouts;
-
-        if (defaultProvider && defaultProvider.supportedLayouts)
-            return defaultProvider.supportedLayouts;
-
-        return "both";
-    }
-    readonly property bool showLayoutToggle: !providerHasDisplayString && providerSupportedLayouts === "both"
-    readonly property string layoutMode: {
-        if (searchText === ">")
-            return "list";
-
-        if (providerSupportedLayouts === "grid")
-            return "grid";
-
-        if (providerSupportedLayouts === "list")
-            return "list";
-
-        if (providerSupportedLayouts === "single")
-            return "single";
-
-        if (providerHasDisplayString)
-            return "grid";
-
-        return "list";
-    }
-    readonly property bool isGridView: layoutMode === "grid"
-    readonly property bool isSingleView: layoutMode === "single"
-    // ---
-    readonly property int targetGridColumns: {
-        let base = 5;
-        if (!activeProvider || activeProvider === defaultProvider)
-            return base;
-
-        if (activeProvider.preferredGridColumns) {
-            let multiplier = base / 5;
-            return Math.max(1, Math.round(activeProvider.preferredGridColumns * multiplier));
-        }
-        return base;
-    }
-    readonly property int listPanelWidth: 500
-    readonly property int gridContentWidth: listPanelWidth - Style.margin2XS
-    readonly property int gridCellSize: Math.floor((gridContentWidth - ((targetGridColumns - 1) * Style.marginS)) / targetGridColumns)
-    readonly property int gridColumns: targetGridColumns
     // Check if current provider allows wrap navigation (default true)
     readonly property bool allowWrapNavigation: {
         var provider = activeProvider || currentProvider;
@@ -268,22 +216,6 @@ Rectangle {
         selectedIndex = LauncherNav.selectPreviousPage(selectedIndex, results.length, entryHeight);
     }
 
-    function selectPreviousRow() {
-        selectedIndex = LauncherNav.selectPreviousRow(selectedIndex, results.length, gridColumns);
-    }
-
-    function selectNextRow() {
-        selectedIndex = LauncherNav.selectNextRow(selectedIndex, results.length, gridColumns);
-    }
-
-    function selectPreviousColumn() {
-        selectedIndex = LauncherNav.selectPreviousColumn(selectedIndex, results.length, gridColumns);
-    }
-
-    function selectNextColumn() {
-        selectedIndex = LauncherNav.selectNextColumn(selectedIndex, results.length, gridColumns);
-    }
-
     // ---
     function activate() {
         if (results.length > 0 && results[selectedIndex]) {
@@ -326,30 +258,12 @@ Rectangle {
             event.accepted = true;
             break;
         case Qt.Key_Up:
-            if (!isSingleView)
-                isGridView ? selectPreviousRow() : selectPreviousWrapped();
-
+            selectPreviousWrapped();
             event.accepted = true;
             break;
         case Qt.Key_Down:
-            if (!isSingleView)
-                isGridView ? selectNextRow() : selectNextWrapped();
-
+            selectNextWrapped();
             event.accepted = true;
-            break;
-        case Qt.Key_Left:
-            if (isGridView) {
-                selectPreviousColumn();
-                event.accepted = true;
-                break;
-            }
-            break;
-        case Qt.Key_Right:
-            if (isGridView) {
-                selectNextColumn();
-                event.accepted = true;
-                break;
-            }
             break;
         case Qt.Key_Home:
             selectFirst();
@@ -500,8 +414,8 @@ Rectangle {
             Layout.rightMargin: 1
             Layout.fillWidth: true
             Layout.fillHeight: true
-            animationsEnabled: !root.animationsDisabled
-            sourceComponent: root.isSingleView ? singleViewComponent : (root.isGridView ? gridViewComponent : listViewComponent)
+            animationsEnabled: true
+            sourceComponent: listViewComponent
         }
 
         // --------------------------
@@ -533,133 +447,6 @@ Rectangle {
                 }
 
                 delegate: LauncherListDelegate {
-                    launcher: root
-                }
-
-            }
-
-        }
-
-        // --------------------------
-        // SINGLE ITEM VIEW
-        Component {
-            id: singleViewComponent
-
-            Item {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-
-                NBox {
-                    anchors.fill: parent
-                    color: Colors.md3.surface_variant
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-
-                    ColumnLayout {
-                        anchors.fill: parent
-                        anchors.margins: Style.marginL
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-
-                        Item {
-                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-
-                            NText {
-                                text: root.results.length > 0 ? root.results[0].name : ""
-                                size: Style.fontSizeL
-                                font.weight: Font.Bold
-                                color: Colors.md3.primary
-                            }
-
-                        }
-
-                        NScrollView {
-                            id: descriptionScrollView
-
-                            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                            Layout.topMargin: Style.fontSizeL + Style.marginXL
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            horizontalPolicy: ScrollBar.AlwaysOff
-                            reserveScrollbarSpace: false
-
-                            NText {
-                                width: descriptionScrollView.availableWidth
-                                text: root.results.length > 0 ? root.results[0].description : ""
-                                size: Style.fontSizeM
-                                font.weight: Font.Bold
-                                color: Colors.md3.on_surface
-                                horizontalAlignment: Text.AlignHLeft
-                                verticalAlignment: Text.AlignTop
-                                wrapMode: Text.Wrap
-                            }
-
-                        }
-
-                    }
-
-                }
-
-            }
-
-        }
-
-        // --------------------------
-        // GRID VIEW
-        Component {
-            id: gridViewComponent
-
-            NGridView {
-                id: resultsGrid
-
-                horizontalPolicy: ScrollBar.AlwaysOff
-                verticalPolicy: ScrollBar.AlwaysOff
-                reserveScrollbarSpace: false
-                gradientColor: Settings.data.ui.panelBackgroundOpacity < 1 ? "transparent" : Colors.md3.surface
-                wheelScrollMultiplier: 4
-                trackedSelectionIndex: root.selectedIndex
-                width: parent.width
-                height: parent.height
-                cellWidth: parent.width / root.targetGridColumns
-                cellHeight: {
-                    var cellWidth = parent.width / root.targetGridColumns;
-                    // Use provider's preferred ratio if available
-                    if (root.currentProvider && root.currentProvider.preferredGridCellRatio)
-                        return cellWidth * root.currentProvider.preferredGridCellRatio;
-
-                    return cellWidth;
-                }
-                leftMargin: 0
-                rightMargin: 0
-                topMargin: 0
-                bottomMargin: 0
-                model: root.results
-                cacheBuffer: resultsGrid.height * 2
-                keyNavigationEnabled: false
-                focus: false
-                interactive: !Settings.data.appLauncher.ignoreMouseInput
-                // Completely disable GridView key handling
-                Keys.enabled: false
-
-                // Handle scrolling to show selected item when it changes
-                Connections {
-                    function onSelectedIndexChanged() {
-                        if (!root.isGridView || root.selectedIndex < 0 || !resultsGrid)
-                            return ;
-
-                        Qt.callLater(() => {
-                            if (root.isGridView && resultsGrid && resultsGrid.cancelFlick) {
-                                resultsGrid.cancelFlick();
-                                resultsGrid.positionViewAtIndex(root.selectedIndex, GridView.Contain);
-                            }
-                        });
-                    }
-
-                    target: root
-                    enabled: root.isGridView
-                }
-
-                delegate: LauncherGridDelegate {
                     launcher: root
                 }
 

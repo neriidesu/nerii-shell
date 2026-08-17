@@ -6,6 +6,9 @@ import qs.Commons
 import qs.Services
 import qs.Widgets
 
+/*
+* TrayMenu forked from noctalia-v4 (https://github.com/noctalia-dev/noctalia/tree/legacy-v4)
+*/
 PopupWindow {
     id: root
 
@@ -237,7 +240,7 @@ PopupWindow {
                     Rectangle {
                         id: innerRect
                         anchors.fill: parent
-                        color: mouseArea.containsMouse ? Colors.mOnHover : "transparent"
+                        color: mouseArea.containsMouse ? Qt.alpha(Colors.md3.primary, 0.5) : "transparent"
                         radius: Style.radiusS
                         visible: !(modelData?.isSeparator ?? false)
                         Behavior on color {
@@ -264,9 +267,9 @@ PopupWindow {
                                 readonly property bool isRadio: type === QsMenuButtonType.RadioButton
                                 readonly property bool isChecked: modelData?.checkState === Qt.Checked || (modelData?.checked ?? false)
 
-                                readonly property color activeColor: mouseArea.containsMouse ? Colors.mOnHover : Colors.md3.on_background
+                                readonly property color activeColor: mouseArea.containsMouse ? Qt.alpha(Colors.md3.primary, 0.5) : Colors.md3.on_background
                                 readonly property color checkMarkColor: mouseArea.containsMouse ? Colors.md3.on_background : Colors.md3.primary
-                                readonly property color borderColor: isChecked ? activeColor : (mouseArea.containsMouse ? Colors.mOnHover : Colors.md3.on_surface)
+                                readonly property color borderColor: isChecked ? activeColor : (mouseArea.containsMouse ? Qt.alpha(Colors.md3.primary, 0.5) : Colors.md3.on_surface)
 
                                 Rectangle {
                                     visible: !parent.isRadio
@@ -287,7 +290,6 @@ PopupWindow {
                                     NIcon {
                                         visible: parent.parent.isChecked
                                         anchors.centerIn: parent
-                                        // anchors.horizontalCenterOffset: -1
                                         text: ""
                                         color: parent.parent.activeColor
                                         size: Math.max(Style.fontSizeXXS, parent.width * 0.6)
@@ -403,7 +405,7 @@ PopupWindow {
                                         }
                                     } else {
                                         modelData.triggered();
-                                        // root.hideMenu();
+                                        root.hideMenu();
                                     }
                                 }
                             }

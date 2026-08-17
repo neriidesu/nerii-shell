@@ -133,16 +133,6 @@ Singleton {
 
         // If fallback enabled, try to find panel on another screen
         if (fallback) {
-            // First try the primary screen (0x0)
-            var fallbackScreen = findFallbackScreen();
-            if (fallbackScreen && fallbackScreen.name !== screen.name) {
-                var fallbackKey = `${name}-${fallbackScreen.name}`;
-                if (registeredPanels[fallbackKey]) {
-                    Logger.d("PanelService", "Panel fallback from", screen.name, "to", fallbackScreen.name);
-                    return registeredPanels[fallbackKey];
-                }
-            }
-            // Try any other screen
             for (var key in registeredPanels) {
                 if (key.startsWith(name + "-")) {
                     Logger.d("PanelService", "Panel fallback to first available:", key);

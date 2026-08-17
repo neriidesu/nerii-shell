@@ -81,11 +81,6 @@ Item {
             return ;
 
         const step = delta * root.wheelScrollMultiplier;
-        if (!Settings.data.general.smoothScrollEnabled || Settings.data.general.animationDisabled) {
-            listView.contentY = root.clampScrollY(listView.contentY - step);
-            root._wheelTargetY = listView.contentY;
-            return ;
-        }
         if (!wheelScrollAnimation.running)
             root._wheelTargetY = listView.contentY;
 
@@ -166,68 +161,11 @@ Item {
         return listView.itemAtIndex(index);
     }
 
-    // Dynamically create gradient overlays
-    function createGradients() {
-        if (!showGradientMasks)
-            return ;
-
-        Qt.createQmlObject(`
-      import QtQuick
-      import qs.Commons
-      Rectangle {
-        x: 0
-        y: 0
-        width: root.availableWidth
-        height: root.gradientHeight
-        z: 1
-        visible: root.showGradientMasks && root.contentOverflows
-        opacity: {
-          if (listView.contentY <= 1) return 0;
-          if (listView.currentItem && listView.currentItem.y - listView.contentY < root.gradientHeight) return 0;
-          return 1;
-        }
-        Behavior on opacity {
-          NumberAnimation { duration: Style.animationFast; easing.type: Easing.InOutQuad }
-        }
-        gradient: Gradient {
-          GradientStop { position: 0.0; color: root.gradientColor }
-          GradientStop { position: 1.0; color: "transparent" }
-        }
-      }
-    `, root, "topGradient");
-        Qt.createQmlObject(`
-      import QtQuick
-      import qs.Commons
-      Rectangle {
-        x: 0
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: -1
-        width: root.availableWidth
-        height: root.gradientHeight + 1
-        z: 1
-        visible: root.showGradientMasks && root.contentOverflows
-        opacity: {
-          if (listView.contentY + listView.height >= listView.contentHeight - 1) return 0;
-          if (listView.currentItem && listView.currentItem.y + listView.currentItem.height > listView.contentY + listView.height - root.gradientHeight) return 0;
-          return 1;
-        }
-        Behavior on opacity {
-          NumberAnimation { duration: Style.animationFast; easing.type: Easing.InOutQuad }
-        }
-        gradient: Gradient {
-          GradientStop { position: 0.0; color: "transparent" }
-          GradientStop { position: 1.0; color: root.gradientColor }
-        }
-      }
-    `, root, "bottomGradient");
-    }
-
     // Set reasonable implicit sizes for Layout usage
     implicitWidth: 200
     implicitHeight: 200
     Component.onCompleted: {
         _wheelTargetY = listView.contentY;
-        createGradients();
     }
 
     ListView {

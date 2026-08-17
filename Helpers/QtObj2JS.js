@@ -1,6 +1,7 @@
 // -----------------------------------------------------
 // Helper function to convert Qt objects to plain JavaScript objects
-// Only used when generating settings-default.json
+// Used when generating settings-default.json and saving shell state
+// From noctalia-v4 https://github.com/noctalia-dev/noctalia/tree/legacy-v4
 function qtObjectToPlainObject(obj) {
   if (obj === null || obj === undefined) {
     return obj;

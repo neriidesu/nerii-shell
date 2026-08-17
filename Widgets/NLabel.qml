@@ -35,17 +35,6 @@ ColumnLayout {
         }
 
         NText {
-            //   // Settings indicator dot positioned right after the text content
-            //   Loader {
-            //     active: root.showIndicator
-            //     x: labelText.contentWidth + Style.marginXS
-            //     anchors.verticalCenter: parent.verticalCenter
-            //     sourceComponent: NSettingsIndicator {
-            //       show: true
-            //       tooltipText: root.indicatorTooltip || ""
-            //     }
-            //   }
-
             id: labelText
 
             Layout.fillWidth: true

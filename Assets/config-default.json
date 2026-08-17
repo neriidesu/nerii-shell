@@ -1,5 +1,4 @@
 {
-  "configVersion": 0,
   "misc": {
     "debug": false,
     "theme": ""
@@ -24,7 +23,14 @@
     "enableLwe": false
   },
   "appLauncher": {
-    "terminalCommand": "kitty",
-    "iconMode": "tabler"
+    "terminalCommand": "kitty"
+  },
+  "colors": {
+    "genFromWallpaper": true,
+    "genFromColor": false,
+    "genWithTheme": false,
+    "themeName": "",
+    "themeDir": "",
+    "primaryHex": ""
   }
 }

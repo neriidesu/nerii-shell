@@ -6,6 +6,7 @@ import qs.Services
 pragma Singleton
 
 // Centralized shell state management for small cache files
+// Forked from noctalia-v4 (https://github.com/noctalia-dev/noctalia/tree/legacy-v4)
 Singleton {
     id: root
 

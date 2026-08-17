@@ -22,7 +22,7 @@ Item {
 
             text: "外気温は "
             anchors.verticalCenter: parent.verticalCenter
-            font.family: Fonts.jp
+            font.family: Style.fontJp
             color: Colors.md3.inverse_primary
         }
 

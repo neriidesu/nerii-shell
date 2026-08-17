@@ -44,9 +44,9 @@ Singleton {
     function spawn(command) {
         try {
             const cmd = command instanceof Array ? command.join(" ") : String(command);
-            dispatchCommand("exec", cmd, `hl.dsp.exec_cmd("${luaQuote(cmd)}")`);
+            dispatchCommand(`hl.dsp.exec_cmd("${luaQuote(cmd)}")`);
         } catch (e) {
-            Logger.e("HyprlandService", "Failed to spawn command:", e);
+            Logger.e("CompositorService", "Failed to spawn command:", e);
         }
     }
 
@@ -55,8 +55,8 @@ Singleton {
         return String(str).replace(/\\/g, "\\\\").replace(/"/g, "\\\"").replace(/\n/g, "\\n").replace(/\r/g, "\\r");
     }
 
-    function dispatchCommand(legacyDispatcher, legacyArgs, luaCommand) {
-        Logger.d("HyprlandService", "Dispatch (Lua):", luaCommand);
+    function dispatchCommand(luaCommand) {
+        Logger.d("CompositorService", "Dispatch (Lua):", luaCommand);
         Quickshell.execDetached(["hyprctl", "dispatch", luaCommand]);
     }
 

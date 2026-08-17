@@ -37,11 +37,16 @@ Item {
             Separator {
                 type: -1
             }
-
+            
             NText {
                 horizontalAlignment: Text.AlignHCenter
                 text: "Session Menu"
                 Layout.fillWidth: true
+                color: Colors.md3.primary
+                font {
+                    letterSpacing: 1
+                    weight: Style.fontWeightLight
+                }
             }
 
             Separator {

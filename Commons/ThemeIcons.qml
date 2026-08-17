@@ -7,21 +7,11 @@ Singleton {
     id: root
 
     function iconFromName(iconName, fallbackName) {
-        const fallback = fallbackName || "application-x-executable";
-        try {
-            if (iconName && typeof Quickshell !== 'undefined' && Quickshell.iconPath) {
-                const p = Quickshell.iconPath(iconName, fallback);
-                if (p && p !== "")
-                    return p;
+        const fallback = fallbackName || "folder";
+        if (!iconName)
+            return Quickshell.iconPath(fallback);
 
-            }
-        } catch (e) {
-        }
-        try {
-            return Quickshell.iconPath ? (Quickshell.iconPath(fallback, true) || "") : "";
-        } catch (e2) {
-            return "";
-        }
+        return Quickshell.iconPath(iconName, fallback);
     }
 
 }

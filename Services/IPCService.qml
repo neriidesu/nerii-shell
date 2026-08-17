@@ -93,16 +93,15 @@ Singleton {
     }
 
     IpcHandler {
-        // Closed -> open in clipboard mode
-        // Already in clipboard mode -> close
-        // In another mode -> switch to clipboard mode
-
         function toggle() {
             var screen = CompositorService.getFocusedScreen();
             PanelService.toggleLauncher(screen);
         }
 
         function clipboard() {
+            // Closed -> open in clipboard mode
+            // Already in clipboard mode -> close
+            // In another mode -> switch to clipboard mode
             var screen = CompositorService.getFocusedScreen();
             var searchText = PanelService.getLauncherSearchText(screen);
             var isInClipMode = searchText.startsWith(">clip");

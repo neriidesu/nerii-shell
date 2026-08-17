@@ -13,7 +13,7 @@ ColumnLayout {
     property bool readOnly: false
     property color labelColor: Colors.md3.on_surface
     property color descriptionColor: Colors.md3.on_surface_variant
-    property string fontFamily: Fonts.code
+    property string fontFamily: Style.fontDefault
     property real fontSize: Style.fontSizeS
     property int fontWeight: Style.fontWeightRegular
     property var defaultValue: undefined

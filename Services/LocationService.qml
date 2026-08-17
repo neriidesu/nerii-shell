@@ -5,8 +5,6 @@ import qs.Commons
 pragma Singleton
 
 Singleton {
-    //console.log(JSON.stringify(weatherData))
-
     id: root
 
     property string locationFile: (Config.cacheDir + "location.json")

@@ -8,7 +8,7 @@ Text {
     color: Colors.md3.on_background
 
     font {
-        family: Fonts.code
+        family: Style.fontDefault
         pixelSize: size
     }
 

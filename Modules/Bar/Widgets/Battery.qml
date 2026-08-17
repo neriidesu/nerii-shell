@@ -35,7 +35,7 @@ BarGroup {
         size: Style.fontSizeL
 
         font {
-            family: Fonts.jp
+            family: Style.fontJp
             letterSpacing: 2
         }
 

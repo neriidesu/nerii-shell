@@ -2,6 +2,9 @@ import QtQuick
 import Quickshell
 pragma Singleton
 
+/*
+* Handles time formatting and universal clock
+*/
 Singleton {
     id: root
 
@@ -24,6 +27,7 @@ Singleton {
         Qt.formatDateTime(clock.date, "yyyy年MM月dd日");
     }
 
+    // Standard formatting for time calculation
     function formatStandard(date, ref) {
         if (!date)
             date = new Date();

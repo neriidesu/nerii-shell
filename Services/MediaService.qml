@@ -5,9 +5,6 @@ import qs.Commons
 pragma Singleton
 
 Singleton {
-    //Logger.i("Media", "No active player found")
-    //Logger.i("Media", "No active player found")
-
     id: root
 
     property var currentPlayer: null
