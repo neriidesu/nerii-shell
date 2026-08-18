@@ -78,7 +78,7 @@ Absolute path to selected wallpaper.
 #### wallpaperDir
 Directory where wallpapers are located
 #### lweDir
-Directory where previews of linux-wallpaperengine wallpapers are. These need to be pngs with the name being the same as the ID of the wallpaper
+Directory where previews of linux-wallpaperengine wallpapers should be placed.
 #### enableLwe
 Wether to enable linux-wallpaperengine wallpapers
 

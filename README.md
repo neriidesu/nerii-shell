@@ -92,10 +92,10 @@ hl.layer_rule({ match = { namespace = "nerii-shell.+" }, blur = true, ignore_alp
 
 The naming convention for shell layers is as follows:
 
-Bar: nerii-shell-bar-[SCREEN NAME]
-Launcher: nerii-shell-launcher-overlay-[SCREEN NAME]
-Panels: nerii-shell-background-[SCREEN NAME]
-Popup menu: nerii-shell-popupmenu-[SCREEN NAME]
+- Bar: nerii-shell-bar-[SCREEN NAME]
+- Launcher: nerii-shell-launcher-overlay-[SCREEN NAME]
+- Panels: nerii-shell-background-[SCREEN NAME]
+- Popup menu: nerii-shell-popupmenu-[SCREEN NAME]
 
 ## Configuration
 
@@ -104,7 +104,14 @@ Configuration is done in JSON. The config file is located at `~/.config/nerii-sh
 > [!NOTE]
 > For wallpaper selection to work please set `wallpaperDir` to an absolute path to your wallpaper directory. Usually this would be `/home/USER/Pictures/Wallpapers/`
 
+> [!TIP]
+> After having configured linux-wallpaperengine settings you can call writeLweFiles in the IPC to get linux-wallpaperengine wallpapers working. I recommend focusing an empty workspace.
+
 For more configuration options, please read [this](https://github.com/neriidesu/nerii-shell/tree/master/CONFIGURATION.md) document
+
+# Other notes
+> [!NOTE]
+> nerii-shell bundles one rust binary to help with wallpaper selection. It could honestly probably be a bash script. The source code can be found [here](https://github.com/neriidesu/wallpaperl).
 
 # Thanks
 

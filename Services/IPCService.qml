@@ -77,6 +77,11 @@ Singleton {
             WallpaperService.startWallpaper();
         }
 
+        function writeLweFiles() {
+            WallpaperService.kill();
+            WallpaperService.writeLweFiles();
+        }
+
         target: "wallpaper"
     }
 

@@ -91,6 +91,10 @@ Singleton {
         lwe.running = false;
     }
 
+    function writeLweFiles() {
+        Quickshell.execDetached([Quickshell.shellDir + "/Helpers/write_lwe_files", Config.data.wallpaper.lweDir]);
+    }
+
     Timer {
         id: timer
     }
