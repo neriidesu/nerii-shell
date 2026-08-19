@@ -79,7 +79,7 @@ RowLayout {
             id: eth_icon
 
             text: eth.icon
-            color: Networking.wifiEnabled ? Colors.purple : Colors.grey_0
+            color: active ? Colors.purple : Colors.grey_0
             size: Style.fontSizeL
         }
 
