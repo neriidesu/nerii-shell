@@ -366,6 +366,15 @@ Rectangle {
         }
     }
 
+    ReminderProvider {
+        id: reminderProvider
+
+        Component.onCompleted: {
+            registerProvider(this);
+            Logger.d("Launcher", "Registered: ReminderProvider");
+        }
+    }
+
     Timer {
         id: mouseTrackingDelayTimer
 

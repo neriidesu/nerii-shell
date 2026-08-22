@@ -138,4 +138,27 @@ Singleton {
         target: "shell"
     }
 
+    IpcHandler {
+        function start(message: string, time: string) {
+            TimerService.start(message, time);
+        }
+
+        function complete(message: string) {
+            TimerService.complete(message);
+        }
+
+        function get() {
+            var timers = TimerService.getTimers();
+            if (timers == null)
+                return ;
+
+            Logger.d("TimerService", "Listing Timers");
+            for (const timer of timers) {
+                Logger.d("Timer", timer.id, timer.time, timer.name);
+            }
+        }
+
+        target: "remind"
+    }
+
 }
