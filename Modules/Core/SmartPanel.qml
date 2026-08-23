@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Shapes
 import Quickshell
 import qs.Commons
 import qs.Services
@@ -260,10 +261,65 @@ Item {
                     });
                 }
             }
-            
 
+            Loader {
+                active: isPanelOpen && allowPanelConnect
+                anchors.fill: parent
+
+                sourceComponent: Item {
+                    anchors.fill: parent
+                    visible: isPanelOpen
+                    Shape {
+                        width: Style.radiusL
+                        height: Style.radiusL
+                        x: targetPosition.x
+                        y: targetPosition.y
+                        ShapePath {
+                            fillColor: panelBackgroundColor
+                            strokeWidth: 0
+                            PathLine {
+                                relativeX: -Style.radiusL
+                                relativeY: 0
+                            }
+                            PathArc {
+                                relativeX: Style.radiusL
+                                relativeY: Style.radiusL
+                                radiusX: Style.radiusL
+                                radiusY: Style.radiusL
+                            }
+                            PathLine {
+                                relativeX: 0
+                                relativeY: -Style.radiusL
+                            }
+                        }
+                    }
+                    Shape {
+                        width: Style.radiusL
+                        height: Style.radiusL
+                        x: targetPosition.x + (panelBackground.width)
+                        y: targetPosition.y
+                        ShapePath {
+                            fillColor: panelBackgroundColor
+                            strokeWidth: 0
+                            PathLine {
+                                relativeX: 0
+                                relativeY: Style.radiusL
+                            }
+                            PathArc {
+                                relativeX: Style.radiusL
+                                relativeY: -Style.radiusL
+                                radiusX: Style.radiusL
+                                radiusY: Style.radiusL
+                            }
+                            PathLine {
+                                relativeX: Style.radiusL
+                                relativeY: 0
+                            }
+                        }
+                    }
+                }
+            }
         }
-
     }
 
     ParallelAnimation{
