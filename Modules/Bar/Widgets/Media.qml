@@ -27,6 +27,7 @@ Item {
         anchors.fill: root
         color: mouse.hovered ? Qt.alpha(Colors.md3.primary, 0.5) : "transparent"
         radius: Style.radiusS
+        anchors.margins: -Style.marginXXS
 
         Behavior on color {
             ColorAnimation {

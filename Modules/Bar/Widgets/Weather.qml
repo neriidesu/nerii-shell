@@ -12,6 +12,21 @@ Item {
     implicitHeight: row.height
     implicitWidth: row.width
 
+    Rectangle {
+        anchors.fill: root
+        color: mouse.hovered ? Qt.alpha(Colors.md3.primary, 0.5) : "transparent"
+        radius: Style.radiusS
+        anchors.margins: -Style.marginXS
+
+        Behavior on color {
+            ColorAnimation {
+                duration: Style.animationFast
+            }
+
+        }
+
+    }
+
     Row {
         id: row
 
@@ -23,7 +38,15 @@ Item {
             text: "外気温は "
             anchors.verticalCenter: parent.verticalCenter
             font.family: Style.fontJp
-            color: Colors.md3.inverse_primary
+            color: mouse.hovered ? Colors.md3.on_primary : Colors.md3.inverse_primary
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: Style.animationFast
+                }
+
+            }
+
         }
 
         NText {
@@ -46,7 +69,15 @@ Item {
 
             text: "°C"
             anchors.verticalCenter: parent.verticalCenter
-            color: Colors.md3.inverse_primary
+            color: mouse.hovered ? Colors.md3.on_primary : Colors.md3.inverse_primary
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: Style.animationFast
+                }
+
+            }
+
         }
 
     }
@@ -56,6 +87,12 @@ Item {
         onClicked: {
             PanelService.getPanel("weatherMenuPanel", screen)?.toggle(parent);
         }
+    }
+
+    HoverHandler {
+        id: mouse
+
+        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
     }
 
 }
