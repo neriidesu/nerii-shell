@@ -321,6 +321,24 @@ Rectangle {
         }
     }
 
+    CalculatorProvider {
+        id: calculatorProvider
+
+        Component.onCompleted: {
+            registerProvider(this);
+            Logger.d("Launcher", "Registered: CalculatorProvider");
+        }
+    }
+
+    WallpaperProvider {
+        id: wallpaperProvider
+
+        Component.onCompleted: {
+            registerProvider(this);
+            Logger.d("Launcher", "Registered: WallpaperProvider");
+        }
+    }
+
     ClipboardProvider {
         id: clipProvider
 
@@ -336,15 +354,6 @@ Rectangle {
         Component.onCompleted: {
             registerProvider(this);
             Logger.d("Launcher", "Registered: CommandProvider");
-        }
-    }
-
-    CalculatorProvider {
-        id: calculatorProvider
-
-        Component.onCompleted: {
-            registerProvider(this);
-            Logger.d("Launcher", "Registered: CalculatorProvider");
         }
     }
 
