@@ -339,6 +339,15 @@ Rectangle {
         }
     }
 
+    SessionProvider {
+        id: sessionProvider
+
+        Component.onCompleted: {
+            registerProvider(this);
+            Logger.d("Launcher", "Registered: SessionProvider");
+        }
+    }
+
     ClipboardProvider {
         id: clipProvider
 
