@@ -263,7 +263,7 @@ Item {
             }
 
             Loader {
-                active: isPanelOpen && allowPanelConnect
+                active: isPanelOpen && isConnected
                 anchors.fill: parent
 
                 sourceComponent: Item {
