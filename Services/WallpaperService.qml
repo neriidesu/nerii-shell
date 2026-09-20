@@ -59,6 +59,7 @@ Singleton {
 
     function setWallpaper(path) {
         Config.data.wallpaper.wallpaperPath = path;
+        Quickshell.execDetached(["magick", path, "/usr/share/sddm/themes/nerii-shell/Assets/wallpaper.png"]);
         reload();
     }
 

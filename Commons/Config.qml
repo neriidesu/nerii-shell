@@ -209,6 +209,7 @@ Singleton {
             property string wallpaperDir: ""
             property string lweDir: ""
             property bool enableLwe: false
+            property bool sendToSDDMTheme: false
         }
 
         appLauncher: JsonObject {
