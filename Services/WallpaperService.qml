@@ -12,7 +12,6 @@ Singleton {
     property bool isAnimated: false
     property bool prevIsAnimated
     property bool hasInitialized: false
-    property string lweArgs
 
     signal wallpaperReloaded()
 
@@ -28,32 +27,26 @@ Singleton {
 
     }
 
+    function restart() {
+        kill();
+        delay(30, function() {
+            startWallpaper();
+        });
+    }
+
     function startWallpaper() {
         if (!hasInitialized) {
             Logger.e("WallpaperService", "Tried to call startWallpaper while WallpaperService not initialized");
             return ;
         }
         if (isAnimated && Config.data.wallpaper.enableLwe) {
-            Logger.d("WallpaperService", "Wallpaper is lwe");
-            lweArgs = "";
-            for (var i = 0; i < Quickshell.screens.length; i++) {
-                lweArgs = lweArgs + `--screen-root ${Quickshell.screens[i].name} --bg ${wallpaperFile.slice(0,wallpaperFile.lastIndexOf('.'))} `;
-            }
-            if (hyprpaper.running)
-                hyprpaper.running = false;
-
-            lwe.running = false;
-            lwe.command = ["sh", "-c", "linux-wallpaperengine --silent " + lweArgs.trim()];
-            lwe.running = true;
+            Logger.d("WallpaperService", "Wallpaper is WE");
+            let weSteamDir = Quickshell.env("HOME") + "/.local/share/Steam/steamapps/workshop/content/431960/";
+            let path = weSteamDir.concat(wallpaperFile.slice(0, wallpaperFile.lastIndexOf('.')));
+            Quickshell.execDetached(["sh", "-c", `skwd-paper-v2 apply '*' ${path} --replace-all`]);
         } else {
-            Logger.d("WallpaperService", "Wallpaper is hyprpaper");
-            if (lwe.running)
-                lwe.running = false;
-
-            hyprpaper.running = true;
-            delay(150, function() {
-                Quickshell.execDetached(["hyprctl", "hyprpaper", "wallpaper", `,${wallpaperPath}`]);
-            });
+            Logger.d("WallpaperService", "Wallpaper is static");
+            Quickshell.execDetached(["sh", "-c", `skwd-paper-v2 apply '*' ${wallpaperPath} --replace-all`]);
         }
     }
 
@@ -88,8 +81,7 @@ Singleton {
     }
 
     function kill() {
-        hyprpaper.running = false;
-        lwe.running = false;
+        Quickshell.execDetached(["pkill", "skwd-paper"]);
     }
 
     function writeLweFiles() {
@@ -98,31 +90,6 @@ Singleton {
 
     Timer {
         id: timer
-    }
-
-    Timer {
-        id: lweRestartTimer
-
-        interval: 60 * 60 * 1000
-        running: lwe.running
-        onTriggered: {
-            Logger.i("WallpaperService", "Restarting lwe to combat memory leak");
-            lwe.running = false;
-            lwe.running = true;
-        }
-    }
-
-    Process {
-        id: hyprpaper
-
-        command: ["hyprpaper"]
-        running: false
-    }
-
-    Process {
-        id: lwe
-
-        running: false
     }
 
 }

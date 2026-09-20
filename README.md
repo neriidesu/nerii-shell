@@ -37,9 +37,14 @@ If you've read all of this and decided you want to install nerii-shell, follow t
 
 nerii-shell uses a few different programs to not have to handle everything itself. Make sure you have these installed. You can also use the following command to install them:
 
-`sudo pacman -S hyprland hyprpaper hyprlock quickshell matugen cliphist pipewire imagemagick`
+`sudo pacman -S hyprland hyprlock quickshell matugen cliphist pipewire imagemagick`
 
-nerii-shell optionally supports [linux-wallpaperengine](https://github.com/Almamu/linux-wallpaperengine) for animated wallpapers. Install it from source or from the AUR, with or without your AUR helper of choice. The shell will still work without it.
+nerii-shell also requires [skwd-paper](https://github.com/liixini/skwd-paper) for wallpapers. Install it from source or from the AUR, with or without your AUR helper of choice. (example with paru)
+
+`paru -S skwd-paper-bin`
+
+>[!NOTE]
+>There is no way to capture thumbnails of video-type wallpapers with skwd-wall yet, although an issue has been created. Meanwhile nerii-shell still uses [linux-wallpaperengine](https://github.com/Almamu/linux-wallpaperengine) to render previews of wallpaper-engine wallpapers. Install it from source or from the AUR, with or without your AUR helper of choice. The shell will still work without it.
 
 ## Installation
 

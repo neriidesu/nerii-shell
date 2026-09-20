@@ -73,8 +73,7 @@ Singleton {
         }
 
         function restart() {
-            WallpaperService.kill();
-            WallpaperService.startWallpaper();
+            WallpaperService.restart();
         }
 
         function writeLweFiles() {
